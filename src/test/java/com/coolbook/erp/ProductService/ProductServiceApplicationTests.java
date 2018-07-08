@@ -1,4 +1,4 @@
-package com.coolbook.ProductService;
+package com.coolbook.erp.ProductService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

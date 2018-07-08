@@ -1,4 +1,4 @@
-package com.coolbook.ProductService;
+package com.coolbook.erp.ProductService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
