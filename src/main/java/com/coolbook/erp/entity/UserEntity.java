@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="user")
+@Table(name="oauth_user")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserEntity {
 	@Id
