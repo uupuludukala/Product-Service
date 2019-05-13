@@ -1,12 +1,15 @@
 package com.coolbook.erp.rest.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.ProductCategoryEntity;
+import com.coolbook.erp.entity.ProductEntity;
 import com.coolbook.erp.repository.ProductCategoryRepository;
+import com.coolbook.erp.repository.specs.ProductCategorySpecification;
+import com.coolbook.erp.rest.searchCriteria.ProductCategoryCriteria;
 
 @Service
 public class ProductCategoryService {
@@ -17,15 +20,26 @@ public class ProductCategoryService {
 		this.productCategoryRepository = productCategoryRepository;
 	}
 
-	public void saveProductCategory(ProductCategoryEntity productCategory) {
-		this.productCategoryRepository.save(productCategory);
+	public long saveProductCategory(ProductCategoryEntity productCategory) {
+		return this.productCategoryRepository.save(productCategory).getId();
 	}
 
+	public void updateProductCategory(ProductCategoryEntity productcategory,long id) {
+		productcategory.setId(id);
+		this.productCategoryRepository.save(productcategory);
+	}
+	
+	public void deleteProductCategory(long id) {
+		
+		this.productCategoryRepository.delete(id);
+	}
+	
 	public ProductCategoryEntity getProductCategoryById(long id) {
 		return this.productCategoryRepository.getOne(id);
 	}
 
-	public List<ProductCategoryEntity> getAllProductCategory() {
-		return this.productCategoryRepository.findAll();
+	public Page<ProductCategoryEntity> getAllProductCategory(Pageable page, ProductCategoryCriteria criteria) {
+		ProductCategorySpecification specification = new ProductCategorySpecification(criteria);
+		return this.productCategoryRepository.findAll(specification, page);
 	}
 }

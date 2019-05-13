@@ -29,5 +29,5 @@ public abstract class AbstractCompanyResourceAssembler extends ResourceAssembler
 		return companyGet;
 	}
 	
-	protected abstract String getCompanySelfLink(String id);
+	protected abstract String getSelfLink(String id);
 }

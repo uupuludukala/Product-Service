@@ -62,6 +62,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		List<org.springframework.validation.FieldError> allErrors = ex.getBindingResult().getFieldErrors();
 		return new ResponseEntity<>(allErrors, HttpStatus.UNPROCESSABLE_ENTITY);
 	}
+	
+	
 
 	
 

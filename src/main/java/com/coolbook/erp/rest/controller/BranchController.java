@@ -19,18 +19,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.BranchEntity;
 import com.coolbook.erp.rest.assembler.BranchAssembler;
 import com.coolbook.erp.rest.assembler.BranchGetResourceAssembler;
+import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
 import com.coolbook.erp.rest.service.BranchService;
 import com.coolbook.model.BranchGet;
 import com.coolbook.model.BranchPost;
-
-import io.swagger.annotations.ApiParam;
 
 
 
@@ -69,11 +67,11 @@ public class BranchController {
 	}
 
 	@RequestMapping(value = "getAllBranch", method = RequestMethod.GET)
-	public ResponseEntity<PagedResources<BranchGet>> getAllBranch(Pageable pageable, HttpServletRequest request) {
+	public ResponseEntity<PagedResources<BranchGet>> getAllBranch(Pageable pageable, HttpServletRequest request,@Valid BranchCriteria searchCriteria) {
 		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
 		String basePath = StringUtils.isEmpty(proxyRequestUri)
 				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
 				: proxyRequestUri;
-		return ok(pagedResourcesAssembler.toResource(this.branchService.getAllBranch(pageable),assembler,new Link(basePath)));
+		return ok(pagedResourcesAssembler.toResource(this.branchService.getAllBranch(pageable,searchCriteria),assembler,new Link(basePath)));
 	}
 }

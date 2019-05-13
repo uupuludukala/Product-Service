@@ -2,11 +2,14 @@ package com.coolbook.model;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Data
 public class BranchGet extends ResourceSupport{
 
+	@JsonProperty("id")
 	private long branch_id;
 	private String branchCode;
 	private String address1;

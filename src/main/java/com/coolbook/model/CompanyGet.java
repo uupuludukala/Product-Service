@@ -2,10 +2,13 @@ package com.coolbook.model;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Data
 public class CompanyGet extends ResourceSupport {
+	@JsonProperty("id")
 	private long company_id;
 	private String companyName;
 	private String companyCode;

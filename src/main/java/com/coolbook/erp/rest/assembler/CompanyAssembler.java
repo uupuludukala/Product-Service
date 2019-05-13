@@ -23,12 +23,12 @@ public class CompanyAssembler {
 
 	public CompanyEntity essembleCompanyentity(CompanyPost companyPost) {
 		CompanyEntity companyEntity = new CompanyEntity();
-		companyEntity.setAdress1(companyPost.getAdress1());
-		companyEntity.setAdress2(companyPost.getAdress2());
-		companyEntity.setAdress3(companyPost.getAdress3());
+		companyEntity.setAdress1(companyPost.getAddress1());
+		companyEntity.setAdress2(companyPost.getAddress2());
+		companyEntity.setAdress3(companyPost.getAddress3());
 		companyEntity.setCompanyCode(companyPost.getCompanyCode());
 		companyEntity.setCompanyName(companyPost.getCompanyName());
-		companyEntity.setConatactNumber(companyPost.getConatactNumber());
+		companyEntity.setConatactNumber(companyPost.getContactNumber());
 		return companyEntity;
 
 	}

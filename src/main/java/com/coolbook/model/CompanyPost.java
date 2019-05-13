@@ -12,15 +12,15 @@ public class CompanyPost {
 	@JsonProperty("companyCode")
 	private String companyCode;
 	
-	@JsonProperty("adress1")
-	private String adress1;
+	@JsonProperty("address1")
+	private String address1;
 	
-	@JsonProperty("adress2")
-	private String adress2;
+	@JsonProperty("address2")
+	private String address2;
 	
-	@JsonProperty("adress3")
-	private String adress3;
+	@JsonProperty("address3")
+	private String address3;
 	
-	@JsonProperty("conatactNumber")
-	private String conatactNumber;
+	@JsonProperty("contactNumber")
+	private String contactNumber;
 }

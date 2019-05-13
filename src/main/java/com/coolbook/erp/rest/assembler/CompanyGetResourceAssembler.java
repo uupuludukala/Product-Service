@@ -8,7 +8,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 public class CompanyGetResourceAssembler extends AbstractCompanyResourceAssembler {
 	@Override
-	protected String getCompanySelfLink(String id) {
+	protected String getSelfLink(String id) {
 		if (!StringUtils.isEmpty(id)) {
 			UriComponentsBuilder builder = ServletUriComponentsBuilder.fromHttpUrl(requestURI).query(null);
 			if (!builder.build().toString().endsWith("/companies")) {

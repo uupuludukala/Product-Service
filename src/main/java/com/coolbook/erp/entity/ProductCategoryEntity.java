@@ -11,18 +11,18 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="product_category")
+@Table(name = "product_category")
 public class ProductCategoryEntity {
 	@Id
 	@Column
-	@GeneratedValue(generator="product_category_seq")
-	@SequenceGenerator(name="product_category_seq",sequenceName="product_category_seq" ,allocationSize=1)
+	@GeneratedValue(generator = "product_category_seq")
+	@SequenceGenerator(name = "product_category_seq", sequenceName = "product_category_seq", allocationSize = 1)
 	private long id;
 	@Column
 	private String productcatCode;
 	@Column
+	private long parentCategory;
+	@Column
 	private String productcatName;
-	
-	
 
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.BranchEntity;
 import com.coolbook.erp.repository.BranchRepository;
+import com.coolbook.erp.repository.specs.BranchSpecification;
+import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
 
 @Service
 public class BranchService {
@@ -23,7 +25,8 @@ BranchRepository branchRepository;
 		return this.branchRepository.getOne(id);
 		
 	}
-	public Page<BranchEntity> getAllBranch(Pageable page){
-		return this.branchRepository.findAll(page);
+	public Page<BranchEntity> getAllBranch(Pageable page,BranchCriteria searchCriteria){
+		BranchSpecification specification=new BranchSpecification(searchCriteria);
+		return this.branchRepository.findAll(specification,page);
 	}
 }

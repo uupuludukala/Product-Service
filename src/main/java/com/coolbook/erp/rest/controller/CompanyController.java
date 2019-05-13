@@ -4,6 +4,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.http.ResponseEntity.ok;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.rest.assembler.CompanyAssembler;
 import com.coolbook.erp.rest.assembler.CompanyGetResourceAssembler;
+import com.coolbook.erp.rest.searchCriteria.CompanyCriteria;
 import com.coolbook.erp.rest.service.CompanyService;
 import com.coolbook.model.CompanyGet;
 import com.coolbook.model.CompanyPost;
@@ -60,13 +62,13 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value="getAllCompany",method=RequestMethod.GET)
-	public ResponseEntity<PagedResources<CompanyGet>> getAllCompany(Pageable pageable, HttpServletRequest request){
+	public ResponseEntity<PagedResources<CompanyGet>> getAllCompany(Pageable pageable, HttpServletRequest request,@Valid CompanyCriteria criteria){
 
 		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
 		String basePath = StringUtils.isEmpty(proxyRequestUri)
 				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
 				: proxyRequestUri;
-		return ok(pagedResourcesAssembler.toResource(this.companyService.getAllCompany(pageable),assembler,new Link(basePath)));
+		return ok(pagedResourcesAssembler.toResource(this.companyService.getAllCompany(pageable,criteria),assembler,new Link(basePath)));
 	
 	}
 	

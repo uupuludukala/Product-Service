@@ -34,15 +34,13 @@ public class BranchAssembler {
 	 
 	 public BranchGet essembleBranchGet(BranchEntity branchEntity) {
 		 BranchGet branchGet=new BranchGet();
+		 branchGet.setBranch_id(branchEntity.getId());
 		 branchGet.setBranchCode(branchEntity.getBranchCode());
 		 branchGet.setAddress1(branchEntity.getAddress1());
 		 branchGet.setAddress2(branchEntity.getAddress2());
 		 branchGet.setAddress3(branchEntity.getAddress3());
 		 branchGet.setCompanyId(branchEntity.getCompany().getId());
 		 branchGet.setConatactNumber(branchEntity.getConatactNumber());
-		 return branchGet;
-		 
-		 
-		 
+		 return branchGet;		 
 	 }
 }
