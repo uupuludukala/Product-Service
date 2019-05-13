@@ -29,7 +29,7 @@ public class ProductEntity {
 
 	@Id
 	@Column
-	@GeneratedValue(generator = "product_seq")
+	@GeneratedValue(generator = "product_seq") 
 	@SequenceGenerator(name = "product_seq", sequenceName = "product_seq", allocationSize = 1)
 	private long id;
 	@Column
