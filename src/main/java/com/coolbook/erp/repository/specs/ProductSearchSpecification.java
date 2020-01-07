@@ -20,7 +20,7 @@ public class ProductSearchSpecification  implements Specification<ProductEntity>
 	@Override
 	public Predicate toPredicate(Root<ProductEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		Predicate predicate = cb.conjunction();
-		if (!searchvalue.equals(null)) {
+		if (searchvalue != null) {
 			Expression<String> barcode = root.get("barcode");
 			predicate = cb.or(predicate, cb.like(barcode, "%" + searchvalue + "%"));
 			Expression<String> internalReference = root.get("internalReference");

@@ -21,7 +21,7 @@ public class CustomerSearchSpecification implements Specification<CustomerEntity
 	@Override
 	public Predicate toPredicate(Root<CustomerEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		Predicate predicate = cb.conjunction();
-		if (!searchvalue.equals(null)) {
+		if (searchvalue != null) {
 			Expression<String> nicNumber = root.get("nicNumber");
 			predicate = cb.or(predicate, cb.like(nicNumber, "%" + searchvalue + "%"));
 			Expression<String> customerName = root.get("customerName");
