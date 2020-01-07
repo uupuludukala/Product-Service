@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,11 +59,12 @@ public class ProductCategoryController {
 				.saveProductCategory(productCategoryAssembler.essembleProductCategoryentity(productCategory));
 		HttpHeaders header = new HttpHeaders();
 		header.setLocation(linkTo(ProductCategoryController.class).slash(productCategoryId).toUri());
+		header.setLocation(linkTo(ControllerLinkBuilder.methodOn(ProductCategoryController.class).getProductCategoryById(productCategoryId)).toUri());
 		return new ResponseEntity<>(header, HttpStatus.CREATED);
 
 	}
 
-	@RequestMapping(value ="updateProductCategory/{id}",method=RequestMethod.PUT)
+	@RequestMapping(value ="saveProductCategory/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<Void> updateProductCategory(@RequestBody ProductCategoryPost productCategory,@ApiParam(value = "Product category Id", required = true) @PathVariable("id") long id){
 		productCategoryService.updateProductCategory(productCategoryAssembler.essembleProductCategoryentity(productCategory), id);
 		return new ResponseEntity<>(HttpStatus.OK);

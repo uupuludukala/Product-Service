@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.ProductEntity;
 import com.coolbook.erp.repository.ProductRepository;
+import com.coolbook.erp.repository.specs.ProductSearchSpecification;
 import com.coolbook.erp.repository.specs.ProductSpecification;
+import com.coolbook.erp.repository.specs.ProductSpecificationPOS;
 import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 
 @Service
@@ -42,4 +44,17 @@ public class ProductService {
 		ProductSpecification specification = new ProductSpecification(criteria);
 		return this.productRepository.findAll(specification, page);
 	}
+	
+	public Page<ProductEntity> getAllProductPOS(Pageable page,
+			ProductCriteria criteria) {
+		ProductSpecificationPOS specification = new ProductSpecificationPOS(criteria);
+		return this.productRepository.findAll(specification, page);
+	}
+	
+	public Page<ProductEntity> searchProduct(Pageable page,
+			String searchValue) {
+		ProductSearchSpecification specification = new ProductSearchSpecification(searchValue);
+		return this.productRepository.findAll(specification, page);
+	}
+	
 }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,7 @@ public class ProductController {
 	public ResponseEntity<Void> saveProduct(@Valid @RequestBody ProductPost product) {
 		long productId = productService.saveProduct(productAssembler.essembleProductentity(product));
 		HttpHeaders header = new HttpHeaders();
-		header.setLocation(linkTo(ProductController.class).slash(productId).toUri());
+		header.setLocation(linkTo(ControllerLinkBuilder.methodOn(ProductController.class).getProductById(productId)).toUri());		
 		return new ResponseEntity<>(header, HttpStatus.CREATED);
 	}
 	
@@ -88,6 +89,30 @@ public class ProductController {
 		return ok(pagedResourcesAssembler.toResource(this.productService.getAllProduct(pageable, criteria), assembler,
 				new Link(basePath)));
 	}
+	
+	@RequestMapping(value = "getAllProductPOS", method = RequestMethod.GET)
+	public ResponseEntity<PagedResources<ProductGet>> getAllProductPOS(Pageable pageable, HttpServletRequest request,
+			@Valid ProductCriteria criteria) {
+		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+		String basePath = StringUtils.isEmpty(proxyRequestUri)
+				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+				: proxyRequestUri;
+		return ok(pagedResourcesAssembler.toResource(this.productService.getAllProductPOS(pageable, criteria), assembler,
+				new Link(basePath)));
+	}
+	
+	@RequestMapping(value = "searchProduct", method = RequestMethod.GET)
+	public ResponseEntity<PagedResources<ProductGet>> searchProduct(Pageable pageable, HttpServletRequest request,
+			String searchValue) {
+		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+		String basePath = StringUtils.isEmpty(proxyRequestUri)
+				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+				: proxyRequestUri;
+		return ok(pagedResourcesAssembler.toResource(this.productService.searchProduct(pageable, searchValue), assembler,
+				new Link(basePath)));
+	}
+	
+	
 	
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,7 @@ public class CustomerController {
 	public ResponseEntity<Void> saveCustomer(@Valid @RequestBody CustomerPost customer) {
 		long customerId = customerService.saveCustomer(customerAssembler.essembleCustomerentity(customer));
 		HttpHeaders header = new HttpHeaders();
-		header.setLocation(linkTo(CustomerController.class).slash(customerId).toUri());
+		header.setLocation(linkTo(ControllerLinkBuilder.methodOn(CustomerController.class).getCustomerById(customerId)).toUri());
 		return new ResponseEntity<>(header, HttpStatus.CREATED);
 	}
 	
@@ -86,6 +87,17 @@ public class CustomerController {
 				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
 				: proxyRequestUri;
 		return ok(pagedResourcesAssembler.toResource(this.customerService.getAllCustomer(pageable, criteria), assembler,
+				new Link(basePath)));
+	}
+	
+	@RequestMapping(value = "searchCustomer", method = RequestMethod.GET)
+	public ResponseEntity<PagedResources<CustomerGet>> searchCustomer(Pageable pageable, HttpServletRequest request,
+			String searchValue) {
+		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+		String basePath = StringUtils.isEmpty(proxyRequestUri)
+				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+				: proxyRequestUri;
+		return ok(pagedResourcesAssembler.toResource(this.customerService.searchCustomer(pageable, searchValue), assembler,
 				new Link(basePath)));
 	}
 	

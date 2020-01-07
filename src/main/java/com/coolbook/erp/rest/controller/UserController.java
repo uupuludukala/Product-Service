@@ -27,8 +27,11 @@ import com.coolbook.erp.rest.assembler.UserAssembler;
 import com.coolbook.erp.rest.assembler.UserGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.UserCriteria;
 import com.coolbook.erp.rest.service.UserService;
+import com.coolbook.model.ProductPost;
 import com.coolbook.model.UserGet;
 import com.coolbook.model.UserPost;
+
+import io.swagger.annotations.ApiParam;
 
 @RestController
 public class UserController {
@@ -51,7 +54,7 @@ public class UserController {
 
 	@RequestMapping(value = "saveUser", method = RequestMethod.POST)
 	public ResponseEntity<Void> saveUser(@RequestBody UserPost user) {
-		long userId = userService.saveUser(userAssembler.essembleUserentity(user));
+		long userId = userService.saveUser(userAssembler.essembleUserEntity(user));
 		HttpHeaders header = new HttpHeaders();
 		header.setLocation(linkTo(UserController.class).slash(userId).toUri());
 		return new ResponseEntity<>(header, HttpStatus.CREATED);
@@ -71,5 +74,17 @@ public class UserController {
 				: proxyRequestUri;
 		return ok(pagedResourcesAssembler.toResource(this.userService.getAllUser(pageable, criteria), assembler,
 				new Link(basePath)));
+	}
+	
+	@RequestMapping(value ="deleteUser/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteUser(@ApiParam(value = "User Id", required = true) @PathVariable("id") long id){
+		userService.deleteUser( id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="saveUser/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<Void> updateUser(@RequestBody UserPost user,@ApiParam(value = "User Id", required = true) @PathVariable("id") long id){
+		userService.updateUser(userAssembler.essembleUserEntity(user), id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

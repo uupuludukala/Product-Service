@@ -28,9 +28,7 @@ public class CustomerEntity {
 	@Column
 	private String nicNumber;
 	@Column
-	private String firstName;
-	@Column
-	private String lastName;
+	private String customerName;	
 	@Column
 	private String addressLine1;
 	@Column
@@ -43,5 +41,7 @@ public class CustomerEntity {
 	private String homePhone;
 	@Column
 	private double creditLimit;
+	@Column
+	private String imageUrl;
 
 }

@@ -28,9 +28,9 @@ public class ProductSpecification implements Specification<ProductEntity> {
 			Expression<String> exp = root.get("id");
 			predicate = cb.equal(exp, searchCriteria.getId());
 		}
-		if (searchCriteria.getProductCode() != null) {
-			Expression<String> productCode = root.get("productCode");
-			predicate = cb.and(predicate, cb.like(productCode, "%" + searchCriteria.getProductCode() + "%"));
+		if (searchCriteria.getInternalReference() != null) {
+			Expression<String> internalReference = root.get("internalReference");
+			predicate = cb.and(predicate, cb.like(internalReference, "%" + searchCriteria.getInternalReference() + "%"));
 		}
 
 		if (searchCriteria.getProductName() != null) {
@@ -49,10 +49,8 @@ public class ProductSpecification implements Specification<ProductEntity> {
 			Expression<ProductCategoryEntity> productCategory = root.get("productCategory");
 			predicate=getProductCategoryPredicate(query, searchCriteria.getProductCategory(), predicate,cb,productCategory);
 		}
-		
-
-		Expression<String> active = root.get("active");
-		predicate = cb.and(predicate, cb.equal(active, searchCriteria.isActive()));
+//		Expression<String> active = root.get("active");
+//		predicate = cb.and(predicate, cb.equal(active, searchCriteria.isActive()));
 
 		return predicate;
 	}

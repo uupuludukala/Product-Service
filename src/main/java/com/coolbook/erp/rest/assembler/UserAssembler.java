@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.assembler;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.BranchEntity;
@@ -17,12 +18,12 @@ public class UserAssembler {
 		return userGet;
 	}
 
-	public UserEntity essembleUserentity(UserPost userPost) {
+	public UserEntity essembleUserEntity(UserPost userPost) {
 		UserEntity userEntity = new UserEntity();
 		BranchEntity branch=new BranchEntity();
 		branch.setId(userPost.getBranch());
 		userEntity.setBranch(branch);
-		userEntity.setPasword(userPost.getPasword());
+		userEntity.setPassword(BCrypt.hashpw(userPost.getPasword(), BCrypt.gensalt()));
 		userEntity.setUserName(userPost.getUserName());
 		return userEntity;
 	}

@@ -7,12 +7,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.coolbook.erp.config.FileStorageProperties;
@@ -38,8 +40,8 @@ public class FileService {
 
     public String storeFile(MultipartFile file) {
         // Normalize file name
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName=generateUniqueFileName();
         try {
             // Check if the file's name contains invalid characters
             if(fileName.contains("..")) {
@@ -68,5 +70,17 @@ public class FileService {
         } catch (MalformedURLException ex) {
             throw new MyFileNotFoundException("File not found " + fileName, ex);
         }
+        
+    }
+    
+    String generateUniqueFileName() {
+        String filename = "";
+        long millis = System.currentTimeMillis();
+        String datetime = new Date().toGMTString();
+        datetime = datetime.replace(" ", "");
+        datetime = datetime.replace(":", "");
+        String rndchars = RandomStringUtils.randomAlphanumeric(16);
+        filename = rndchars + "_" + datetime + "_" + millis;
+        return filename;
     }
 }

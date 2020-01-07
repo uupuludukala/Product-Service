@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.CustomerEntity;
 import com.coolbook.erp.repository.CustomerRepository;
+import com.coolbook.erp.repository.specs.CustomerSearchSpecification;
 import com.coolbook.erp.repository.specs.CustomerSpecification;
 import com.coolbook.erp.rest.searchCriteria.CustomerCriteria;
 
@@ -40,6 +41,11 @@ public class CustomerService {
 
 	public Page<CustomerEntity> getAllCustomer(Pageable page, CustomerCriteria criteria) {
 		CustomerSpecification specification = new CustomerSpecification(criteria);
+		return this.customerRepository.findAll(specification, page);
+	}
+	
+	public Page<CustomerEntity> searchCustomer(Pageable page, String searchValue) {
+		CustomerSearchSpecification specification = new CustomerSearchSpecification(searchValue);
 		return this.customerRepository.findAll(specification, page);
 	}
 }

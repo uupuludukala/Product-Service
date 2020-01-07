@@ -29,7 +29,7 @@ public abstract class AbstractProductCategoryResourceAssembler
 		ProductCategoryGet productCategoryGet = new ProductCategoryGet();
 		productCategoryGet.setProductCategory_id(productCategoryEntity.getId());
 		productCategoryGet.setParentCategory(productCategoryEntity.getParentCategory());
-		productCategoryGet.setParentCategoryCode(productCategoryService.getProductCategoryById(productCategoryEntity.getParentCategory()).getProductcatCode());
+		productCategoryGet.setParentCategoryCode(productCategoryEntity.getParentCategory()!=0?productCategoryService.getProductCategoryById(productCategoryEntity.getParentCategory()).getProductcatCode():"");
 		productCategoryGet.setProductCatCode(productCategoryEntity.getProductcatCode());
 		productCategoryGet.setProductCatName(productCategoryEntity.getProductcatName());
 		return productCategoryGet;

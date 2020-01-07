@@ -27,7 +27,7 @@ public class UserEntity {
 	@Column
 	private String userName;
 	@Column
-	private String pasword;
+	private String password;
 	@OneToOne
 	private  BranchEntity branch;
 }

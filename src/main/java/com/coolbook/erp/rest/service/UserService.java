@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.coolbook.erp.entity.ProductEntity;
 import com.coolbook.erp.entity.UserEntity;
 import com.coolbook.erp.repository.UserRepository;
 import com.coolbook.erp.repository.specs.UserSpecification;
@@ -27,6 +28,16 @@ UserRepository userRepository;
 	public Page<UserEntity> getAllUser(Pageable page, UserCriteria criteria){
 		UserSpecification specification = new UserSpecification(criteria);
 		return this.userRepository.findAll(specification, page);
+	}
+	
+	public void updateUser(UserEntity user,long id) {
+		user.setId(id);
+		this.userRepository.save(user);
+	}
+	
+	public void deleteUser(long id) {
+		
+		this.userRepository.delete(id);
 	}
 	
 }

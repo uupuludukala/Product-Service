@@ -1,4 +1,4 @@
-package com.coolbook.erp.config;
+package com.coolbook.erp.config.security;
 
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,7 +15,7 @@ import lombok.Data;
 @Configuration
 @ConfigurationProperties("cors")
 @Data
-public class WebConfig {
+public class CORSConfiguration {
 
 	private boolean allowCredentials;
 	private List<String> allowedHeaders;
@@ -32,7 +32,7 @@ public class WebConfig {
 		getAllowedOrigins().forEach(configuration::addAllowedOrigin);
 
 		getAllowedHeaders().forEach(configuration::addAllowedHeader);
-
+		
 		getExposedHeaders().forEach(configuration::addExposedHeader);
 
 		configuration.setAllowCredentials(isAllowCredentials());

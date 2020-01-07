@@ -26,15 +26,11 @@ public class CustomerSpecification  implements Specification<CustomerEntity> {
 			Expression<String> nicNumber = root.get("nicNumber");
 			predicate = cb.and(predicate, cb.like(nicNumber, "%" + searchCriteria.getNicNumber() + "%"));
 		}
-		if (searchCriteria.getFirstName() != null) {
-			Expression<String> firstName = root.get("firstName");
-			predicate = cb.and(predicate, cb.like(firstName, "%" + searchCriteria.getFirstName() + "%"));
+		if (searchCriteria.getCustomerName() != null) {
+			Expression<String> customerName = root.get("customerName");
+			predicate = cb.and(predicate, cb.like(customerName, "%" + searchCriteria.getCustomerName() + "%"));
 		}
-
-		if (searchCriteria.getLastName() != null) {
-			Expression<String> lastName = root.get("lastName");
-			predicate = cb.and(predicate, cb.like(lastName, "%" + searchCriteria.getLastName() + "%"));
-		}
+		
 		if (searchCriteria.getMobileNumer() != null) {
 			Expression<String> mobileNumer = root.get("mobileNumer");
 			predicate = cb.and(predicate, cb.like(mobileNumer, "%" + searchCriteria.getMobileNumer() + "%"));
@@ -43,7 +39,6 @@ public class CustomerSpecification  implements Specification<CustomerEntity> {
 			Expression<String> homePhone = root.get("homePhone");
 			predicate = cb.and(predicate, cb.like(homePhone, "%" + searchCriteria.getHomePhone() + "%"));
 		}
-		
 
 		return predicate;
 	}

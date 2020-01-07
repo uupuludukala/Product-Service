@@ -10,8 +10,7 @@ public class CustomerPost {
 
 	
 	private String nicNumber;
-	private String firstName;
-	private String lastName;
+	private String customerName;
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
@@ -20,4 +19,5 @@ public class CustomerPost {
 	@Valid
 	@NotNull
 	private double creditLimit;
+	private String imageUrl;
 }

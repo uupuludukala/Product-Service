@@ -2,85 +2,90 @@
   "groups": [
     {
       "name": "cors",
-      "type": "com.coolbook.erp.config.WebConfig",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "type": "com.coolbook.erp.config.security.CORSConfiguration",
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "file",
       "type": "com.coolbook.erp.config.FileStorageProperties",
       "sourceType": "com.coolbook.erp.config.FileStorageProperties"
+    },
+    {
+      "name": "oauth2",
+      "type": "com.coolbook.erp.config.security.AuthorizationResourceServerConfiguration",
+      "sourceType": "com.coolbook.erp.config.security.AuthorizationResourceServerConfiguration"
     }
   ],
   "properties": [
     {
       "name": "cors.allow-credentials",
       "type": "java.lang.Boolean",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.allow-credentials",
       "type": "java.lang.Boolean",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.allowed-headers",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.allowed-headers",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.allowed-methods",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.allowed-methods",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.allowed-origins",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.allowed-origins",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.exposed-headers",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.exposed-headers",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.max-age",
       "type": "java.lang.Long",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.max-age",
       "type": "java.lang.Long",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.path",
       "type": "java.lang.String",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "cors.path",
       "type": "java.lang.String",
-      "sourceType": "com.coolbook.erp.config.WebConfig"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
       "name": "file.upload-dir",

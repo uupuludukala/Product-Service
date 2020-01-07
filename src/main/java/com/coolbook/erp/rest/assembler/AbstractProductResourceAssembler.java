@@ -20,16 +20,27 @@ public abstract class AbstractProductResourceAssembler extends ResourceAssembler
 	private ProductGet createProductJson(ProductEntity productEntity) {
 		ProductGet productGet = new ProductGet();
 		productGet.setProduct_Id(productEntity.getId());
+		productGet.setCanBeSold(productEntity.isCanBeSold());
+		productGet.setCanBePurchased(productEntity.isCanBePurchased());
 		productGet.setActive(productEntity.isActive());
 		productGet.setBarcode(productEntity.getBarcode());
+		productGet.setInternalNotes(productEntity.getInternalNotes());
 		productGet.setCost(productEntity.getCost());
 		productGet.setProductCategory(productEntity.getProductCategory().getId());
-		productGet.setProductCode(productEntity.getProductCode());
+		productGet.setInternalReference(productEntity.getInternalReference());
 		productGet.setProductName(productEntity.getProductName());
 		productGet.setProductType(productEntity.getProductType());
 		productGet.setQuantity(productEntity.getQuantity());
 		productGet.setSalePrice(productEntity.getSalePrice());
 		productGet.setImageUrl(productEntity.getImageUrl());
+		productGet.setAvailableInPos(productEntity.isAvailableInPos());
+		productGet.setMakeToOrder(productEntity.isMakeToOrder());
+		productGet.setCustomerLeadTime(productEntity.getCustomerLeadTime());
+		productGet.setDescDelOrder(productEntity.getDescDelOrder());
+		productGet.setDescReceipt(productEntity.getDescReceipt());
+		productGet.setWeight(productEntity.getWeight());
+		productGet.setVolume(productEntity.getVolume());
+		productGet.setResponsible(productEntity.getResponsible());
 
 		return productGet;
 	}

@@ -21,15 +21,14 @@ public abstract class AbstractCustomerResourceAssembler  extends ResourceAssembl
 		CustomerGet customerGet = new CustomerGet();
 		customerGet.setCustomer_Id(customerEntity.getId());
 		customerGet.setNicNumber(customerEntity.getNicNumber());
-		customerGet.setFirstName(customerEntity.getFirstName());
-		customerGet.setLastName(customerEntity.getLastName());
+		customerGet.setCustomerName(customerEntity.getCustomerName());
 		customerGet.setAddressLine1(customerEntity.getAddressLine1());
 		customerGet.setAddressLine2(customerEntity.getAddressLine2());
 		customerGet.setAddressLine3(customerEntity.getAddressLine3());
 		customerGet.setMobileNumer(customerEntity.getMobileNumer());
 		customerGet.setHomePhone(customerEntity.getHomePhone());
 		customerGet.setCreditLimit(customerEntity.getCreditLimit());
-
+		customerGet.setImageUrl(customerEntity.getImageUrl());
 		return customerGet;
 	}
 
