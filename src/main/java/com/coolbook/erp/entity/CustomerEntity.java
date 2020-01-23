@@ -13,22 +13,23 @@ import lombok.Data;
 @Entity
 @Table(name = "customer")
 public class CustomerEntity {
-	public CustomerEntity (long id) {
-		this.id=id;
+	public CustomerEntity(long id) {
+		this.id = id;
 	}
-	
+
 	public CustomerEntity() {
-		
+
 	}
+
 	@Id
 	@Column
 	@GeneratedValue(generator = "customer_seq")
 	@SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
 	private long id;
-	@Column
+	@Column(unique = true)
 	private String nicNumber;
 	@Column
-	private String customerName;	
+	private String customerName;
 	@Column
 	private String addressLine1;
 	@Column

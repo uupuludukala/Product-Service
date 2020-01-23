@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.CompanyEntity;
+import com.coolbook.erp.model.CompanyGet;
+import com.coolbook.erp.model.CompanyPost;
 import com.coolbook.erp.rest.assembler.CompanyAssembler;
 import com.coolbook.erp.rest.assembler.CompanyGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.CompanyCriteria;
 import com.coolbook.erp.rest.service.CompanyService;
-import com.coolbook.model.CompanyGet;
-import com.coolbook.model.CompanyPost;
 
 @RestController
 public class CompanyController {

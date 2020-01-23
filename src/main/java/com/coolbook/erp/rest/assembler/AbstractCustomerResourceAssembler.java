@@ -3,7 +3,7 @@ package com.coolbook.erp.rest.assembler;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CustomerEntity;
-import com.coolbook.model.CustomerGet;
+import com.coolbook.erp.model.CustomerGet;
 
 public abstract class AbstractCustomerResourceAssembler  extends ResourceAssemblerSupport<CustomerEntity, CustomerGet>{
 	protected String requestURI;

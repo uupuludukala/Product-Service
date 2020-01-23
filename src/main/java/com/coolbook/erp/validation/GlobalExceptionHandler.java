@@ -19,6 +19,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.coolbook.erp.exception.ConstraintViolationexception;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -36,6 +38,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ApiError handleEntityNotFoundException(EntityNotFoundException e) {
 		ApiError apiError=new ApiError();
 		apiError.fieldErrors.add(new FieldError("","",e.getMessage()));
+		return apiError;
+	}
+	
+	@ExceptionHandler({ ConstraintViolationexception.class })
+	@ResponseBody
+	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+	public ApiError handleConstraintViolationexception(ConstraintViolationexception e) {
+		ApiError apiError=new ApiError();
+		apiError.fieldErrors.addAll(e.getFielderrors());
 		return apiError;
 	}
 	

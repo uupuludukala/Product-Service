@@ -3,8 +3,8 @@ package com.coolbook.erp.rest.assembler;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.CustomerEntity;
-import com.coolbook.model.CustomerGet;
-import com.coolbook.model.CustomerPost;
+import com.coolbook.erp.model.CustomerGet;
+import com.coolbook.erp.model.CustomerPost;
 
 @Component
 public class CustomerAssembler {

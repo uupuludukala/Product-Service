@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.ProductCategoryEntity;
+import com.coolbook.erp.model.ProductCategoryGet;
 import com.coolbook.erp.rest.service.ProductCategoryService;
-import com.coolbook.model.ProductCategoryGet;
 
 
 

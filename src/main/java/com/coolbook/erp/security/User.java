@@ -2,35 +2,21 @@ package com.coolbook.erp.security;
 
 import java.io.Serializable;
 
-public class User  implements Serializable {
-	
+import lombok.Getter;
+
+@Getter
+public class User  implements Serializable{
+
 	private static final long serialVersionUID = -2110734144884441488L;
 	
-	private final String userId;
-	private final String userFullName;
-	private final String username;
-	private final String customer;
+	private String companyCode;
+	private String branchCode;
+	private long companyId;
 
-	public User(String userId, String userFullName, String username, String customer) {
-		this.userId = userId;
-		this.userFullName = userFullName;
-		this.username = username;
-		this.customer = customer;
+	public User(String companyCode, String branchCode, long companyId) {
+		this.companyCode = companyCode;
+		this.branchCode = branchCode;
+		this.companyId = companyId;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public String getUserFullName() {
-		return this.userFullName;
-	}
 }

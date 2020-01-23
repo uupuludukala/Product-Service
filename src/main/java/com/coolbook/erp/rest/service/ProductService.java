@@ -11,28 +11,32 @@ import com.coolbook.erp.repository.specs.ProductSearchSpecification;
 import com.coolbook.erp.repository.specs.ProductSpecification;
 import com.coolbook.erp.repository.specs.ProductSpecificationPOS;
 import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
+import com.coolbook.erp.security.SecurityFacade;
 
 @Service
 public class ProductService {
 
 	ProductRepository productRepository;
 
+	private SecurityFacade securityFacade;
+
 	@Autowired
-	ProductService(ProductRepository productRepository) {
+	ProductService(ProductRepository productRepository, SecurityFacade securityFacade) {
 		this.productRepository = productRepository;
+		this.securityFacade = securityFacade;
 	}
 
 	public long saveProduct(ProductEntity product) {
 		return this.productRepository.save(product).getId();
 	}
-	
-	public void updateProduct(ProductEntity product,long id) {
+
+	public void updateProduct(ProductEntity product, long id) {
 		product.setId(id);
 		this.productRepository.save(product);
 	}
-	
+
 	public void deleteProduct(long id) {
-		
+
 		this.productRepository.delete(id);
 	}
 
@@ -41,20 +45,19 @@ public class ProductService {
 	}
 
 	public Page<ProductEntity> getAllProduct(Pageable page, ProductCriteria criteria) {
-		ProductSpecification specification = new ProductSpecification(criteria);
+		ProductSpecification specification = new ProductSpecification(criteria,
+				securityFacade.getCurrentUser().getCompanyId());
 		return this.productRepository.findAll(specification, page);
 	}
-	
-	public Page<ProductEntity> getAllProductPOS(Pageable page,
-			ProductCriteria criteria) {
+
+	public Page<ProductEntity> getAllProductPOS(Pageable page, ProductCriteria criteria) {
 		ProductSpecificationPOS specification = new ProductSpecificationPOS(criteria);
 		return this.productRepository.findAll(specification, page);
 	}
-	
-	public Page<ProductEntity> searchProduct(Pageable page,
-			String searchValue) {
+
+	public Page<ProductEntity> searchProduct(Pageable page, String searchValue) {
 		ProductSearchSpecification specification = new ProductSearchSpecification(searchValue);
 		return this.productRepository.findAll(specification, page);
 	}
-	
+
 }

@@ -3,7 +3,7 @@ package com.coolbook.erp.rest.assembler;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CompanyEntity;
-import com.coolbook.model.CompanyGet;
+import com.coolbook.erp.model.CompanyGet;
 
 public abstract class AbstractCompanyResourceAssembler extends ResourceAssemblerSupport<CompanyEntity, CompanyGet>{
 	protected String requestURI;

@@ -1,7 +1,7 @@
 
 
 
-package com.coolbook.model;
+package com.coolbook.erp.model;
 
 import lombok.Data;
 

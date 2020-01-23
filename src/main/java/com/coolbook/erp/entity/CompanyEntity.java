@@ -1,9 +1,14 @@
 package com.coolbook.erp.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -33,6 +38,9 @@ public class CompanyEntity {
 	private String adress3;
 	@Column
 	private String conatactNumber;
+	
+	@ManyToMany(mappedBy = "companies", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<ProductEntity> products;
 	
 	
 

@@ -23,13 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.UserEntity;
+import com.coolbook.erp.model.UserGet;
+import com.coolbook.erp.model.UserPost;
 import com.coolbook.erp.rest.assembler.UserAssembler;
 import com.coolbook.erp.rest.assembler.UserGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.UserCriteria;
 import com.coolbook.erp.rest.service.UserService;
-import com.coolbook.model.ProductPost;
-import com.coolbook.model.UserGet;
-import com.coolbook.model.UserPost;
 
 import io.swagger.annotations.ApiParam;
 

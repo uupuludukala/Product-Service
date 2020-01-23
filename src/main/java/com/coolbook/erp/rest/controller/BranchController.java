@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.BranchEntity;
+import com.coolbook.erp.model.BranchGet;
+import com.coolbook.erp.model.BranchPost;
 import com.coolbook.erp.rest.assembler.BranchAssembler;
 import com.coolbook.erp.rest.assembler.BranchGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
 import com.coolbook.erp.rest.service.BranchService;
-import com.coolbook.model.BranchGet;
-import com.coolbook.model.BranchPost;
 
 
 

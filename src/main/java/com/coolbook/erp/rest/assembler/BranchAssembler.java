@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.BranchEntity;
+import com.coolbook.erp.model.BranchGet;
+import com.coolbook.erp.model.BranchPost;
 import com.coolbook.erp.repository.CompanyRepository;
-import com.coolbook.model.BranchGet;
-import com.coolbook.model.BranchPost;
 
 @Component
 public class BranchAssembler {

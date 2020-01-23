@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.BranchEntity;
 import com.coolbook.erp.entity.UserEntity;
-import com.coolbook.model.UserGet;
-import com.coolbook.model.UserPost;
+import com.coolbook.erp.model.UserGet;
+import com.coolbook.erp.model.UserPost;
 
 @Component
 public class UserAssembler {

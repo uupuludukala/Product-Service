@@ -4,7 +4,7 @@ package com.coolbook.erp.rest.assembler;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.PaymentMethodEntity;
-import com.coolbook.model.PaymentMethodGet;
+import com.coolbook.erp.model.PaymentMethodGet;
 
 public abstract class AbstractPaymentMethodResourceAssembler
 		extends ResourceAssemblerSupport<PaymentMethodEntity, PaymentMethodGet> {

@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.PaymentMethodEntity;
+import com.coolbook.erp.model.PaymentMethodGet;
+import com.coolbook.erp.model.PaymentMethodPost;
 import com.coolbook.erp.rest.assembler.PaymentMethodAssembler;
 import com.coolbook.erp.rest.assembler.PaymentMethodGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.PaymentMethodCriteria;
 import com.coolbook.erp.rest.service.PaymentMethodService;
-import com.coolbook.model.PaymentMethodGet;
-import com.coolbook.model.PaymentMethodPost;
 
 import io.swagger.annotations.ApiParam;
 

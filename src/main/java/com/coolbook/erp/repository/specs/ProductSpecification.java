@@ -1,5 +1,8 @@
 package com.coolbook.erp.repository.specs;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
@@ -9,6 +12,7 @@ import javax.persistence.criteria.Subquery;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.ProductCategoryEntity;
 import com.coolbook.erp.entity.ProductEntity;
 import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
@@ -16,9 +20,11 @@ import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 public class ProductSpecification implements Specification<ProductEntity> {
 
 	private ProductCriteria searchCriteria;
+	private long companyId;
 
-	public ProductSpecification(ProductCriteria searchCriteria) {
+	public ProductSpecification(ProductCriteria searchCriteria, long companyId) {
 		this.searchCriteria = searchCriteria;
+		this.companyId = companyId;
 	}
 
 	@Override
@@ -30,7 +36,8 @@ public class ProductSpecification implements Specification<ProductEntity> {
 		}
 		if (searchCriteria.getInternalReference() != null) {
 			Expression<String> internalReference = root.get("internalReference");
-			predicate = cb.and(predicate, cb.like(internalReference, "%" + searchCriteria.getInternalReference() + "%"));
+			predicate = cb.and(predicate,
+					cb.like(internalReference, "%" + searchCriteria.getInternalReference() + "%"));
 		}
 
 		if (searchCriteria.getProductName() != null) {
@@ -47,20 +54,36 @@ public class ProductSpecification implements Specification<ProductEntity> {
 		}
 		if (searchCriteria.getProductCategory() != null && !"".equals(searchCriteria.getProductCategory())) {
 			Expression<ProductCategoryEntity> productCategory = root.get("productCategory");
-			predicate=getProductCategoryPredicate(query, searchCriteria.getProductCategory(), predicate,cb,productCategory);
+			predicate = getProductCategoryPredicate(query, searchCriteria.getProductCategory(), predicate, cb,
+					productCategory);
 		}
-//		Expression<String> active = root.get("active");
-//		predicate = cb.and(predicate, cb.equal(active, searchCriteria.isActive()));
+		if (companyId != 0) {
+			Expression<Collection<CompanyEntity>> company = root.get("companies");
+			predicate = getCompanyPredicate(root, query, companyId, predicate, cb, company);
+		}
+		// Expression<String> active = root.get("active");
+		// predicate = cb.and(predicate, cb.equal(active, searchCriteria.isActive()));
 
 		return predicate;
 	}
 
 	public Predicate getProductCategoryPredicate(CriteriaQuery<?> query, String productCategoryId, Predicate predicate,
-			CriteriaBuilder cb,Expression<ProductCategoryEntity> productCategory) {
+			CriteriaBuilder cb, Expression<ProductCategoryEntity> productCategory) {
 		Subquery<?> subQuery = query.subquery(ProductCategoryEntity.class);
-		Root<?> rootChild = subQuery.from(ProductCategoryEntity.class);		
-		subQuery.select(rootChild.get("id")).where(rootChild.get("id").in(productCategoryId)); // your predicates on children		
+		Root<?> rootChild = subQuery.from(ProductCategoryEntity.class);
+		subQuery.select(rootChild.get("id")).where(rootChild.get("id").in(productCategoryId)); // your predicates on
+																								// children
 		return predicate = cb.and(predicate, productCategory.in(subQuery));
+	}
+
+	public Predicate getCompanyPredicate(Root<ProductEntity> root, CriteriaQuery<?> query, long companyId,
+			Predicate predicate, CriteriaBuilder cb, Expression<Collection<CompanyEntity>> company) {
+		query.distinct(true);
+		Subquery<CompanyEntity> subQuery = query.subquery(CompanyEntity.class);
+		Root<CompanyEntity> rootChild = subQuery.from(CompanyEntity.class);
+		subQuery.select(rootChild);
+		subQuery.where(rootChild.get("id").in(companyId));
+		return predicate = cb.isMember(subQuery, company);
 	}
 
 }

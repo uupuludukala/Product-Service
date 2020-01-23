@@ -2,33 +2,44 @@ package com.coolbook.erp.security;
 
 import java.util.Map;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
-
-
 
 public class SubAwareAccessTokenConverter extends DefaultAccessTokenConverter {
 
+	private static final String COMPANY_CODE = "companyCode";
+	private static final String BRANCH_CODE = "branchCode";
+	private static final String COMAPNY_ID = "companyId";
+
 	@Override
 	public OAuth2Authentication extractAuthentication(Map<String, ?> map) {
-		return super.extractAuthentication(map);
+		String companyCode = extractClaimUsingKeyString(map, COMPANY_CODE);
+		String branchCode = extractClaimUsingKeyString(map, BRANCH_CODE);
+		long companyId = extractClaimUsingKeyLong(map, COMAPNY_ID);
+
+		OAuth2Authentication oAuth2Authentication = super.extractAuthentication(map);
+		oAuth2Authentication.setDetails(new User(companyCode, branchCode, companyId));
+		return oAuth2Authentication;
 	}
 
-	public static String getCurrentCustomer() {
-
-		if (SecurityContextHolder.getContext().getAuthentication() instanceof OAuth2Authentication) {
-			OAuth2AuthenticationDetails det = (OAuth2AuthenticationDetails) SecurityContextHolder.getContext()
-					.getAuthentication().getDetails();
-			return ((UserDetails) det.getDecodedDetails()).getUsername();
-		} else if (SecurityContextHolder.getContext()
-				.getAuthentication() instanceof UsernamePasswordAuthenticationToken) {
-			return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+	private String extractClaimUsingKeyString(Map<String, ?> map, String key) {
+		if (map.containsKey(key)) {
+			Object claimObj = map.get(key);
+			if (String.class.isInstance(claimObj)) {
+				return (String) claimObj;
+			}
 		}
 		return null;
-
 	}
+	
+	private long extractClaimUsingKeyLong(Map<String, ?> map, String key) {
+		if (map.containsKey(key)) {
+			Object claimObj = map.get(key);
+			if (Integer.class.isInstance(claimObj)) {
+				return (Integer) claimObj;
+			}
+		}
+		return 0;
+	}
+
 }

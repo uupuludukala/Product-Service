@@ -1,4 +1,4 @@
-package com.coolbook.model;
+package com.coolbook.erp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

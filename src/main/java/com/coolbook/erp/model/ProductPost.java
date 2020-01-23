@@ -1,4 +1,6 @@
-package com.coolbook.model;
+package com.coolbook.erp.model;
+
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -69,6 +71,9 @@ public class ProductPost {
 	
 	@JsonProperty("responsible")
 	private long responsible;
+	
+	@JsonProperty("companies")
+	private List<Long> companies;
 	
 	
 	

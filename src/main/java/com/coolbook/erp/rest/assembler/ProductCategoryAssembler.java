@@ -3,8 +3,8 @@ package com.coolbook.erp.rest.assembler;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.ProductCategoryEntity;
-import com.coolbook.model.ProductCategoryGet;
-import com.coolbook.model.ProductCategoryPost;
+import com.coolbook.erp.model.ProductCategoryGet;
+import com.coolbook.erp.model.ProductCategoryPost;
 
 @Component
 public class ProductCategoryAssembler {

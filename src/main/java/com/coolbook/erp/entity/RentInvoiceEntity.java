@@ -19,11 +19,11 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "invoice")
-public class InvoiceEntity {
+public class RentInvoiceEntity {
 	@Id
 	@Column
-	@GeneratedValue(generator = "invoice_seq")
-	@SequenceGenerator(name = "invoice_seq", sequenceName = "invoice_seq", allocationSize = 1)
+	@GeneratedValue(generator = "rent_invoice_seq")
+	@SequenceGenerator(name = "rent_invoice_seq", sequenceName = "rent_invoice_seq", allocationSize = 1)
 	private long id;
 	@OneToOne
 	private UserEntity user;
@@ -42,7 +42,4 @@ public class InvoiceEntity {
 	private double totalDiscount;
 	@OneToOne
 	private CustomerEntity customer;
-	@Column
-	private String invoiceFrom;
-
 }

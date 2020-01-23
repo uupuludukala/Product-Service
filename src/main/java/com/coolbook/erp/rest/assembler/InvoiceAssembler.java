@@ -10,8 +10,8 @@ import com.coolbook.erp.entity.CustomerEntity;
 import com.coolbook.erp.entity.InvoiceEntity;
 import com.coolbook.erp.entity.InvoiceProductEntity;
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.model.InvoicePost;
-import com.coolbook.model.InvoiceProduct;
+import com.coolbook.erp.model.InvoicePost;
+import com.coolbook.erp.model.InvoiceProduct;
 
 
 @Component

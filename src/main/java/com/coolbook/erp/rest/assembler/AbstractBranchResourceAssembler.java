@@ -3,7 +3,7 @@ package com.coolbook.erp.rest.assembler;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.BranchEntity;
-import com.coolbook.model.BranchGet;
+import com.coolbook.erp.model.BranchGet;
 
 public abstract class AbstractBranchResourceAssembler extends ResourceAssemblerSupport<BranchEntity, BranchGet>{
 	protected String requestURI;

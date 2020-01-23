@@ -4,8 +4,8 @@ package com.coolbook.erp.rest.assembler;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.PaymentMethodEntity;
-import com.coolbook.model.PaymentMethodGet;
-import com.coolbook.model.PaymentMethodPost;
+import com.coolbook.erp.model.PaymentMethodGet;
+import com.coolbook.erp.model.PaymentMethodPost;
 
 @Component
 public class PaymentMethodAssembler {

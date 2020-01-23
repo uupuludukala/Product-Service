@@ -1,9 +1,14 @@
 package com.coolbook.erp.rest.assembler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
+import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.model.ProductGet;
+import com.coolbook.erp.model.CompanyGet;
+import com.coolbook.erp.model.ProductGet;
 
 public abstract class AbstractProductResourceAssembler extends ResourceAssemblerSupport<ProductEntity, ProductGet> {
 	protected String requestURI;
@@ -41,7 +46,14 @@ public abstract class AbstractProductResourceAssembler extends ResourceAssembler
 		productGet.setWeight(productEntity.getWeight());
 		productGet.setVolume(productEntity.getVolume());
 		productGet.setResponsible(productEntity.getResponsible());
-
+		List<CompanyGet> companies =new ArrayList<CompanyGet>();
+		for(CompanyEntity company:productEntity.getCompanies()) {
+			CompanyGet companyGet=new CompanyGet();
+			companyGet.setCompany_id(company.getId());
+			companyGet.setCompanyName(company.getCompanyName());
+			companies.add(companyGet);
+		}
+		productGet.setCompanies(companies);
 		return productGet;
 	}
 
