@@ -23,7 +23,7 @@ public class CustomerSearchSpecification implements Specification<CustomerEntity
 		Predicate predicate = cb.conjunction();
 		if (searchvalue != null) {
 			Expression<String> nicNumber = root.get("nicNumber");
-			predicate = cb.or(predicate, cb.like(nicNumber, "%" + searchvalue + "%"));
+			predicate = cb.or(predicate, cb.like(cb.upper(nicNumber), "%" + searchvalue.toUpperCase() + "%"));
 			Expression<String> customerName = root.get("customerName");
 			predicate = cb.or(predicate, cb.like(customerName, "%" + searchvalue + "%"));
 			Expression<String> mobileNumer = root.get("mobileNumer");

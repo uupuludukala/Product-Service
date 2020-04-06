@@ -3,7 +3,7 @@ Implementation-Title: Product-Service
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: uduup
 Implementation-Vendor-Id: com.coolbook.erp
-Build-Jdk: 1.8.0_171
+Build-Jdk: 1.8.0_222-4-redhat
 Implementation-URL: http://projects.spring.io/spring-boot/Product-Serv
  ice/
 Created-By: Maven Integration for Eclipse

@@ -28,7 +28,7 @@ public class CustomerSpecification  implements Specification<CustomerEntity> {
 		}
 		if (searchCriteria.getCustomerName() != null) {
 			Expression<String> customerName = root.get("customerName");
-			predicate = cb.and(predicate, cb.like(customerName, "%" + searchCriteria.getCustomerName() + "%"));
+			predicate = cb.and(predicate, cb.like(cb.upper(customerName), "%" + searchCriteria.getCustomerName().toUpperCase() + "%"));
 		}
 		
 		if (searchCriteria.getMobileNumer() != null) {

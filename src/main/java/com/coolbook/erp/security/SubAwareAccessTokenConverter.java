@@ -7,9 +7,9 @@ import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConv
 
 public class SubAwareAccessTokenConverter extends DefaultAccessTokenConverter {
 
-	private static final String COMPANY_CODE = "companyCode";
-	private static final String BRANCH_CODE = "branchCode";
-	private static final String COMAPNY_ID = "companyId";
+	private static final String COMPANY_CODE = "CompanyCode";
+	private static final String BRANCH_CODE = "BranchCode";
+	private static final String COMAPNY_ID = "CompanyId";
 
 	@Override
 	public OAuth2Authentication extractAuthentication(Map<String, ?> map) {

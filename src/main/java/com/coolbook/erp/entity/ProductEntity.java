@@ -52,7 +52,7 @@ public class ProductEntity {
 	@Column
 	private String productType;
 
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "productCat_id", referencedColumnName = "id")
 	private ProductCategoryEntity productCategory;
 	@Column
