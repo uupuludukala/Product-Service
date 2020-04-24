@@ -21,6 +21,8 @@ import lombok.Data;
 @Table(name = "company")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class CompanyEntity {
+	
+	
 	@Id
 	@Column
 	@GeneratedValue(generator="company_seq")
@@ -31,11 +33,11 @@ public class CompanyEntity {
 	@Column
 	private String companyCode;
 	@Column
-	private String adress1;
+	private String addressLine1;
 	@Column
-	private String adress2;
+	private String addressLine2;
 	@Column
-	private String adress3;
+	private String addressLine3;
 	@Column
 	private String conatactNumber;
 	

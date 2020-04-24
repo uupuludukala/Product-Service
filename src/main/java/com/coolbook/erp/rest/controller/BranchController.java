@@ -30,10 +30,12 @@ import com.coolbook.erp.rest.assembler.BranchGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
 import com.coolbook.erp.rest.service.BranchService;
 
+import io.swagger.annotations.ApiParam;
+
 
 
 @RestController
-@RequestMapping(value="branchService")
+//@RequestMapping(value="branchService")
 public class BranchController {
 	private static final String REFERRER_HEADER_KEY = "referrer";
 	
@@ -61,6 +63,19 @@ public class BranchController {
 		return new ResponseEntity<>(header,HttpStatus.CREATED);
 	}
 
+	
+	@RequestMapping(value ="saveBranch/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<Void> updateBranch(@RequestBody BranchPost branch,@ApiParam(value = "Branch Id", required = true) @PathVariable("id") long id){
+		branchService.updateBranch(branchAssembler.essembleBranchEntity(branch), id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value ="deleteBranch/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteBranch(@ApiParam(value = "Branch Id", required = true) @PathVariable("id") long id){
+		branchService.deleteBranch( id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	@RequestMapping(value = "getBranchById/{id}", method = RequestMethod.GET)
 	public ResponseEntity<BranchGet> getBranchById(@PathVariable("id") long id) {
 		return ResponseEntity.ok().body(branchAssembler.essembleBranchGet(this.branchService.getBranchById(id)));

@@ -19,12 +19,12 @@ public abstract class AbstractCompanyResourceAssembler extends ResourceAssembler
 	
 	private CompanyGet createCompanyJson(CompanyEntity companyEntity) {
 		CompanyGet companyGet=new CompanyGet();
-		companyGet.setAdress1(companyEntity.getAdress1());
-		companyGet.setAdress2(companyEntity.getAdress2());
-		companyGet.setAdress3(companyEntity.getAdress3());
+		companyGet.setAddressLine1(companyEntity.getAddressLine1());
+		companyGet.setAddressLine2(companyEntity.getAddressLine2());
+		companyGet.setAddressLine3(companyEntity.getAddressLine3());
 		companyGet.setCompanyCode(companyEntity.getCompanyCode());
 		companyGet.setCompanyName(companyEntity.getCompanyName());
-		companyGet.setConatactNumber(companyEntity.getConatactNumber());
+		companyGet.setContactNumber(companyEntity.getConatactNumber());
 		companyGet.setCompany_id(companyEntity.getId());
 		return companyGet;
 	}

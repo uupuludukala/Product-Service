@@ -25,12 +25,15 @@ public class BranchEntity {
 	private long id;
 	@Column
 	private String branchCode;
+	
 	@Column
-	private String address1;
+	private String branchName;
 	@Column
-	private String address2;
+	private String addressLine1;
 	@Column
-	private String address3;
+	private String addressLine2;
+	@Column
+	private String addressLine3;
 	@Column
 	private String conatactNumber;
 	@OneToOne

@@ -20,12 +20,13 @@ public abstract class AbstractBranchResourceAssembler extends ResourceAssemblerS
 	private BranchGet createBranchJson(BranchEntity branchEntity) {
 		BranchGet branchGet=new BranchGet();
 		branchGet.setBranch_id(branchEntity.getId());
-		branchGet.setAddress1(branchEntity.getAddress1());
-		branchGet.setAddress2(branchEntity.getAddress2());
-		branchGet.setAddress3(branchEntity.getAddress3());
+		branchGet.setAddressLine1(branchEntity.getAddressLine1());
+		branchGet.setAddressLine2(branchEntity.getAddressLine2());
+		branchGet.setAddressLine3(branchEntity.getAddressLine3());
 		branchGet.setBranchCode(branchEntity.getBranchCode());
+		branchGet.setBranchName(branchEntity.getBranchName());
 		branchGet.setCompanyId(branchEntity.getCompany().getId());
-		branchGet.setConatactNumber(branchEntity.getConatactNumber());
+		branchGet.setContactNumber(branchEntity.getConatactNumber());
 		return branchGet;
 	}
 	

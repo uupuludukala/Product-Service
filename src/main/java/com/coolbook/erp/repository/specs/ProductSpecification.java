@@ -83,7 +83,7 @@ public class ProductSpecification implements Specification<ProductEntity> {
 		Root<CompanyEntity> rootChild = subQuery.from(CompanyEntity.class);
 		subQuery.select(rootChild);
 		subQuery.where(rootChild.get("id").in(companyId));
-		return predicate = cb.isMember(subQuery, company);
+		return predicate = cb.and(predicate,cb.isMember(subQuery, company));
 	}
 
 }

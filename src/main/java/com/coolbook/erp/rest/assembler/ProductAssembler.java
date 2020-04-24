@@ -14,6 +14,7 @@ import com.coolbook.erp.model.CompanyGet;
 import com.coolbook.erp.model.ProductGet;
 import com.coolbook.erp.model.ProductPost;
 import com.coolbook.erp.rest.service.CompanyService;
+import com.coolbook.erp.rest.service.ProductCategoryService;
 import com.coolbook.erp.security.SecurityFacade;
 
 
@@ -23,10 +24,12 @@ public class ProductAssembler {
 
 	private SecurityFacade securityFacade;
 	private CompanyService companyService;
+	private ProductCategoryService productCategoryService;
 
-	public ProductAssembler(SecurityFacade securityFacade, CompanyService companyService) {
+	public ProductAssembler(SecurityFacade securityFacade, CompanyService companyService,ProductCategoryService productCategoryService) {
 		this.securityFacade = securityFacade;
 		this.companyService = companyService;
+		this.productCategoryService=productCategoryService;
 	}
 
 	public ProductGet essembleProductGet(ProductEntity productEntity) {
@@ -72,8 +75,7 @@ public class ProductAssembler {
 		productEntity.setBarcode(productPost.getBarcode());
 		productEntity.setInternalNotes(productPost.getInternalNotes());
 		productEntity.setCost(productPost.getCost());
-		ProductCategoryEntity productCategory = new ProductCategoryEntity();
-		productCategory.setId(productPost.getProductCategory());
+		ProductCategoryEntity productCategory = productCategoryService.getProductCategoryById(productPost.getProductCategory());		
 		productEntity.setProductCategory(productCategory);
 		productEntity.setInternalReference(productPost.getInternalReference());
 		productEntity.setProductName(productPost.getProductName());

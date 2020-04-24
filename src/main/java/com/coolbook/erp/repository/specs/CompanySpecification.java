@@ -28,7 +28,7 @@ public class CompanySpecification implements Specification<CompanyEntity> {
 		}
 		if (searchCriteria.getCompanyName() != null) {
 			Expression<String> comNameExp = root.get("companyName");
-			predicate = cb.and(predicate, cb.like(comNameExp, "%" + searchCriteria.getCompanyName() + "%"));
+			predicate = cb.and(predicate, cb.like(cb.upper(comNameExp), "%" + searchCriteria.getCompanyName().toUpperCase() + "%"));
 		}
 
 		if (searchCriteria.getContactNumber() != null) {

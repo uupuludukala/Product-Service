@@ -54,7 +54,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "saveCustomer", method = RequestMethod.POST)
 	public ResponseEntity<Void> saveCustomer(@Valid @RequestBody CustomerPost customer) {
-		long customerId = customerService.saveCustomer(customerAssembler.essembleCustomerentity(customer));
+		long customerId = customerService.saveCustomer(customerAssembler.essembleCustomerEntity(customer));
 		HttpHeaders header = new HttpHeaders();
 		header.setLocation(linkTo(ControllerLinkBuilder.methodOn(CustomerController.class).getCustomerById(customerId)).toUri());
 		return new ResponseEntity<>(header, HttpStatus.CREATED);
@@ -62,7 +62,7 @@ public class CustomerController {
 	
 	@RequestMapping(value ="saveCustomer/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<Void> updateCustomer(@RequestBody CustomerPost customer,@ApiParam(value = "Customer Id", required = true) @PathVariable("id") long id){
-		customerService.updateCustomer(customerAssembler.essembleCustomerentity(customer), id);
+		customerService.updateCustomer(customerAssembler.essembleCustomerEntity(customer), id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

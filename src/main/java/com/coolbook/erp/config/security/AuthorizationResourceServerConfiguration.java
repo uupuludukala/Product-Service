@@ -35,7 +35,7 @@ public class AuthorizationResourceServerConfiguration extends ResourceServerConf
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.cors().and().authorizeRequests()
-				.antMatchers("/swagger-ui.html", "/configuration/ui", "/swagger-resources/**", "/**/api-docs",
+				.antMatchers("/initialSetup", "/swagger-ui.html", "/configuration/ui", "/swagger-resources/**", "/**/api-docs",
 						"/health", "/hystrix.stream", "/version","/downloadFile/**")
 				.permitAll().anyRequest().authenticated().and().headers().cacheControl().disable();
 	}

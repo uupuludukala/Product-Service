@@ -9,8 +9,8 @@ public class UserPost {
 
 	@JsonProperty("userName")
 	private String userName;
-	@JsonProperty("pasword")
-	private String pasword;
+	@JsonProperty("password")
+	private String password;
 	@JsonProperty("branch")
 	private  long branch;
 }

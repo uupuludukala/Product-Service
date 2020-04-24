@@ -23,7 +23,7 @@ public class UserAssembler {
 		BranchEntity branch=new BranchEntity();
 		branch.setId(userPost.getBranch());
 		userEntity.setBranch(branch);
-		userEntity.setPassword(BCrypt.hashpw(userPost.getPasword(), BCrypt.gensalt()));
+		userEntity.setPassword(BCrypt.hashpw(userPost.getPassword(), BCrypt.gensalt()));
 		userEntity.setUserName(userPost.getUserName());
 		return userEntity;
 	}

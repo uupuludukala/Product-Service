@@ -23,7 +23,7 @@ public class CustomerAssembler {
 		return customerGet;
 	}
 	
-	public CustomerEntity essembleCustomerentity(CustomerPost customerPost) {
+	public CustomerEntity essembleCustomerEntity(CustomerPost customerPost) {
 		CustomerEntity customerEntity=new CustomerEntity();
 		customerEntity.setNicNumber(customerPost.getNicNumber());
 		customerEntity.setCustomerName(customerPost.getCustomerName());

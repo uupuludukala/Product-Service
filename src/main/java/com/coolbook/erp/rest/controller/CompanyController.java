@@ -30,6 +30,8 @@ import com.coolbook.erp.rest.assembler.CompanyGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.CompanyCriteria;
 import com.coolbook.erp.rest.service.CompanyService;
 
+import io.swagger.annotations.ApiParam;
+
 @RestController
 public class CompanyController {
 	private static final String REFERRER_HEADER_KEY = "referrer";
@@ -51,10 +53,22 @@ public class CompanyController {
 	}
 	@RequestMapping(value="saveCompany",method=RequestMethod.POST)
 	public ResponseEntity<Void> saveCompany(@RequestBody CompanyPost company) {
-		long companyId=companyService.saveCompany(companyAssembler.essembleCompanyentity(company));
+		long companyId=companyService.saveCompany(companyAssembler.essembleCompanyEntity(company));
 		HttpHeaders header=new HttpHeaders();
 		header.setLocation(linkTo(BranchController.class).slash(companyId).toUri());
 		return new ResponseEntity<>(header,HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value ="saveCompany/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<Void> updateCompany(@RequestBody CompanyPost company,@ApiParam(value = "Company Id", required = true) @PathVariable("id") long id){
+		companyService.updateCompany(companyAssembler.essembleCompanyEntity(company), id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value ="deleteCompany/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteCompany(@ApiParam(value = "Company Id", required = true) @PathVariable("id") long id){
+		companyService.deleteCompany( id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	@RequestMapping(value="getCompanyById/{id}",method=RequestMethod.GET)
 	public ResponseEntity<CompanyGet> getCompanyById(@PathVariable ("id") long id){
@@ -70,6 +84,17 @@ public class CompanyController {
 				: proxyRequestUri;
 		return ok(pagedResourcesAssembler.toResource(this.companyService.getAllCompany(pageable,criteria),assembler,new Link(basePath)));
 	
+	}
+	
+	@RequestMapping(value = "searchCompany", method = RequestMethod.GET)
+	public ResponseEntity<PagedResources<CompanyGet>> searchCompany(Pageable pageable, HttpServletRequest request,
+			String searchValue) {
+		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+		String basePath = StringUtils.isEmpty(proxyRequestUri)
+				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+				: proxyRequestUri;
+		return ok(pagedResourcesAssembler.toResource(this.companyService.searchCompany(pageable, searchValue), assembler,
+				new Link(basePath)));
 	}
 	
 }

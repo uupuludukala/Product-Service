@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.BranchEntity;
+import com.coolbook.erp.entity.CustomerEntity;
 import com.coolbook.erp.repository.BranchRepository;
 import com.coolbook.erp.repository.specs.BranchSpecification;
 import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
@@ -20,6 +21,16 @@ BranchRepository branchRepository;
 	}
 	public long saveBranch(BranchEntity branch) {
 		return this.branchRepository.save(branch).getId();
+	}
+	
+	public void updateBranch(BranchEntity branch, long id) {
+		branch.setId(id);
+		this.branchRepository.save(branch);
+	}
+
+	public void deleteBranch(long id) {
+
+		this.branchRepository.delete(id);
 	}
 	public BranchEntity getBranchById(long id) {
 		return this.branchRepository.getOne(id);

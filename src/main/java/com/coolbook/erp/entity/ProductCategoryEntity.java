@@ -30,7 +30,7 @@ public class ProductCategoryEntity {
 	@Column
 	private String productcatName;
 	
-	@OneToMany(cascade= {CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="productCategory")
+	@OneToMany(cascade= {CascadeType.MERGE},fetch=FetchType.LAZY,mappedBy="productCategory")
 	private List<ProductEntity> product;
 
 }

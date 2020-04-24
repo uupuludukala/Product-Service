@@ -24,11 +24,12 @@ public class BranchAssembler {
 	 public BranchEntity essembleBranchEntity(BranchPost branchPost) {
 		 BranchEntity  branchEntity=new BranchEntity ();
 		 branchEntity.setBranchCode(branchPost.getBranchCode());
-		 branchEntity.setAddress1(branchPost.getAddress1());
-		 branchEntity.setAddress2(branchPost.getAddress2());
-		 branchEntity.setAddress3(branchPost.getAddress3());
+		 branchEntity.setBranchName(branchPost.getBranchName());
+		 branchEntity.setAddressLine1(branchPost.getAddressLine1());
+		 branchEntity.setAddressLine2(branchPost.getAddressLine2());
+		 branchEntity.setAddressLine3(branchPost.getAddressLine3());
 		 branchEntity.setCompany(companyRepository.getOne(branchPost.getCompanyId()));
-		 branchEntity.setConatactNumber(branchPost.getConatactNumber());
+		 branchEntity.setConatactNumber(branchPost.getContactNumber());
 		 return branchEntity;
 	 }
 	 
@@ -36,11 +37,12 @@ public class BranchAssembler {
 		 BranchGet branchGet=new BranchGet();
 		 branchGet.setBranch_id(branchEntity.getId());
 		 branchGet.setBranchCode(branchEntity.getBranchCode());
-		 branchGet.setAddress1(branchEntity.getAddress1());
-		 branchGet.setAddress2(branchEntity.getAddress2());
-		 branchGet.setAddress3(branchEntity.getAddress3());
+		 branchGet.setBranchName(branchEntity.getBranchName());
+		 branchGet.setAddressLine1(branchEntity.getAddressLine1());
+		 branchGet.setAddressLine2(branchEntity.getAddressLine2());
+		 branchGet.setAddressLine3(branchEntity.getAddressLine3());
 		 branchGet.setCompanyId(branchEntity.getCompany().getId());
-		 branchGet.setConatactNumber(branchEntity.getConatactNumber());
+		 branchGet.setContactNumber(branchEntity.getConatactNumber());
 		 return branchGet;		 
 	 }
 }

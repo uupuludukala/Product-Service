@@ -12,9 +12,10 @@ public class BranchGet extends ResourceSupport{
 	@JsonProperty("id")
 	private long branch_id;
 	private String branchCode;
-	private String address1;
-	private String address2;
-	private String address3;
-	private String conatactNumber;
+	private String  branchName;
+	private String addressLine1;
+	private String addressLine2;
+	private String addressLine3;
+	private String contactNumber;
 	private long companyId;
 }

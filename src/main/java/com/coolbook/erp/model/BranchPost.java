@@ -12,17 +12,20 @@ public class BranchPost {
 	@JsonProperty("branchCode")
 	private String branchCode;
 	
-	@JsonProperty("address1")
-	private String address1;
+	@JsonProperty("branchName")
+	private String branchName;
+	
+	@JsonProperty("addressLine1")
+	private String addressLine1;
 
-	@JsonProperty("address2")
-	private String address2;
+	@JsonProperty("addressLine2")
+	private String addressLine2;
 
-	@JsonProperty("address3")
-	private String address3;
+	@JsonProperty("addressLine3")
+	private String addressLine3;
 
-	@JsonProperty("conatactNumber")
-	private String conatactNumber;
+	@JsonProperty("contactNumber")
+	private String contactNumber;
 	
 	@JsonProperty("email")
 	@Pattern(regexp="^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")
