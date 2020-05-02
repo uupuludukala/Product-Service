@@ -93,8 +93,6 @@
 			<artifactId>spring-security-jwt</artifactId>
 			<version>1.0.0.RELEASE</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>

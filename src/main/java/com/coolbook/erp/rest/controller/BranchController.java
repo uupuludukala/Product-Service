@@ -25,6 +25,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.coolbook.erp.entity.BranchEntity;
 import com.coolbook.erp.model.BranchGet;
 import com.coolbook.erp.model.BranchPost;
+import com.coolbook.erp.model.CompanyGet;
 import com.coolbook.erp.rest.assembler.BranchAssembler;
 import com.coolbook.erp.rest.assembler.BranchGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
@@ -88,5 +89,16 @@ public class BranchController {
 				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
 				: proxyRequestUri;
 		return ok(pagedResourcesAssembler.toResource(this.branchService.getAllBranch(pageable,searchCriteria),assembler,new Link(basePath)));
+	}
+	
+	@RequestMapping(value = "searchBranch", method = RequestMethod.GET)
+	public ResponseEntity<PagedResources<BranchGet>> searchBranch(Pageable pageable, HttpServletRequest request,
+			String searchValue,long companyId) {
+		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+		String basePath = StringUtils.isEmpty(proxyRequestUri)
+				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+				: proxyRequestUri;
+		return ok(pagedResourcesAssembler.toResource(this.branchService.searchBranch(pageable, searchValue,companyId), assembler,
+				new Link(basePath)));
 	}
 }

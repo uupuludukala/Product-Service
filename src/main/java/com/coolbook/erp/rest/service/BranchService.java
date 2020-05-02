@@ -6,8 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.BranchEntity;
-import com.coolbook.erp.entity.CustomerEntity;
+import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.repository.BranchRepository;
+import com.coolbook.erp.repository.specs.BranchSearchSpecification;
 import com.coolbook.erp.repository.specs.BranchSpecification;
 import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
 
@@ -40,4 +41,11 @@ BranchRepository branchRepository;
 		BranchSpecification specification=new BranchSpecification(searchCriteria);
 		return this.branchRepository.findAll(specification,page);
 	}
+	
+	
+	public Page<BranchEntity> searchBranch(Pageable page, String searchValue,long companyId) {
+		BranchSearchSpecification specification = new BranchSearchSpecification(searchValue,companyId);
+		return this.branchRepository.findAll(specification, page);
+	}
+	
 }

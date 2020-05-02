@@ -14,6 +14,8 @@ public class UserAssembler {
 		UserGet userGet = new UserGet();
 		userGet.setUser_Id(userEntity.getId());
 		userGet.setBranch(userEntity.getBranch().getBranchCode());
+		userGet.setBranchId(userEntity.getBranch().getId());
+		userGet.setCompanyId(userEntity.getBranch().getCompany().getId());
 		userGet.setUserName(userEntity.getUserName());
 		return userGet;
 	}

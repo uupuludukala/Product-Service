@@ -21,10 +21,10 @@ public class CompanySearchSpecification  implements Specification<CompanyEntity>
 
 	@Override
 	public Predicate toPredicate(Root<CompanyEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-		Predicate predicate = cb.conjunction();
+		Predicate predicate =null;
 		if (searchvalue != null) {
 			Expression<String> companyCode = root.get("companyCode");
-			predicate = cb.or(predicate, cb.like(cb.upper(companyCode), "%" + searchvalue.toUpperCase() + "%"));
+			predicate = cb.like(cb.upper(companyCode), "%" + searchvalue.toUpperCase() + "%");
 			Expression<String> companyName = root.get("companyName");
 			predicate = cb.or(predicate, cb.like(cb.upper(companyName), "%" + searchvalue.toUpperCase() + "%"));
 			Expression<String> conatactNumber = root.get("conatactNumber");
