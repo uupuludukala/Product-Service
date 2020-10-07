@@ -44,27 +44,29 @@ public class ProductEntity {
 
 	@Column
 	private boolean canBePurchased;
-
-	@Column
-	private String internalReference;
+	
 	@Column
 	private String productName;
+	
 	@Column
 	private String productType;
 
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "productCat_id", referencedColumnName = "id")
 	private ProductCategoryEntity productCategory;
-	@Column
+	
+	@Column(unique = true)
 	private String barcode;
 
-	@Column
-	private String internalNotes;
+	@Column(unique = true)
+	private String productCode;
 
 	@Column
 	private double salePrice;
+	
 	@Column
 	private double cost;
+	
 	@Column
 	private boolean active;
 
@@ -101,7 +103,8 @@ public class ProductEntity {
 	@Column
 	private long responsible;
 
-	
+    @Column
+    private String status;
 	
 	@ManyToMany
     @JoinTable(

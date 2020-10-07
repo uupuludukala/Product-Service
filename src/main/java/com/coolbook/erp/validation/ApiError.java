@@ -1,9 +1,10 @@
 package com.coolbook.erp.validation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.validation.FieldError;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,20 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @NoArgsConstructor
-public class ApiError {
+public class ApiError implements Serializable {
 
-	List<FieldError> fieldErrors=new ArrayList<FieldError>();
+    private static final long serialVersionUID = -5130054537377087224L;
+    private List<FieldError> fieldsErrors = new ArrayList<>();
+    private List<GlobalError> globalErrors = new ArrayList<>();
+
+    public ApiError addFieldError(String code, String fieldName, String userMessage, String rejectedValue) {
+        this.fieldsErrors.add(new FieldError(code, fieldName, userMessage, rejectedValue));
+        return this;
+    }
+
+    public ApiError addGlobalError(String code, List<String> fields, String userMessage) {
+        this.globalErrors.add(new GlobalError(code, fields, userMessage));
+        return this;
+    }
+
 }

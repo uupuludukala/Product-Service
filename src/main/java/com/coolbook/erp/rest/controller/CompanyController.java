@@ -52,7 +52,7 @@ public class CompanyController {
 		this.companyService=companyService;
 	}
 	@RequestMapping(value="saveCompany",method=RequestMethod.POST)
-	public ResponseEntity<Void> saveCompany(@RequestBody CompanyPost company) {
+	public ResponseEntity<Void> saveCompany(@RequestBody @Valid CompanyPost company) {
 		long companyId=companyService.saveCompany(companyAssembler.essembleCompanyEntity(company));
 		HttpHeaders header=new HttpHeaders();
 		header.setLocation(linkTo(BranchController.class).slash(companyId).toUri());

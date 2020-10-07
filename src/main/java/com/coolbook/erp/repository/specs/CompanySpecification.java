@@ -32,7 +32,7 @@ public class CompanySpecification implements Specification<CompanyEntity> {
 		}
 
 		if (searchCriteria.getContactNumber() != null) {
-			Expression<String> contactNumExp = root.get("conatactNumber");
+			Expression<String> contactNumExp = root.get("contactNumber");
 			predicate = cb.and(predicate, cb.like(contactNumExp, "%" + searchCriteria.getContactNumber() + "%"));
 		}
 

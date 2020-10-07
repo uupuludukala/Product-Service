@@ -6,6 +6,7 @@ import static org.springframework.http.ResponseEntity.ok;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.coolbook.erp.model.BranchGet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -59,6 +60,12 @@ public class UserController {
 		return new ResponseEntity<>(header, HttpStatus.CREATED);
 	}
 
+    @RequestMapping(value ="saveUser/{id}",method=RequestMethod.PUT)
+    public ResponseEntity<Void> updateUser(@RequestBody UserPost user,@ApiParam(value = "User Id", required = true) @PathVariable("id") long id){
+        userService.updateUser(userAssembler.essembleUserEntity(user), id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 	@RequestMapping(value = "getUserById/{id}", method = RequestMethod.GET)
 	public ResponseEntity<UserGet> getUserById(@PathVariable("id") long id) {
 		return ResponseEntity.ok().body(userAssembler.essembleUserGet(this.userService.getUserById(id)));
@@ -81,9 +88,16 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="saveUser/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<Void> updateUser(@RequestBody UserPost user,@ApiParam(value = "User Id", required = true) @PathVariable("id") long id){
-		userService.updateUser(userAssembler.essembleUserEntity(user), id);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+	
+
+    @RequestMapping(value = "searchUser", method = RequestMethod.GET)
+    public ResponseEntity<PagedResources<UserGet>> searchUser(Pageable pageable, HttpServletRequest request,
+                                                                  String searchValue) {
+        String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+        String basePath = StringUtils.isEmpty(proxyRequestUri)
+                ? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+                : proxyRequestUri;
+        return ok(pagedResourcesAssembler.toResource(this.userService.searchBranch(pageable, searchValue), assembler,
+                new Link(basePath)));
+    }
 }

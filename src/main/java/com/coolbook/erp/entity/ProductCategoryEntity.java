@@ -23,12 +23,18 @@ public class ProductCategoryEntity {
 	@GeneratedValue(generator = "product_category_seq")
 	@SequenceGenerator(name = "product_category_seq", sequenceName = "product_category_seq", allocationSize = 1)
 	private long id;
-	@Column
-	private String productcatCode;
+	
+	@Column(unique = true)
+	private String productCategoryCode;
+	
 	@Column
 	private long parentCategory;
+	
 	@Column
-	private String productcatName;
+	private String productCategoryName;
+
+    @Column
+    private String status;
 	
 	@OneToMany(cascade= {CascadeType.MERGE},fetch=FetchType.LAZY,mappedBy="productCategory")
 	private List<ProductEntity> product;

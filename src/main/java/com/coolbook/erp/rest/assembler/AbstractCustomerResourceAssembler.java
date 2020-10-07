@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CustomerEntity;
@@ -25,10 +26,12 @@ public abstract class AbstractCustomerResourceAssembler  extends ResourceAssembl
 		customerGet.setAddressLine1(customerEntity.getAddressLine1());
 		customerGet.setAddressLine2(customerEntity.getAddressLine2());
 		customerGet.setAddressLine3(customerEntity.getAddressLine3());
-		customerGet.setMobileNumer(customerEntity.getMobileNumer());
+		customerGet.setMobileNumer(customerEntity.getMobileNumber());
 		customerGet.setHomePhone(customerEntity.getHomePhone());
 		customerGet.setCreditLimit(customerEntity.getCreditLimit());
 		customerGet.setImageUrl(customerEntity.getImageUrl());
+		customerGet.setStatus(StatusEnum.getByCode(customerEntity.getStatus()));
+                
 		return customerGet;
 	}
 

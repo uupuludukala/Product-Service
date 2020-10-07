@@ -31,7 +31,8 @@ BranchRepository branchRepository;
 
 	public void deleteBranch(long id) {
 
-		this.branchRepository.delete(id);
+    this.branchRepository.delete(id);
+
 	}
 	public BranchEntity getBranchById(long id) {
 		return this.branchRepository.getOne(id);
@@ -43,8 +44,13 @@ BranchRepository branchRepository;
 	}
 	
 	
-	public Page<BranchEntity> searchBranch(Pageable page, String searchValue,long companyId) {
+	public Page<BranchEntity> searchBranchByCompany(Pageable page, String searchValue,long companyId) {
 		BranchSearchSpecification specification = new BranchSearchSpecification(searchValue,companyId);
+		return this.branchRepository.findAll(specification, page);
+	}
+	
+	public Page<BranchEntity> searchBranch(Pageable page, String searchValue) {
+		BranchSearchSpecification specification = new BranchSearchSpecification(searchValue,0);
 		return this.branchRepository.findAll(specification, page);
 	}
 	

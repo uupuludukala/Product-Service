@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ProductCriteria {
 	private String id;
-	private String internalReference;
+	private String productCode;
 	private String productName;
 	private String productType;
 	private String productCategory;

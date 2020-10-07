@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.CompanyEntity;
@@ -16,8 +17,9 @@ public class CompanyAssembler {
 		companyGet.setAddressLine3(companyEntity.getAddressLine3());
 		companyGet.setCompanyCode(companyEntity.getCompanyCode());
 		companyGet.setCompanyName(companyEntity.getCompanyName());
-		companyGet.setContactNumber(companyEntity.getConatactNumber());
+		companyGet.setContactNumber(companyEntity.getContactNumber());
 		companyGet.setCompany_id(companyEntity.getId());
+		companyGet.setStatus(StatusEnum.getByCode(companyEntity.getStatus()));
 		return companyGet;
 	}
 
@@ -28,7 +30,9 @@ public class CompanyAssembler {
 		companyEntity.setAddressLine3(companyPost.getAddressLine3());
 		companyEntity.setCompanyCode(companyPost.getCompanyCode());
 		companyEntity.setCompanyName(companyPost.getCompanyName());
-		companyEntity.setConatactNumber(companyPost.getContactNumber());
+		companyEntity.setContactNumber(companyPost.getContactNumber());
+		if(companyPost.getStatus()!=null)
+		    companyEntity.setStatus(companyPost.getStatus().getCode());
 		return companyEntity;
 
 	}

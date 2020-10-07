@@ -28,8 +28,10 @@ public class PaymentMethodEntity {
 	@GeneratedValue(generator = "paymentMethod_seq")
 	@SequenceGenerator(name = "paymentMethod_seq", sequenceName = "paymentMethod_seq", allocationSize = 1)
 	private long id;
+	
 	@Column
 	private String paymentMethodName;
+	
 	@Column
 	private boolean isCash;
 	

@@ -22,4 +22,4 @@ public class BranchGetResourceAssembler extends AbstractBranchResourceAssembler{
 		return ServletUriComponentsBuilder.fromHttpUrl(requestURI).build().toUriString();
 	}
 	
-}
+} 

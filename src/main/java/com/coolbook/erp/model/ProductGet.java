@@ -2,6 +2,7 @@ package com.coolbook.erp.model;
 
 import java.util.List;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,12 +20,11 @@ public class ProductGet extends ResourceSupport {
 	
 	
 	private boolean canBePurchased;
-	private String internalReference;
 	private String productName;
 	private String productType;
 	private long productCategory;
-	private String barcode;
-	private String internalNotes;
+	private String barCode;
+	private String productCode;
 	private double salePrice;
 	private double cost;
 	private boolean active;
@@ -39,4 +39,5 @@ public class ProductGet extends ResourceSupport {
 	private double volume;
 	private long responsible;	
 	private List<CompanyGet> companies;
+    private StatusEnum status;
 }

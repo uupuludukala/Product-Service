@@ -35,7 +35,10 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 public class ProductController {
+    
 	private static final String REFERRER_HEADER_KEY = "referrer";
+	
+	@Autowired
 	ProductService productService;
 
 	@Autowired
@@ -45,15 +48,12 @@ public class ProductController {
 	private ProductGetResourceAssembler assembler;
 
 	@Autowired
-	ProductAssembler productAssembler;
+	private ProductAssembler productAssembler;
 
-	@Autowired
-	ProductController(ProductService productService) {
-		this.productService = productService;
-	}
+
 
 	@RequestMapping(value = "saveProduct", method = RequestMethod.POST)
-	public ResponseEntity<Void> saveProduct(@Valid @RequestBody ProductPost product) {
+	public ResponseEntity<Void> saveProduct(@Valid @RequestBody ProductPost product) {        
 		long productId = productService.saveProduct(productAssembler.essembleProductentity(product));
 		HttpHeaders header = new HttpHeaders();
 		header.setLocation(linkTo(ControllerLinkBuilder.methodOn(ProductController.class).getProductById(productId)).toUri());		
@@ -111,8 +111,5 @@ public class ProductController {
 		return ok(pagedResourcesAssembler.toResource(this.productService.searchProduct(pageable, searchValue), assembler,
 				new Link(basePath)));
 	}
-	
-	
-	
 	
 }

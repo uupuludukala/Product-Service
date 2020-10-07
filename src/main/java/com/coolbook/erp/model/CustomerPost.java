@@ -3,6 +3,7 @@ package com.coolbook.erp.model;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import lombok.Data;
 
 @Data
@@ -20,4 +21,5 @@ public class CustomerPost {
 	@NotNull
 	private double creditLimit;
 	private String imageUrl;
+	private StatusEnum status;
 }

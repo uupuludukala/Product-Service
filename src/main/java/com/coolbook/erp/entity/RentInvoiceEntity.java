@@ -25,21 +25,29 @@ public class RentInvoiceEntity {
 	@GeneratedValue(generator = "rent_invoice_seq")
 	@SequenceGenerator(name = "rent_invoice_seq", sequenceName = "rent_invoice_seq", allocationSize = 1)
 	private long id;
+	
 	@OneToOne
 	private UserEntity user;
+	
 	@Column
 	private Date date;
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id")
 	private List<InvoiceProductEntity> products;
+	
 	@Column
 	private double total;
+	
 	@Column
 	private double cashAmount;
+	
 	@Column
 	private String paymentMethod;
+	
 	@Column
 	private double totalDiscount;
+	
 	@OneToOne
 	private CustomerEntity customer;
 }

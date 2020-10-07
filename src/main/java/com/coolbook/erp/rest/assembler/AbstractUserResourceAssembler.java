@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.UserEntity;
@@ -17,11 +18,12 @@ public abstract class AbstractUserResourceAssembler extends ResourceAssemblerSup
 		return createUserJson(UserEntity);
 	}
 
-	private UserGet createUserJson(UserEntity UserEntity) {
+	private UserGet createUserJson(UserEntity userEntity) {
 		UserGet userGet = new UserGet();
-		userGet.setUser_Id(UserEntity.getId());
-		userGet.setBranch(UserEntity.getBranch().getBranchCode());
-		userGet.setUserName(UserEntity.getUserName());
+		userGet.setUser_Id(userEntity.getId());
+		userGet.setBranch(userEntity.getBranch().getBranchCode());
+		userGet.setUserName(userEntity.getUserName());
+		userGet.setStatus(StatusEnum.getByCode(userEntity.getStatus()));
 		return userGet;
 	}
 

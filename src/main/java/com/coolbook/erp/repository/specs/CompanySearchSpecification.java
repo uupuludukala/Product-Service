@@ -27,8 +27,8 @@ public class CompanySearchSpecification  implements Specification<CompanyEntity>
 			predicate = cb.like(cb.upper(companyCode), "%" + searchvalue.toUpperCase() + "%");
 			Expression<String> companyName = root.get("companyName");
 			predicate = cb.or(predicate, cb.like(cb.upper(companyName), "%" + searchvalue.toUpperCase() + "%"));
-			Expression<String> conatactNumber = root.get("conatactNumber");
-			predicate = cb.or(predicate, cb.like(conatactNumber, "%" + searchvalue + "%"));
+			Expression<String> contactNumber = root.get("contactNumber");
+			predicate = cb.or(predicate, cb.like(contactNumber, "%" + searchvalue + "%"));
 		}
 		return predicate;
 	}

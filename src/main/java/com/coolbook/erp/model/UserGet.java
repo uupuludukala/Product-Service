@@ -1,5 +1,6 @@
 package com.coolbook.erp.model;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,4 +15,5 @@ public class UserGet extends ResourceSupport{
 	private  String branch;
 	private long companyId;
 	private long branchId;
+	private StatusEnum status;
 }

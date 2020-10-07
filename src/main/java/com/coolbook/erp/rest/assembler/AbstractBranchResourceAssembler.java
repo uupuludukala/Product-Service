@@ -1,5 +1,7 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
+import com.coolbook.erp.model.CompanyGet;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.BranchEntity;
@@ -24,9 +26,14 @@ public abstract class AbstractBranchResourceAssembler extends ResourceAssemblerS
 		branchGet.setAddressLine2(branchEntity.getAddressLine2());
 		branchGet.setAddressLine3(branchEntity.getAddressLine3());
 		branchGet.setBranchCode(branchEntity.getBranchCode());
-		branchGet.setBranchName(branchEntity.getBranchName());
-		branchGet.setCompanyId(branchEntity.getCompany().getId());
-		branchGet.setContactNumber(branchEntity.getConatactNumber());
+		branchGet.setBranchName(branchEntity.getBranchName());        		
+		branchGet.setContactNumber(branchEntity.getContactNumber());
+        branchGet.setStatus(StatusEnum.getByCode(branchEntity.getStatus()));
+		if(branchEntity.getCompany()!=null) {
+            branchGet.setCompanyId(branchEntity.getCompany().getId());
+            branchGet.setCompanyCode(branchEntity.getCompany().getCompanyCode());
+            branchGet.setCompanyName(branchEntity.getCompany().getCompanyName());
+        }
 		return branchGet;
 	}
 	

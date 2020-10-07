@@ -28,9 +28,9 @@ public class ProductSpecificationPOS implements Specification<ProductEntity> {
 			Expression<String> exp = root.get("id");
 			predicate = cb.equal(exp, searchCriteria.getId());
 		}
-		if (searchCriteria.getInternalReference() != null) {
-			Expression<String> internalReference = root.get("internalReference");
-			predicate = cb.and(predicate, cb.like(internalReference, "%" + searchCriteria.getInternalReference() + "%"));
+		if (searchCriteria.getProductCode() != null) {
+			Expression<String> productCode = root.get("productCode");
+			predicate = cb.and(predicate, cb.like(productCode, "%" + searchCriteria.getProductCode() + "%"));
 		}
 
 		if (searchCriteria.getProductName() != null) {

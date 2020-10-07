@@ -20,12 +20,14 @@
     {
       "name": "cors.allow-credentials",
       "type": "java.lang.Boolean",
-      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration",
+      "defaultValue": false
     },
     {
       "name": "cors.allow-credentials",
       "type": "java.lang.Boolean",
-      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration",
+      "defaultValue": false
     },
     {
       "name": "cors.allowed-headers",
@@ -70,12 +72,14 @@
     {
       "name": "cors.max-age",
       "type": "java.lang.Long",
-      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration",
+      "defaultValue": 0
     },
     {
       "name": "cors.max-age",
       "type": "java.lang.Long",
-      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
+      "sourceType": "com.coolbook.erp.config.security.CORSConfiguration",
+      "defaultValue": 0
     },
     {
       "name": "cors.path",

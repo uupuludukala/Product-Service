@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CompanyEntity;
@@ -24,8 +25,9 @@ public abstract class AbstractCompanyResourceAssembler extends ResourceAssembler
 		companyGet.setAddressLine3(companyEntity.getAddressLine3());
 		companyGet.setCompanyCode(companyEntity.getCompanyCode());
 		companyGet.setCompanyName(companyEntity.getCompanyName());
-		companyGet.setContactNumber(companyEntity.getConatactNumber());
+		companyGet.setContactNumber(companyEntity.getContactNumber());
 		companyGet.setCompany_id(companyEntity.getId());
+		companyGet.setStatus(StatusEnum.getByCode(companyEntity.getStatus()));
 		return companyGet;
 	}
 	

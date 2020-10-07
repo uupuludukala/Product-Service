@@ -1,5 +1,6 @@
 package com.coolbook.erp.model;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.ResourceSupport;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class CustomerGet extends ResourceSupport {
 	private String homePhone;
 	private double creditLimit;
 	private String imageUrl;
+	private StatusEnum status;
 }

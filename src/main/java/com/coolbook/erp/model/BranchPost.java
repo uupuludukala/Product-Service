@@ -2,6 +2,7 @@ package com.coolbook.erp.model;
 
 import javax.validation.constraints.Pattern;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -31,7 +32,10 @@ public class BranchPost {
 	@Pattern(regexp="^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")
 	private String email;
 	
-	@JsonProperty("companyId")
+	@JsonProperty("companyId")    
 	private long companyId;
+	
+    @JsonProperty("status")
+    private StatusEnum status;
 	
 }

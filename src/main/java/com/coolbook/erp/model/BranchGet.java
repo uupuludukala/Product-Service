@@ -1,5 +1,6 @@
 package com.coolbook.erp.model;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,4 +19,7 @@ public class BranchGet extends ResourceSupport{
 	private String addressLine3;
 	private String contactNumber;
 	private long companyId;
+	private String companyCode;
+	private String companyName;
+	private StatusEnum status;
 }

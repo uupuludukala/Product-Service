@@ -3,6 +3,7 @@ package com.coolbook.erp.rest.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CompanyEntity;
@@ -28,11 +29,10 @@ public abstract class AbstractProductResourceAssembler extends ResourceAssembler
 		productGet.setCanBeSold(productEntity.isCanBeSold());
 		productGet.setCanBePurchased(productEntity.isCanBePurchased());
 		productGet.setActive(productEntity.isActive());
-		productGet.setBarcode(productEntity.getBarcode());
-		productGet.setInternalNotes(productEntity.getInternalNotes());
+		productGet.setBarCode(productEntity.getBarcode());
+		productGet.setProductCode(productEntity.getProductCode());
 		productGet.setCost(productEntity.getCost());
 		productGet.setProductCategory(productEntity.getProductCategory().getId());
-		productGet.setInternalReference(productEntity.getInternalReference());
 		productGet.setProductName(productEntity.getProductName());
 		productGet.setProductType(productEntity.getProductType());
 		productGet.setQuantity(productEntity.getQuantity());
@@ -46,6 +46,7 @@ public abstract class AbstractProductResourceAssembler extends ResourceAssembler
 		productGet.setWeight(productEntity.getWeight());
 		productGet.setVolume(productEntity.getVolume());
 		productGet.setResponsible(productEntity.getResponsible());
+		productGet.setStatus(StatusEnum.getByCode(productEntity.getStatus()));
 		List<CompanyGet> companies =new ArrayList<CompanyGet>();
 		for(CompanyEntity company:productEntity.getCompanies()) {
 			CompanyGet companyGet=new CompanyGet();

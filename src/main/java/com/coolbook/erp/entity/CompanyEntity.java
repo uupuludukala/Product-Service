@@ -2,15 +2,7 @@ package com.coolbook.erp.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,18 +20,27 @@ public class CompanyEntity {
 	@GeneratedValue(generator="company_seq")
 	@SequenceGenerator(name="company_seq",sequenceName="company_seq" ,allocationSize=1)
 	private long id;
-	@Column
+	
+	@Column(unique = true)
 	private String companyName;
-	@Column
+	
+	@Column(unique = true)    
 	private String companyCode;
+	
 	@Column
 	private String addressLine1;
+	
 	@Column
 	private String addressLine2;
+	
 	@Column
 	private String addressLine3;
+	
 	@Column
-	private String conatactNumber;
+	private String contactNumber;
+
+    @Column
+    private String status;
 	
 	@ManyToMany(mappedBy = "companies", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ProductEntity> products;

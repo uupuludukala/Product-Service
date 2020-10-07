@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
@@ -29,9 +30,10 @@ public abstract class AbstractProductCategoryResourceAssembler
 		ProductCategoryGet productCategoryGet = new ProductCategoryGet();
 		productCategoryGet.setProductCategory_id(productCategoryEntity.getId());
 		productCategoryGet.setParentCategory(productCategoryEntity.getParentCategory());
-		productCategoryGet.setParentCategoryCode(productCategoryEntity.getParentCategory()!=0?productCategoryService.getProductCategoryById(productCategoryEntity.getParentCategory()).getProductcatCode():"");
-		productCategoryGet.setProductCatCode(productCategoryEntity.getProductcatCode());
-		productCategoryGet.setProductCatName(productCategoryEntity.getProductcatName());
+		productCategoryGet.setParentCategoryCode(productCategoryEntity.getParentCategory()!=0?productCategoryService.getProductCategoryById(productCategoryEntity.getParentCategory()).getProductCategoryCode():"");
+		productCategoryGet.setProductCatCode(productCategoryEntity.getProductCategoryCode());
+		productCategoryGet.setProductCatName(productCategoryEntity.getProductCategoryName());
+        productCategoryGet.setStatus(StatusEnum.getByCode(productCategoryEntity.getStatus()));
 		return productCategoryGet;
 	}
 

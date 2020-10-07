@@ -28,21 +28,32 @@ public class CustomerEntity {
 	private long id;
 	@Column(unique = true)
 	private String nicNumber;
+	
 	@Column
 	private String customerName;
+	
 	@Column
 	private String addressLine1;
+	
 	@Column
 	private String addressLine2;
+	
 	@Column
 	private String addressLine3;
+	
 	@Column
-	private String mobileNumer;
+	private String mobileNumber;
+	
 	@Column
 	private String homePhone;
+	
 	@Column
 	private double creditLimit;
+	
 	@Column
 	private String imageUrl;
+
+    @Column
+    private String status;
 
 }

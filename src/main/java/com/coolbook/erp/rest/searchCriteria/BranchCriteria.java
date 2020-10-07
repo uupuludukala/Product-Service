@@ -8,5 +8,5 @@ public class BranchCriteria {
 	private String branchCode;
 	private String branchName;
 	private String address;
-	private String conatactNumber;
+	private String contactNumber;
 }

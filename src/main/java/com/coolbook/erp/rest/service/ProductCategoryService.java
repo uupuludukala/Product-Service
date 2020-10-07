@@ -1,5 +1,8 @@
 package com.coolbook.erp.rest.service;
 
+import com.coolbook.erp.entity.UserEntity;
+import com.coolbook.erp.repository.specs.ProductCategorySearchSpecification;
+import com.coolbook.erp.repository.specs.UserSearchSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,4 +45,9 @@ public class ProductCategoryService {
 		ProductCategorySpecification specification = new ProductCategorySpecification(criteria);
 		return this.productCategoryRepository.findAll(specification, page);
 	}
+
+    public Page<ProductCategoryEntity> searchProductCategory(Pageable page, String searchValue) {
+        ProductCategorySearchSpecification specification = new ProductCategorySearchSpecification(searchValue,0);
+        return this.productCategoryRepository.findAll(specification, page);
+    }
 }

@@ -23,8 +23,8 @@ public class ProductSearchSpecification  implements Specification<ProductEntity>
 		if (searchvalue != null) {
 			Expression<String> barcode = root.get("barcode");
 			predicate = cb.or(predicate, cb.like(barcode, "%" + searchvalue + "%"));
-			Expression<String> internalReference = root.get("internalReference");
-			predicate = cb.or(predicate, cb.like(internalReference, "%" + searchvalue + "%"));
+			Expression<String> productCode = root.get("productCode");
+			predicate = cb.or(predicate, cb.like(productCode, "%" + searchvalue + "%"));
 			Expression<String> productName = root.get("productName");
 			predicate = cb.or(predicate, cb.like(productName, "%" + searchvalue + "%"));
 		}

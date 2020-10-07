@@ -91,14 +91,25 @@ public class BranchController {
 		return ok(pagedResourcesAssembler.toResource(this.branchService.getAllBranch(pageable,searchCriteria),assembler,new Link(basePath)));
 	}
 	
-	@RequestMapping(value = "searchBranch", method = RequestMethod.GET)
-	public ResponseEntity<PagedResources<BranchGet>> searchBranch(Pageable pageable, HttpServletRequest request,
+	@RequestMapping(value = "searchBranchByCompany", method = RequestMethod.GET)
+	public ResponseEntity<PagedResources<BranchGet>> searchBranchByCompany(Pageable pageable, HttpServletRequest request,
 			String searchValue,long companyId) {
 		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
 		String basePath = StringUtils.isEmpty(proxyRequestUri)
 				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
 				: proxyRequestUri;
-		return ok(pagedResourcesAssembler.toResource(this.branchService.searchBranch(pageable, searchValue,companyId), assembler,
+		return ok(pagedResourcesAssembler.toResource(this.branchService.searchBranchByCompany(pageable, searchValue,companyId), assembler,
+				new Link(basePath)));
+	}
+	
+	@RequestMapping(value = "searchBranch", method = RequestMethod.GET)
+	public ResponseEntity<PagedResources<BranchGet>> searchBranch(Pageable pageable, HttpServletRequest request,
+			String searchValue) {
+		String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+		String basePath = StringUtils.isEmpty(proxyRequestUri)
+				? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+				: proxyRequestUri;
+		return ok(pagedResourcesAssembler.toResource(this.branchService.searchBranch(pageable, searchValue), assembler,
 				new Link(basePath)));
 	}
 }

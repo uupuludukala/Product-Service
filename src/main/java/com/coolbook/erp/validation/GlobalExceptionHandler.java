@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,6 +27,17 @@ import com.coolbook.erp.exception.ConstraintViolationexception;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    private final MessageSource messageSource;
+
+    protected GlobalExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
+    
+
 	@ExceptionHandler({ HttpServerErrorException.class })
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CONFLICT)
@@ -37,7 +51,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ApiError handleEntityNotFoundException(EntityNotFoundException e) {
 		ApiError apiError=new ApiError();
-		apiError.fieldErrors.add(new FieldError("","",e.getMessage()));
+		apiError.addFieldError("","",e.getMessage(),"");		
 		return apiError;
 	}
 	
@@ -46,9 +60,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 	public ApiError handleConstraintViolationexception(ConstraintViolationexception e) {
 		ApiError apiError=new ApiError();
-		apiError.fieldErrors.addAll(e.getFielderrors());
+        for(org.springframework.validation.FieldError fieldError: e.getFielderrors()){
+            apiError.addFieldError(fieldError.getCode(),fieldError.getField(),fieldError.getDefaultMessage(),fieldError.getRejectedValue().toString());
+        }
 		return apiError;
 	}
+
+    @ExceptionHandler({ DataIntegrityViolationException.class })
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public void handleConstraintViolationexception(DataIntegrityViolationException e) {
+        
+    }
+    
+    
+	
+//	'org.springframework.dao.DataIntegrityViolationException
 	
 	@Override
 	protected ResponseEntity<Object> handleExceptionInternal(Exception exception, Object body, HttpHeaders headers,
@@ -59,7 +86,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 			List<FieldError> fieldErrors = new ArrayList<>();
 
 			for (org.springframework.validation.FieldError error : allErrors) {
-				fieldErrors.add(new FieldError(error.getObjectName(), error.getField(), error.getDefaultMessage()));
+				fieldErrors.add(new FieldError(error.getCode(), error.getField(), error.getDefaultMessage(),error.getRejectedValue().toString()));
 			}
 			return new ResponseEntity<>(fieldErrors, httpStatus);
 		} else
@@ -69,9 +96,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-		List<org.springframework.validation.FieldError> allErrors = ex.getBindingResult().getFieldErrors();
-		return new ResponseEntity<>(allErrors, HttpStatus.UNPROCESSABLE_ENTITY);
+        ApiError apiError=new ApiError();
+        for(org.springframework.validation.FieldError fieldError: ex.getBindingResult().getFieldErrors()){
+            apiError.addFieldError(fieldError.getCode(),fieldError.getField(),
+                    messageSource.getMessage(fieldError.getCode(), 
+                    new Object[]{
+                            fieldError.getField()}
+                            , LocaleContextHolder.getLocale()),
+                    fieldError.getRejectedValue()!=null?fieldError.getRejectedValue().toString():"");
+        }
+		return new ResponseEntity<>(apiError, HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 	
 	

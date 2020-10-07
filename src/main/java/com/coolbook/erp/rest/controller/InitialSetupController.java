@@ -1,7 +1,9 @@
 package com.coolbook.erp.rest.controller;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class InitialSetupController {
 	UserService userService;
 	
 	@RequestMapping(value = "initialSetup", method = RequestMethod.POST)
-	public ResponseEntity<Void> saveBranch() {
+	public ResponseEntity<Void> setup() {
 		CompanyEntity company=new CompanyEntity();		
 		
 		company.setAddressLine1("Main Street");
@@ -36,8 +38,9 @@ public class InitialSetupController {
 		company.setAddressLine3("Bulathsinhala");
 		company.setCompanyCode("FNC");
 		company.setCompanyName("Furnico");
-		company.setConatactNumber("0342283022");
-		long comanyId=companyService.saveCompany(company);
+		company.setContactNumber("0342283022");
+		company.setStatus(StatusEnum.ACTIVE.getCode());
+		long comanyId = companyService.saveCompany(company);
 		
 		BranchEntity  branch=new BranchEntity();
 		branch.setAddressLine1("Main Street");
@@ -45,16 +48,18 @@ public class InitialSetupController {
 		branch.setAddressLine3("Bulathsinhala");
 		branch.setBranchCode("FNC");
 		branch.setBranchName("Furnico");
-		branch.setConatactNumber("0342283022");
+		branch.setContactNumber("0342283022");
 		branch.setCompany(company);
+		branch.setStatus(StatusEnum.ACTIVE.getCode());
 		long branchid=branchService.saveBranch(branch);
 		
 		UserEntity user=new UserEntity();
 		user.setPassword("$2a$10$2Rezb8ejYQPNzNF4muBSxeHiE9Y9ejWZH5kozJbcVQsc1dysKTQmC");
 		user.setUserName("furnico");
 		user.setBranch(branch);
-		userService.saveUser(user);		
-		
+		user.setStatus(StatusEnum.ACTIVE.getCode());
+		userService.saveUser(user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
+		
 	}
 }

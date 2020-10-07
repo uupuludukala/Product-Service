@@ -1,9 +1,9 @@
 INSERT INTO coolbook.branch(
-	id, address_line1, address_line2, address_line3, branch_code,branch_name, conatact_number, company_id)
+	id, address_line1, address_line2, address_line3, branch_code,branch_name, contact_number, company_id)
 	VALUES (1, 'Main Street', 'Athura','Bulathsinhala', 'BUL','Bulathsinhala', '0342283022', 1);
 
 INSERT INTO coolbook.company(
-	id, address_line1, address_line2, address_line3, company_code, company_name, conatact_number)
+	id, address_line1, address_line2, address_line3, company_code, company_name, contact_number)
 	VALUES (1, 'Main Street', 'Athura','Bulathsinhala','FNC' ,'Furnico', '0342283022');
 
 INSERT INTO coolbook.oauth_user(

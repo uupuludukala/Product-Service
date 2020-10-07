@@ -1,5 +1,7 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
+import com.coolbook.erp.model.CompanyGet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +31,9 @@ public class BranchAssembler {
 		 branchEntity.setAddressLine2(branchPost.getAddressLine2());
 		 branchEntity.setAddressLine3(branchPost.getAddressLine3());
 		 branchEntity.setCompany(companyRepository.getOne(branchPost.getCompanyId()));
-		 branchEntity.setConatactNumber(branchPost.getContactNumber());
+		 branchEntity.setContactNumber(branchPost.getContactNumber());
+		 if(branchPost.getStatus()!=null)
+		    branchEntity.setStatus(branchPost.getStatus().getCode());
 		 return branchEntity;
 	 }
 	 
@@ -41,8 +45,13 @@ public class BranchAssembler {
 		 branchGet.setAddressLine1(branchEntity.getAddressLine1());
 		 branchGet.setAddressLine2(branchEntity.getAddressLine2());
 		 branchGet.setAddressLine3(branchEntity.getAddressLine3());
-		 branchGet.setCompanyId(branchEntity.getCompany().getId());
-		 branchGet.setContactNumber(branchEntity.getConatactNumber());
+		 branchGet.setStatus(StatusEnum.getByCode(branchEntity.getStatus()));
+         if(branchEntity.getCompany()!=null) {
+             branchGet.setCompanyId(branchEntity.getCompany().getId());
+             branchGet.setCompanyCode(branchEntity.getCompany().getCompanyCode());
+             branchGet.setCompanyName(branchEntity.getCompany().getCompanyName());
+         }
+		 branchGet.setContactNumber(branchEntity.getContactNumber());
 		 return branchGet;		 
 	 }
 }

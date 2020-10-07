@@ -37,9 +37,9 @@ public class BranchSpecification implements Specification<BranchEntity> {
 			predicate = cb.and(predicate, cb.like(cb.upper(exp), "%" + searchCriteria.getBranchName().toUpperCase() + "%"));
 		}
 
-		if (searchCriteria.getConatactNumber() != null) {
-			Expression<String> exp = root.get("conatactNumber");
-			predicate = cb.and(predicate, cb.like(exp, "%" + searchCriteria.getConatactNumber() + "%"));
+		if (searchCriteria.getContactNumber() != null) {
+			Expression<String> exp = root.get("contactNumber");
+			predicate = cb.and(predicate, cb.like(exp, "%" + searchCriteria.getContactNumber() + "%"));
 		}
 
 		if (searchCriteria.getAddress() != null) {

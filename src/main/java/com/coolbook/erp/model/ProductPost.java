@@ -2,9 +2,12 @@ package com.coolbook.erp.model;
 
 import java.util.List;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
+
+import javax.validation.constraints.Pattern;
 
 @Data
 public class ProductPost {
@@ -24,14 +27,11 @@ public class ProductPost {
 	@JsonProperty("productCategory")
 	private long productCategory;
 
-	@JsonProperty("internalReference")
-	private String internalReference;
+	@JsonProperty("barCode")
+	private String barCode;
 
-	@JsonProperty("barcode")
-	private String barcode;
-
-	@JsonProperty("internalNotes")
-	private String internalNotes;
+	@JsonProperty("productCode")
+	private String productCode;
 
 	@JsonProperty("salePrice")
 	private double salePrice;
@@ -75,6 +75,8 @@ public class ProductPost {
 	@JsonProperty("companies")
 	private List<Long> companies;
 	
+    @JsonProperty("status")
+    private StatusEnum status;
 	
 	
 }

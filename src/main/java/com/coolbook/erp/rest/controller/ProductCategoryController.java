@@ -6,6 +6,7 @@ import static org.springframework.http.ResponseEntity.ok;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.coolbook.erp.model.UserGet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -93,4 +94,15 @@ public class ProductCategoryController {
 		return ok(pagedResourcesAssembler.toResource(
 				this.productCategoryService.getAllProductCategory(pageable, criteria), assembler, new Link(basePath)));
 	}
+
+    @RequestMapping(value = "searchProductCategory", method = RequestMethod.GET)
+    public ResponseEntity<PagedResources<ProductCategoryGet>> searchUser(Pageable pageable, HttpServletRequest request,
+                                                              String searchValue) {
+        String proxyRequestUri = request.getHeader(REFERRER_HEADER_KEY);
+        String basePath = StringUtils.isEmpty(proxyRequestUri)
+                ? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
+                : proxyRequestUri;
+        return ok(pagedResourcesAssembler.toResource(this.productCategoryService.searchProductCategory(pageable, searchValue), assembler,
+                new Link(basePath)));
+    }
 }
