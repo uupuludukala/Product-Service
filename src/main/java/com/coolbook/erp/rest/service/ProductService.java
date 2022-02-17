@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.service;
 
+import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +11,6 @@ import com.coolbook.erp.repository.ProductRepository;
 import com.coolbook.erp.repository.specs.ProductSearchSpecification;
 import com.coolbook.erp.repository.specs.ProductSpecification;
 import com.coolbook.erp.repository.specs.ProductSpecificationPOS;
-import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 import com.coolbook.erp.security.SecurityFacade;
 
 @Service

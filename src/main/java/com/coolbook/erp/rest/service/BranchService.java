@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.BranchEntity;
-import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.repository.BranchRepository;
 import com.coolbook.erp.repository.specs.BranchSearchSpecification;
 import com.coolbook.erp.repository.specs.BranchSpecification;

@@ -1,10 +1,10 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.model.UserGet;
 import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.UserEntity;
-import com.coolbook.erp.model.UserGet;
 
 public abstract class AbstractUserResourceAssembler extends ResourceAssemblerSupport<UserEntity, UserGet> {
 	protected String requestURI;

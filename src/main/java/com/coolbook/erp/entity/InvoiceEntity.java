@@ -26,6 +26,9 @@ public class InvoiceEntity {
 	@SequenceGenerator(name = "invoice_seq", sequenceName = "invoice_seq", allocationSize = 1)
 	private long id;
 	
+    @Column
+	private String invoiceNUmber;
+    
 	@OneToOne
 	private UserEntity user;
 	

@@ -1,11 +1,10 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.model.BranchGet;
 import com.coolbook.erp.common.enums.StatusEnum;
-import com.coolbook.erp.model.CompanyGet;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.BranchEntity;
-import com.coolbook.erp.model.BranchGet;
 
 public abstract class AbstractBranchResourceAssembler extends ResourceAssemblerSupport<BranchEntity, BranchGet>{
 	protected String requestURI;

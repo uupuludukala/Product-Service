@@ -1,9 +1,7 @@
 package com.coolbook.erp.common.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public enum StatusEnum {

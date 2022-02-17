@@ -7,11 +7,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 
+import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.coolbook.erp.entity.ProductCategoryEntity;
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 
 public class ProductSpecificationPOS implements Specification<ProductEntity> {
 

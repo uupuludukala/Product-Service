@@ -45,6 +45,9 @@ public class CompanyEntity {
 	@ManyToMany(mappedBy = "companies", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ProductEntity> products;
 	
-	
+	@Override
+	public String toString(){
+	    return super.toString();
+    }
 
 }

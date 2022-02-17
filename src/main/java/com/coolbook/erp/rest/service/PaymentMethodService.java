@@ -2,6 +2,7 @@
 
 package com.coolbook.erp.rest.service;
 
+import com.coolbook.erp.rest.searchCriteria.PaymentMethodCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.coolbook.erp.entity.PaymentMethodEntity;
 import com.coolbook.erp.repository.PaymentMethodRepository;
 import com.coolbook.erp.repository.specs.PaymentMethodSpecification;
-import com.coolbook.erp.rest.searchCriteria.PaymentMethodCriteria;
 
 @Service
 public class PaymentMethodService {

@@ -1,7 +1,6 @@
 package com.coolbook.erp.repository.specs;
 
 import java.util.Collection;
-import java.util.Set;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -10,12 +9,12 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 
+import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.ProductCategoryEntity;
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 
 public class ProductSpecification implements Specification<ProductEntity> {
 

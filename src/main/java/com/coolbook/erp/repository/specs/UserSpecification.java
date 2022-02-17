@@ -6,10 +6,10 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.coolbook.erp.rest.searchCriteria.UserCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.coolbook.erp.entity.UserEntity;
-import com.coolbook.erp.rest.searchCriteria.UserCriteria;
 
 public class UserSpecification implements Specification<UserEntity> {
 

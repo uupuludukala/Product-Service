@@ -1,11 +1,11 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.model.CompanyGet;
+import com.coolbook.erp.model.CompanyPost;
 import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.CompanyEntity;
-import com.coolbook.erp.model.CompanyGet;
-import com.coolbook.erp.model.CompanyPost;
 
 @Component
 public class CompanyAssembler {

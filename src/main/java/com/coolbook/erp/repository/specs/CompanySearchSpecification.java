@@ -9,7 +9,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.coolbook.erp.entity.CompanyEntity;
-import com.coolbook.erp.entity.CustomerEntity;
 
 public class CompanySearchSpecification  implements Specification<CompanyEntity> {
 

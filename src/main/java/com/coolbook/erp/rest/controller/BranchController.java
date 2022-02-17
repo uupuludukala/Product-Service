@@ -6,6 +6,10 @@ import static org.springframework.http.ResponseEntity.ok;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.coolbook.erp.model.BranchGet;
+import com.coolbook.erp.model.BranchPost;
+import com.coolbook.erp.rest.assembler.BranchGetResourceAssembler;
+import com.coolbook.erp.rest.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -23,13 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.BranchEntity;
-import com.coolbook.erp.model.BranchGet;
-import com.coolbook.erp.model.BranchPost;
-import com.coolbook.erp.model.CompanyGet;
 import com.coolbook.erp.rest.assembler.BranchAssembler;
-import com.coolbook.erp.rest.assembler.BranchGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
-import com.coolbook.erp.rest.service.BranchService;
 
 import io.swagger.annotations.ApiParam;
 

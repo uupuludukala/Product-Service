@@ -6,6 +6,9 @@ import static org.springframework.http.ResponseEntity.ok;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.coolbook.erp.model.ProductGet;
+import com.coolbook.erp.model.ProductPost;
+import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -24,11 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.erp.model.ProductGet;
-import com.coolbook.erp.model.ProductPost;
 import com.coolbook.erp.rest.assembler.ProductAssembler;
 import com.coolbook.erp.rest.assembler.ProductGetResourceAssembler;
-import com.coolbook.erp.rest.searchCriteria.ProductCriteria;
 import com.coolbook.erp.rest.service.ProductService;
 
 import io.swagger.annotations.ApiParam;

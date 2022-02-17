@@ -1,9 +1,10 @@
 package com.coolbook.erp.rest.controller;
 
+import com.coolbook.erp.rest.service.BranchService;
+import com.coolbook.erp.rest.service.CompanyService;
+import com.coolbook.erp.rest.service.UserService;
 import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,21 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coolbook.erp.entity.BranchEntity;
 import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.UserEntity;
-import com.coolbook.erp.rest.service.BranchService;
-import com.coolbook.erp.rest.service.CompanyService;
-import com.coolbook.erp.rest.service.UserService;
 
 @RestController
 public class InitialSetupController {
 
 	@Autowired
-	BranchService branchService;
+    BranchService branchService;
 	
 	@Autowired
-	CompanyService companyService;
+    CompanyService companyService;
 	
 	@Autowired
-	UserService userService;
+    UserService userService;
 	
 	@RequestMapping(value = "initialSetup", method = RequestMethod.POST)
 	public ResponseEntity<Void> setup() {

@@ -1,18 +1,15 @@
 package com.coolbook.erp.rest.service;
 
-import com.coolbook.erp.entity.UserEntity;
+import com.coolbook.erp.rest.searchCriteria.ProductCategoryCriteria;
 import com.coolbook.erp.repository.specs.ProductCategorySearchSpecification;
-import com.coolbook.erp.repository.specs.UserSearchSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.entity.ProductCategoryEntity;
-import com.coolbook.erp.entity.ProductEntity;
 import com.coolbook.erp.repository.ProductCategoryRepository;
 import com.coolbook.erp.repository.specs.ProductCategorySpecification;
-import com.coolbook.erp.rest.searchCriteria.ProductCategoryCriteria;
 
 @Service
 public class ProductCategoryService {

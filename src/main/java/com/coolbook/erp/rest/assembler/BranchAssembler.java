@@ -1,13 +1,12 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.model.BranchGet;
+import com.coolbook.erp.model.BranchPost;
 import com.coolbook.erp.common.enums.StatusEnum;
-import com.coolbook.erp.model.CompanyGet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.BranchEntity;
-import com.coolbook.erp.model.BranchGet;
-import com.coolbook.erp.model.BranchPost;
 import com.coolbook.erp.repository.CompanyRepository;
 
 @Component

@@ -6,10 +6,10 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.coolbook.erp.rest.searchCriteria.ProductCategoryCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.coolbook.erp.entity.ProductCategoryEntity;
-import com.coolbook.erp.rest.searchCriteria.ProductCategoryCriteria;
 
 public class ProductCategorySpecification implements Specification<ProductCategoryEntity>{
 

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.coolbook.erp.model.InvoicePost;
+import com.coolbook.erp.model.InvoiceProduct;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.CustomerEntity;
 import com.coolbook.erp.entity.InvoiceEntity;
 import com.coolbook.erp.entity.InvoiceProductEntity;
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.erp.model.InvoicePost;
-import com.coolbook.erp.model.InvoiceProduct;
 
 
 @Component

@@ -5,15 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.coolbook.erp.model.CompanyGet;
+import com.coolbook.erp.model.ProductGet;
+import com.coolbook.erp.model.ProductPost;
 import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.ProductCategoryEntity;
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.erp.model.CompanyGet;
-import com.coolbook.erp.model.ProductGet;
-import com.coolbook.erp.model.ProductPost;
 import com.coolbook.erp.rest.service.CompanyService;
 import com.coolbook.erp.rest.service.ProductCategoryService;
 import com.coolbook.erp.security.SecurityFacade;
@@ -96,6 +96,7 @@ public class ProductAssembler {
         companies.add(companyService.getCompanyById(securityFacade.getCurrentUser().getCompanyId()));
         if (productPost.getCompanies() != null) {
             for (Long companyId : productPost.getCompanies()) {
+                if(companyId!=null)
                 companies.add(companyService.getCompanyById(companyId));
             }
         } else {

@@ -1,7 +1,5 @@
 package com.coolbook.erp.repository.specs;
 
-import com.coolbook.erp.entity.BranchEntity;
-import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.UserEntity;
 import org.springframework.data.jpa.domain.Specification;
 

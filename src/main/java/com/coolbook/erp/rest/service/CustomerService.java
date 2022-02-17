@@ -3,6 +3,7 @@ package com.coolbook.erp.rest.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coolbook.erp.rest.searchCriteria.CustomerCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,6 @@ import com.coolbook.erp.exception.ConstraintViolationexception;
 import com.coolbook.erp.repository.CustomerRepository;
 import com.coolbook.erp.repository.specs.CustomerSearchSpecification;
 import com.coolbook.erp.repository.specs.CustomerSpecification;
-import com.coolbook.erp.rest.searchCriteria.CustomerCriteria;
 
 @Service
 public class CustomerService {

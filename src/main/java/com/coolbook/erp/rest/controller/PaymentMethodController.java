@@ -6,6 +6,9 @@ import static org.springframework.http.ResponseEntity.ok;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.coolbook.erp.model.PaymentMethodGet;
+import com.coolbook.erp.model.PaymentMethodPost;
+import com.coolbook.erp.rest.searchCriteria.PaymentMethodCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -24,11 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coolbook.erp.entity.PaymentMethodEntity;
-import com.coolbook.erp.model.PaymentMethodGet;
-import com.coolbook.erp.model.PaymentMethodPost;
 import com.coolbook.erp.rest.assembler.PaymentMethodAssembler;
 import com.coolbook.erp.rest.assembler.PaymentMethodGetResourceAssembler;
-import com.coolbook.erp.rest.searchCriteria.PaymentMethodCriteria;
 import com.coolbook.erp.rest.service.PaymentMethodService;
 
 import io.swagger.annotations.ApiParam;

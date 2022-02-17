@@ -3,13 +3,13 @@ package com.coolbook.erp.rest.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coolbook.erp.model.CompanyGet;
+import com.coolbook.erp.model.ProductGet;
 import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.ProductEntity;
-import com.coolbook.erp.model.CompanyGet;
-import com.coolbook.erp.model.ProductGet;
 
 public abstract class AbstractProductResourceAssembler extends ResourceAssemblerSupport<ProductEntity, ProductGet> {
 	protected String requestURI;

@@ -5,6 +5,7 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
 
+import com.coolbook.erp.security.exception.CertificateLoadingException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import com.coolbook.erp.security.SubAwareAccessTokenConverter;
-import com.coolbook.erp.security.exception.CertificateLoadingException;
 
 @Configuration
 @ConfigurationProperties("oauth2")
