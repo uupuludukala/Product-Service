@@ -19,14 +19,16 @@ public class ProductSearchSpecification  implements Specification<ProductEntity>
 
 	@Override
 	public Predicate toPredicate(Root<ProductEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-		Predicate predicate = null;
+		Predicate predicate = cb.or();
 		if (searchvalue != null) {
-            Expression<String> barcode = root.get("barcode");
-            predicate =  cb.like(cb.upper(barcode), "%" + searchvalue.toUpperCase() + "%");
+//            Expression<String> companyCode = root.get("branchCode");
+//            predicate =  cb.like(cb.upper(companyCode), "%" + searchValue.toUpperCase() + "%");
+			Expression<String> barcode = root.get("barcode");
+			predicate = cb.or(predicate, cb.like(cb.upper(barcode), "%" + searchvalue.toUpperCase() + "%"));
 			Expression<String> productCode = root.get("productCode");
-			predicate = cb.or(predicate, cb.like(cb.upper(productCode), "%" + searchvalue + "%"));
+			predicate = cb.or(predicate, cb.like(cb.upper(productCode), "%" + searchvalue.toUpperCase() + "%"));
 			Expression<String> productName = root.get("productName");
-			predicate = cb.or(predicate, cb.like(cb.upper(productName), "%" + searchvalue + "%"));
+			predicate = cb.or(predicate, cb.like(cb.upper(productName), "%" + searchvalue.toUpperCase() + "%"));
 		}
 		return predicate;
 	}
