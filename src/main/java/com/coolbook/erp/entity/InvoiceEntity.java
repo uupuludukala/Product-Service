@@ -2,17 +2,9 @@ package com.coolbook.erp.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -27,17 +19,18 @@ public class InvoiceEntity {
 	private long id;
 	
     @Column
-	private String invoiceNUmber;
+	private String invoiceNumber;
     
 	@OneToOne
 	private UserEntity user;
 	
 	@Column
 	private Date date;
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id")
-	private List<InvoiceProductEntity> products;
+
+  
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+	private Set<InvoiceProductEntity> products;
 	
 	@Column
 	private double total;

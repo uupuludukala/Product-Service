@@ -12,11 +12,13 @@ public class User  implements Serializable{
 	private String companyCode;
 	private String branchCode;
 	private long companyId;
+	private long userId;
 
-	public User(String companyCode, String branchCode, long companyId) {
+	public User(String companyCode, String branchCode, long companyId,long userId) {
 		this.companyCode = companyCode;
 		this.branchCode = branchCode;
 		this.companyId = companyId;
+		this.userId=userId;
 	}
 
 }

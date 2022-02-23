@@ -32,20 +32,17 @@ public class InvoiceController {
 
 	@RequestMapping(value = "saveInvoice", method = RequestMethod.POST)
 	public ResponseEntity<Void> saveInvoice(@Valid @RequestBody InvoicePost invoice) {
-		long invoiceId = invoiceService.saveInvoice(invoiceAssembler.essembleInvoiceentity(invoice));
+		long invoiceId = invoiceService.saveInvoice(invoiceAssembler.essembleInvoiceentity(invoice),invoiceAssembler.assembleInvoiceProductList(invoice.getProductList()));
 		HttpHeaders header = new HttpHeaders();
 		header.setLocation(linkTo(InvoiceController.class).slash(invoiceId).toUri());
 		return new ResponseEntity<>(header, HttpStatus.CREATED);
 	}
 
+
 	
-	@RequestMapping(value = "invoiceReport", method = RequestMethod.POST)
+	@RequestMapping(value = "invoiceReport", method = RequestMethod.GET)
 	public ResponseEntity invoiceReport() {
 		ByteArrayInputStream outStream=invoiceService.invoiceReport();
-//		return ResponseEntity.ok().contentType(
-//				MediaType.APPLICATION_OCTET_STREAM).body(new InputStreamResource(
-//						outStream));	
-		
 		
 		StringBuilder headerContentDispositionValue = new StringBuilder();
 		headerContentDispositionValue.append("attachment; filename=test.pdf");

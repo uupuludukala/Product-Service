@@ -18,6 +18,16 @@ import lombok.Data;
 @Table(name="oauth_user") 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserEntity {
+
+    public UserEntity(long id) {
+        this.id = id;
+    }
+
+    public UserEntity() {
+        
+    }
+    
+    
 	@Id
 	@Column
 	@GeneratedValue(generator="user_seq")
