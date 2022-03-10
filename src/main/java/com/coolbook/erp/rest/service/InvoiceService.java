@@ -57,9 +57,11 @@ public class InvoiceService {
         this.invoiceRepository.save(invoice);
     }
 
-	public ByteArrayInputStream invoiceReport() {
-		return invoiceReport.generateInvoice();
+	public ByteArrayInputStream invoiceReport(long id) {
+		return invoiceReport.generateInvoice(id);
 	}
+	
+	
 	
 	public  String generateInvoiceNumber(long id){
 	    StringBuilder invoiceNumber=new StringBuilder("");

@@ -7,8 +7,11 @@ import java.util.Set;
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "invoice")
 public class InvoiceEntity {
@@ -28,7 +31,7 @@ public class InvoiceEntity {
 	private Date date;
 
   
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
 	private Set<InvoiceProductEntity> products;
 	
@@ -46,8 +49,9 @@ public class InvoiceEntity {
 	
 	@OneToOne
 	private CustomerEntity customer;
-	
-	@Column
-	private String invoiceFrom;
+
+    @OneToOne
+    private BranchEntity branch;
+
 
 }

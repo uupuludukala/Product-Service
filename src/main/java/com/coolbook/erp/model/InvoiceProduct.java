@@ -9,5 +9,6 @@ public class InvoiceProduct {
 	private double quantity;
 	private double unitPrice;
 	private double discount;
+	private double amount;
 	
 }

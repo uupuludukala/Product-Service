@@ -5,8 +5,6 @@ import com.coolbook.erp.model.EmployeeGet;
 import com.coolbook.erp.model.EmployeePost;
 import com.coolbook.erp.rest.assembler.EmployeeAssembler;
 import com.coolbook.erp.rest.assembler.EmployeeGetResourceAssembler;
-import com.coolbook.erp.rest.assembler.EmployeeAssembler;
-import com.coolbook.erp.rest.assembler.EmployeeGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.EmployeeCriteria;
 import com.coolbook.erp.rest.service.EmployeeService;
 import io.swagger.annotations.ApiParam;

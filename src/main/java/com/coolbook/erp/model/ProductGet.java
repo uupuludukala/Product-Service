@@ -13,6 +13,8 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductGet extends ResourceSupport {
+
+    
 	@JsonProperty("id")
 	private long product_Id;
 	
@@ -40,4 +42,13 @@ public class ProductGet extends ResourceSupport {
 	private long responsible;	
 	private List<CompanyGet> companies;
     private StatusEnum status;
+
+    public ProductGet(long product_Id,String productCode,String productName){
+        this.product_Id=product_Id;
+        this.productCode=productCode;
+        this.productName=productName;
+    }
+    public ProductGet(){
+        
+    }
 }

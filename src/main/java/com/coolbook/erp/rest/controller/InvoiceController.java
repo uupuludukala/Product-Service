@@ -13,10 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.coolbook.erp.rest.assembler.InvoiceAssembler;
 import com.coolbook.erp.rest.service.InvoiceService;
@@ -31,18 +28,19 @@ public class InvoiceController {
 	InvoiceAssembler invoiceAssembler;
 
 	@RequestMapping(value = "saveInvoice", method = RequestMethod.POST)
-	public ResponseEntity<Void> saveInvoice(@Valid @RequestBody InvoicePost invoice) {
-		long invoiceId = invoiceService.saveInvoice(invoiceAssembler.essembleInvoiceentity(invoice),invoiceAssembler.assembleInvoiceProductList(invoice.getProductList()));
+	public ResponseEntity<Long> saveInvoice(@Valid @RequestBody InvoicePost invoice) {
+		long invoiceId = invoiceService.saveInvoice(invoiceAssembler.assembleInvoiceEntity(invoice),invoiceAssembler.assembleInvoiceProductList(invoice.getProductList()));
 		HttpHeaders header = new HttpHeaders();
+        header.add("invoiceId",String.valueOf(invoiceId));
 		header.setLocation(linkTo(InvoiceController.class).slash(invoiceId).toUri());
-		return new ResponseEntity<>(header, HttpStatus.CREATED);
+		return new ResponseEntity<>(invoiceId,header, HttpStatus.CREATED);
 	}
 
 
 	
-	@RequestMapping(value = "invoiceReport", method = RequestMethod.GET)
-	public ResponseEntity invoiceReport() {
-		ByteArrayInputStream outStream=invoiceService.invoiceReport();
+	@RequestMapping(value = "invoiceReport/{id}", method = RequestMethod.GET)
+	public ResponseEntity invoiceReport(@PathVariable long  id) {
+		ByteArrayInputStream outStream=invoiceService.invoiceReport(id);
 		
 		StringBuilder headerContentDispositionValue = new StringBuilder();
 		headerContentDispositionValue.append("attachment; filename=test.pdf");

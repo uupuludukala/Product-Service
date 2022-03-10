@@ -109,7 +109,12 @@
             <artifactId>io</artifactId>
             <version>7.0.0</version>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

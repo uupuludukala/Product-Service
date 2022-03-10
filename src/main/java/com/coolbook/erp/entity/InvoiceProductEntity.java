@@ -3,8 +3,11 @@ package com.coolbook.erp.entity;
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "invoice_product")
 public class InvoiceProductEntity {
@@ -16,7 +19,19 @@ public class InvoiceProductEntity {
 	
 	@OneToOne
 	private ProductEntity product;
-	
+
+    @Column
+	private String itemNo;
+
+    @Column
+	private String description;
+
+    @Column
+	private double amount;
+
+    @Column
+    private double cost;
+
 	@Column
 	private double unitPrice;
 	
@@ -26,7 +41,7 @@ public class InvoiceProductEntity {
 	@Column
 	private double quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "invoice_id", nullable = false)
     private InvoiceEntity invoice;
     
