@@ -62,7 +62,9 @@ public class ProductController {
 	
 	@RequestMapping(value ="saveProduct/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<Void> updateProduct(@RequestBody ProductPost product,@ApiParam(value = "Product Id", required = true) @PathVariable("id") long id){
-		productService.updateProduct(productAssembler.essembleProductentity(product), id);
+        ProductEntity productEntity=productAssembler.essembleProductentity(product);
+        productEntity.setId(id);
+		productService.updateProduct(productEntity);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

@@ -30,8 +30,7 @@ public class ProductService {
 		return this.productRepository.save(product).getId();
 	}
 
-	public void updateProduct(ProductEntity product, long id) {
-		product.setId(id);
+	public void updateProduct(ProductEntity product) {
 		this.productRepository.save(product);
 	}
 

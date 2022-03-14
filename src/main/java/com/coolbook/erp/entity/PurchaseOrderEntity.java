@@ -36,5 +36,8 @@ public class PurchaseOrderEntity {
 
     @OneToOne
     private VendorEntity vendor;
+    
+    @Column
+    private boolean approved=false;
 
 }

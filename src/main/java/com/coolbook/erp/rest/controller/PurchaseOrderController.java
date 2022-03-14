@@ -56,7 +56,10 @@ public class PurchaseOrderController {
 
     @RequestMapping(value ="savePurchaseOrder/{id}",method=RequestMethod.PUT)
     public ResponseEntity<Void> updatePurchaseOrder(@RequestBody PurchaseOrderPost purchaseOrder,@ApiParam(value = "PurchaseOrder Id", required = true) @PathVariable("id") long id){
-        purchaseOrderService.updatePurchaseOrder(purchaseOrderAssembler.assemblePurchaseOrderEntity(purchaseOrder), id);
+        PurchaseOrderEntity purchaseOrderEntity=purchaseOrderAssembler.assemblePurchaseOrderEntity(purchaseOrder);
+        purchaseOrderEntity.setId(id);
+        purchaseOrderEntity.setApproved(false);
+        purchaseOrderService.updatePurchaseOrder(purchaseOrderEntity);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -93,6 +96,12 @@ public class PurchaseOrderController {
                 : proxyRequestUri;
         return ok(pagedResourcesAssembler.toResource(this.purchaseOrderService.searchPurchaseOrder(pageable, searchValue), assembler,
                 new Link(basePath)));
+    }
+
+    @RequestMapping(value = "approvePurchaseOrder", method = RequestMethod.POST)
+    public ResponseEntity<Void> approvePurchaseOrder(long purchaseOrderId) {
+        this.purchaseOrderService.approvePurchaseOrder(purchaseOrderId);
+        return (ResponseEntity<Void>) ok();
     }
 
 

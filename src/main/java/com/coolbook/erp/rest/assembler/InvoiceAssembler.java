@@ -37,10 +37,11 @@ public class InvoiceAssembler {
 		invoiceEntity.setTotal(invoicePost.getTotal());
 		invoiceEntity.setTotalDiscount(invoicePost.getTotalDiscount());
 		invoiceEntity.setBranch(branchService.getBranchById(securityFacade.getCurrentUser().getBranchId()));
+        invoiceEntity.setProducts(assembleInvoiceProductList( invoicePost.getProductList(),invoiceEntity));
 		return invoiceEntity;
 	}
 	
-	public Set<InvoiceProductEntity> assembleInvoiceProductList(List<InvoiceProduct> invoiceProductList) {
+	public Set<InvoiceProductEntity> assembleInvoiceProductList(List<InvoiceProduct> invoiceProductList,InvoiceEntity invoiceEntity) {
 		Set<InvoiceProductEntity> invoiceProductEntityList=new HashSet<InvoiceProductEntity>();
 		ProductEntity product;
 		for(InvoiceProduct invoiceProduct:invoiceProductList) {
@@ -55,6 +56,7 @@ public class InvoiceAssembler {
 			invoiceProductentity.setQuantity(invoiceProduct.getQuantity());
             invoiceProductentity.setItemNo(product.getProductCode());
             invoiceProductEntityList.add(invoiceProductentity);
+            invoiceProductentity.setInvoice(invoiceEntity);
 		}
 		return invoiceProductEntityList;
 	}

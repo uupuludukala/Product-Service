@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.hateoas.ResourceSupport;
 
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,6 +20,7 @@ public class PurchaseOrderGet extends ResourceSupport {
     private double totalDiscount;
     private long vendorId;
     private String vendorName;
+    private boolean isApproved;
     
 }
 

@@ -32,7 +32,7 @@ public class InvoiceEntity {
 
   
     @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL , orphanRemoval=true)
 	private Set<InvoiceProductEntity> products;
 	
 	@Column

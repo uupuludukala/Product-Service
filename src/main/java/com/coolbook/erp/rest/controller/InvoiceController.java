@@ -28,8 +28,8 @@ public class InvoiceController {
 	InvoiceAssembler invoiceAssembler;
 
 	@RequestMapping(value = "saveInvoice", method = RequestMethod.POST)
-	public ResponseEntity<Long> saveInvoice(@Valid @RequestBody InvoicePost invoice) {
-		long invoiceId = invoiceService.saveInvoice(invoiceAssembler.assembleInvoiceEntity(invoice),invoiceAssembler.assembleInvoiceProductList(invoice.getProductList()));
+	public ResponseEntity<Long> saveInvoice( @RequestBody @Valid InvoicePost invoice) throws Exception {
+		long invoiceId = invoiceService.saveInvoice(invoiceAssembler.assembleInvoiceEntity(invoice));
 		HttpHeaders header = new HttpHeaders();
         header.add("invoiceId",String.valueOf(invoiceId));
 		header.setLocation(linkTo(InvoiceController.class).slash(invoiceId).toUri());
