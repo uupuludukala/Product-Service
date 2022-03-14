@@ -9,7 +9,9 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -40,8 +42,8 @@ public abstract class AbstractPurchaseOrderResourceAssembler extends ResourceAss
         return purchaseOrderGet;
     }
 
-    private Set<PurchaseOrderProductGet> assemblePurchaseOrderProductsGet(Set<PurchaseOrderProductEntity> purchaseOrderAccounts){
-        Set<PurchaseOrderProductGet> purchaseOrderAccountsGet= new HashSet<>();
+    private List<PurchaseOrderProductGet> assemblePurchaseOrderProductsGet(List<PurchaseOrderProductEntity> purchaseOrderAccounts){
+        List<PurchaseOrderProductGet> purchaseOrderAccountsGet= new ArrayList<>();
         for(PurchaseOrderProductEntity purchaseOrderProductEntity:purchaseOrderAccounts){
             ProductEntity product=purchaseOrderProductEntity.getProduct();
             purchaseOrderAccountsGet.add(new PurchaseOrderProductGet(purchaseOrderProductEntity.getId(),product.getId(),

@@ -9,7 +9,9 @@ import com.coolbook.erp.model.VendorPost;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class VendorAssembler {
@@ -29,8 +31,8 @@ public class VendorAssembler {
         return vendorGet;
     }
 
-    private List<VendorAccountGet> assembleVendorAccountGet(List<VendorAccountEntity> vendorAccounts){
-        List<VendorAccountGet> vendorAccountsGet= new ArrayList<>();
+    private Set<VendorAccountGet> assembleVendorAccountGet(Set<VendorAccountEntity> vendorAccounts){
+        Set<VendorAccountGet> vendorAccountsGet= new HashSet<>();
         for(VendorAccountEntity vendorAccountEntity:vendorAccounts){
             vendorAccountsGet.add(new VendorAccountGet(vendorAccountEntity.getId(),
                     vendorAccountEntity.getAccountNumber(),vendorAccountEntity.getBankName(),vendorAccountEntity.getBranchName()));
@@ -53,8 +55,8 @@ public class VendorAssembler {
         return vendorEntity;
     }
 
-    public List<VendorAccountEntity> assembleVendorAccountEntity(List<VendorAccount> vendorAccounts,VendorEntity vendorEntity) {
-        List<VendorAccountEntity> vendorAccountEntities=new ArrayList<>();
+    public Set<VendorAccountEntity> assembleVendorAccountEntity(Set<VendorAccount> vendorAccounts,VendorEntity vendorEntity) {
+        Set<VendorAccountEntity> vendorAccountEntities=new HashSet<>();
         if(vendorAccounts!=null) {
             for (VendorAccount vendorAccount : vendorAccounts) {
                 VendorAccountEntity vendorAccountEntity = new VendorAccountEntity();

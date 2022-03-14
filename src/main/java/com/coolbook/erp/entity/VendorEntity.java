@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -49,7 +50,7 @@ public class VendorEntity {
 
     @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL ,orphanRemoval = true)
-    private List<VendorAccountEntity> vendorAccounts;
+    private Set<VendorAccountEntity> vendorAccounts;
     
     
     

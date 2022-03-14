@@ -29,7 +29,7 @@ public class PurchaseOrderEntity {
 
      @OneToMany(mappedBy = "purchaseOrder", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL , orphanRemoval=true)
-    private Set<PurchaseOrderProductEntity> purchaseOrderProducts;
+    private List<PurchaseOrderProductEntity> purchaseOrderProducts;
 
     @Column
     private double total;

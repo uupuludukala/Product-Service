@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -42,8 +44,8 @@ public class PurchaseOrderAssembler {
         return purchaseOrderGet;
     }
 
-    private Set<PurchaseOrderProductGet> assemblePurchaseOrderProductsGet(Set<PurchaseOrderProductEntity> purchaseOrderAccounts){
-        Set<PurchaseOrderProductGet> purchaseOrderAccountsGet= new HashSet<>();
+    private List<PurchaseOrderProductGet> assemblePurchaseOrderProductsGet(List<PurchaseOrderProductEntity> purchaseOrderAccounts){
+        List<PurchaseOrderProductGet> purchaseOrderAccountsGet= new ArrayList<>();
         for(PurchaseOrderProductEntity purchaseOrderProductEntity:purchaseOrderAccounts){
             ProductEntity product=purchaseOrderProductEntity.getProduct();
             purchaseOrderAccountsGet.add(new PurchaseOrderProductGet(purchaseOrderProductEntity.getId(),product.getId(),
@@ -63,9 +65,9 @@ public class PurchaseOrderAssembler {
         return purchaseOrderEntity;
     }
 
-    public Set<PurchaseOrderProductEntity> assemblePurchaseOrderProductEntity(PurchaseOrderPost purchaseOrderPost,PurchaseOrderEntity purchaseOrderEntity) {
-        Set<PurchaseOrderProductEntity> purchaseOrderAccountEntities=new HashSet<>();
-        Set<PurchaseOrderProduct> purchaseOrderProducts=purchaseOrderPost.getPurchaseOrderProducts();
+    public List<PurchaseOrderProductEntity> assemblePurchaseOrderProductEntity(PurchaseOrderPost purchaseOrderPost, PurchaseOrderEntity purchaseOrderEntity) {
+        List<PurchaseOrderProductEntity> purchaseOrderAccountEntities=new ArrayList<>();
+        List<PurchaseOrderProduct> purchaseOrderProducts=purchaseOrderPost.getPurchaseOrderProducts();
         if(purchaseOrderProducts!=null) {
             for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrderProducts) {
                 PurchaseOrderProductEntity purchaseOrderProductEntity = new PurchaseOrderProductEntity();

@@ -11,7 +11,7 @@ public class PurchaseOrderPost {
 
     private String purchaseOrderNumber;
     private Date date; 
-    private Set<PurchaseOrderProduct> purchaseOrderProducts;
+    private List<PurchaseOrderProduct> purchaseOrderProducts;
     private double total;
     private double totalDiscount;
     private long vendorId;

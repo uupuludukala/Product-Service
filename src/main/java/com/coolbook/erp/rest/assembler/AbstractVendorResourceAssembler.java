@@ -8,7 +8,9 @@ import com.coolbook.erp.model.VendorGet;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public abstract class AbstractVendorResourceAssembler extends ResourceAssemblerSupport<VendorEntity, VendorGet> {
@@ -38,8 +40,8 @@ public abstract class AbstractVendorResourceAssembler extends ResourceAssemblerS
         return vendorGet;
     }
     
-    private List<VendorAccountGet> assembleVendorAccountGet(List<VendorAccountEntity> vendorAccounts){
-        List<VendorAccountGet> vendorAccountsGet= new ArrayList<>();
+    private Set<VendorAccountGet> assembleVendorAccountGet(Set<VendorAccountEntity> vendorAccounts){
+        Set<VendorAccountGet> vendorAccountsGet= new HashSet<>();
         for(VendorAccountEntity vendorAccountEntity:vendorAccounts){
             vendorAccountsGet.add(new VendorAccountGet(vendorAccountEntity.getId(),
                     vendorAccountEntity.getAccountNumber(),vendorAccountEntity.getBankName(),vendorAccountEntity.getBranchName()));

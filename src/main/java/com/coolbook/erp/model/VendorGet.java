@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class VendorGet extends ResourceSupport {
@@ -20,7 +21,7 @@ public class VendorGet extends ResourceSupport {
     private String phone;
     private String mobile;
     private String email;
-    private List<VendorAccountGet> vendorAccounts;
+    private Set<VendorAccountGet> vendorAccounts;
     
     public VendorGet(long vendor_Id,String vendorName){
         this.vendor_Id=vendor_Id;

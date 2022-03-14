@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class VendorPost {
@@ -18,5 +19,5 @@ public class VendorPost {
     private String phone;
     private String mobile;
     private String email;
-    private List<VendorAccount> vendorAccounts;
+    private Set<VendorAccount> vendorAccounts;
 }

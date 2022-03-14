@@ -15,7 +15,7 @@ public class PurchaseOrderGet extends ResourceSupport {
     private long purchase_order_id;
     private String purchaseOrderNumber;
     private String date;
-    private Set<PurchaseOrderProductGet> purchaseOrderProducts;
+    private List<PurchaseOrderProductGet> purchaseOrderProducts;
     private double total;
     private double totalDiscount;
     private long vendorId;
