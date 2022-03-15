@@ -32,7 +32,7 @@ public class PurchaseOrderProductEntity {
     @Column
     private double amount;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "purchase_order_id", nullable = false)
     private PurchaseOrderEntity purchaseOrder;
 

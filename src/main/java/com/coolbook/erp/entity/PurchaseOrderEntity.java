@@ -27,7 +27,7 @@ public class PurchaseOrderEntity {
     @Column
     private Date date;
 
-     @OneToMany(mappedBy = "purchaseOrder", fetch = FetchType.EAGER,
+     @OneToMany(mappedBy = "purchaseOrder",
             cascade = CascadeType.ALL , orphanRemoval=true)
     private List<PurchaseOrderProductEntity> purchaseOrderProducts;
 
