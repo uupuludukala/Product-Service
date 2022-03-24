@@ -6,9 +6,13 @@ import java.util.List;
 
 import com.coolbook.erp.entity.*;
 import com.coolbook.erp.repository.InvoiceProductRepository;
+import com.coolbook.erp.repository.specs.InvoiceSearchSpecification;
+import com.coolbook.erp.repository.specs.ProductSearchSpecification;
 import com.coolbook.erp.security.SecurityFacade;
 import com.coolbook.erp.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.coolbook.erp.report.InvoiceReport;
@@ -86,7 +90,7 @@ public class InvoiceService {
             ProductEntity productEntity=invoiceProductEntity.getProduct();
             productEntity.setQuantity(productEntity.getQuantity() - invoiceProductEntity.getQuantity());
             productService.updateProduct(productEntity);
-            List<ProductInventoryDetailsEntity> productInventoryDetailsEntities= productInventoryDetailsService.getOldestProduct(invoiceProductEntity.getProduct());
+            List<ProductInventoryDetailsEntity> productInventoryDetailsEntities= productInventoryDetailsService.getAvailableProducts(invoiceProductEntity.getProduct());
             double soldQuantity = 0;
             double toBeSold = invoiceProductEntity.getQuantity();
             for(ProductInventoryDetailsEntity productInventoryDetailsEntity:productInventoryDetailsEntities){
@@ -123,5 +127,10 @@ public class InvoiceService {
                 break;
         }
 	    return isValid;
+    }
+
+    public Page<InvoiceEntity> searchInvoice(Pageable page, String searchValue) {
+        InvoiceSearchSpecification specification = new InvoiceSearchSpecification(searchValue);
+        return this.invoiceRepository.findAll(specification, page);
     }
 }

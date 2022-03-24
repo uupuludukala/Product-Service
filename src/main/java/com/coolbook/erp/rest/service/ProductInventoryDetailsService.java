@@ -19,7 +19,7 @@ public class ProductInventoryDetailsService {
        this.productInventoryDetailsRepository.save(productInventoryDetailsEntity);
     }
     
-    public List<ProductInventoryDetailsEntity> getOldestProduct(ProductEntity productEntity){
+    public List<ProductInventoryDetailsEntity> getAvailableProducts(ProductEntity productEntity){
         return productInventoryDetailsRepository.getAvailableProducts(productEntity);
     }
 

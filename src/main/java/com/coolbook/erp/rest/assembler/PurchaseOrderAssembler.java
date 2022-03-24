@@ -41,6 +41,7 @@ public class PurchaseOrderAssembler {
         purchaseOrderGet.setTotal(purchaseOrderEntity.getTotal());
         purchaseOrderGet.setVendorName(purchaseOrderEntity.getVendor().getVendorName());
         purchaseOrderGet.setVendorId(purchaseOrderEntity.getVendor().getId());
+        purchaseOrderGet.setApproved(purchaseOrderEntity.isApproved());
         return purchaseOrderGet;
     }
 

@@ -1,11 +1,16 @@
 package com.coolbook.erp.rest.controller;
 
+import com.coolbook.erp.entity.ProductInventoryDetailsEntity;
 import com.coolbook.erp.entity.PurchaseOrderEntity;
+import com.coolbook.erp.model.ProductGet;
+import com.coolbook.erp.model.ProductInventoryDetailsGet;
 import com.coolbook.erp.model.PurchaseOrderGet;
 import com.coolbook.erp.model.PurchaseOrderPost;
+import com.coolbook.erp.rest.assembler.ProductInventoryDetailsAssembler;
 import com.coolbook.erp.rest.assembler.PurchaseOrderAssembler;
 import com.coolbook.erp.rest.assembler.PurchaseOrderGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.PurchaseOrderCriteria;
+import com.coolbook.erp.rest.service.ProductInventoryDetailsService;
 import com.coolbook.erp.rest.service.PurchaseOrderService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +29,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -40,6 +47,10 @@ public class PurchaseOrderController {
 
     @Autowired
     PurchaseOrderAssembler purchaseOrderAssembler;
+
+    @Autowired
+    private ProductInventoryDetailsAssembler productInventoryDetailsAssembler; 
+   
 
     @Autowired
     PurchaseOrderController(PurchaseOrderService purchaseOrderService) {
@@ -72,7 +83,6 @@ public class PurchaseOrderController {
 
     @RequestMapping(value = "getPurchaseOrderById/{id}", method = RequestMethod.GET)
     public ResponseEntity<PurchaseOrderGet> getPurchaseOrderById(@PathVariable("id") long id) {
-
         return ResponseEntity.ok().body(purchaseOrderAssembler.assemblePurchaseOrderGet(this.purchaseOrderService.getPurchaseOrderById(id)));
     }
 
@@ -98,10 +108,15 @@ public class PurchaseOrderController {
                 new Link(basePath)));
     }
 
-    @RequestMapping(value = "approvePurchaseOrder", method = RequestMethod.POST)
-    public ResponseEntity<Void> approvePurchaseOrder(long purchaseOrderId) {
-        this.purchaseOrderService.approvePurchaseOrder(purchaseOrderId);
-        return (ResponseEntity<Void>) ok();
+    @RequestMapping(value = "approvePurchaseOrder/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Void> approvePurchaseOrder(@PathVariable("id")long id) {
+        this.purchaseOrderService.approvePurchaseOrder(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "inquiryProduct/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<ProductInventoryDetailsGet>> inquiryProduct(@PathVariable("id")long productId) {
+        return ok(productInventoryDetailsAssembler.productInventoryDetailsGetList(this.purchaseOrderService.inquiryProduct(productId)));
     }
 
 

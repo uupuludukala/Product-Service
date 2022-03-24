@@ -30,6 +30,9 @@ public class ProductInventoryDetailsEntity {
     private double rate;
 
     @Column
+    private double cost;
+
+    @Column
     private double quantity;
     
     

@@ -10,7 +10,5 @@ import java.math.BigDecimal;
 
 public interface InvoiceRepository  extends CrudRepository<InvoiceEntity, Long>, JpaSpecificationExecutor<InvoiceEntity> {
 
-    @Query(value = "select currval('coolbook.invoice_seq')", nativeQuery = true)
-    public BigDecimal getNextSequence();
 
 }

@@ -12,7 +12,9 @@ import com.coolbook.erp.rest.searchCriteria.PurchaseOrderCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -31,6 +33,8 @@ public class PurchaseOrderService {
 
     @Autowired
     private ProductInventoryDetailsService productInventoryDetailsService;
+    
+    
 
     public long savePurchaseOrder(PurchaseOrderEntity purchaseOrder){
         long id=this.purchaseOrderRepository.save(purchaseOrder).getId();
@@ -42,7 +46,12 @@ public class PurchaseOrderService {
     }
 
     public void deletePurchaseOrder(long id) {
-        this.purchaseOrderRepository.delete(id);
+        PurchaseOrderEntity purchaseOrderEntity=getPurchaseOrderById(id);
+        if(!purchaseOrderEntity.isApproved()) {
+            this.purchaseOrderRepository.delete(id);
+        }else{
+            throw new HttpServerErrorException(HttpStatus.CONFLICT);
+        }
     }
 
     public PurchaseOrderEntity getPurchaseOrderById(long id) {
@@ -64,19 +73,20 @@ public class PurchaseOrderService {
     }
     
     public void approvePurchaseOrder(long purchaseOrderId){
-        PurchaseOrderEntity purchaseOrder = purchaseOrderService.getPurchaseOrderById(purchaseOrderId);            
-        for(PurchaseOrderProductEntity purchaseOrderProduct:purchaseOrder.getPurchaseOrderProducts()){
-            ProductEntity product=purchaseOrderProduct.getProduct();
-            product.setQuantity(product.getQuantity() + purchaseOrderProduct.getQuantity());
-            product.setSalePrice(purchaseOrderProduct.getRate());
-            if(purchaseOrderProduct.getAmount()!=0)
-                product.setCost(purchaseOrderProduct.getAmount()/purchaseOrderProduct.getQuantity());
-            productService.updateProduct(product);
-            saveProductInventoryDetails(purchaseOrderProduct,purchaseOrder);
+        PurchaseOrderEntity purchaseOrder = purchaseOrderService.getPurchaseOrderById(purchaseOrderId); 
+        if(!purchaseOrder.isApproved()) {
+            for (PurchaseOrderProductEntity purchaseOrderProduct : purchaseOrder.getPurchaseOrderProducts()) {
+                ProductEntity product = purchaseOrderProduct.getProduct();
+                product.setQuantity(product.getQuantity() + purchaseOrderProduct.getQuantity());
+                product.setSalePrice(purchaseOrderProduct.getRate());
+                if (purchaseOrderProduct.getAmount() != 0)
+                    product.setCost(purchaseOrderProduct.getAmount() / purchaseOrderProduct.getQuantity());
+                productService.updateProduct(product);
+                saveProductInventoryDetails(purchaseOrderProduct, purchaseOrder);
+            }
+            purchaseOrder.setApproved(true);
+            purchaseOrderService.updatePurchaseOrder(purchaseOrder);
         }
-        purchaseOrder.setApproved(true);
-        purchaseOrderService.updatePurchaseOrder(purchaseOrder);
-        
     }
 
     private void saveProductInventoryDetails(PurchaseOrderProductEntity purchaseOrderProduct, PurchaseOrderEntity purchaseOrder){
@@ -84,9 +94,14 @@ public class PurchaseOrderService {
         productInventoryDetails.setDate(purchaseOrder.getDate());
         productInventoryDetails.setPurchaseOrder(purchaseOrder);
         productInventoryDetails.setProduct(purchaseOrderProduct.getProduct());
-        productInventoryDetails.setRate(purchaseOrderProduct.getAmount()/purchaseOrderProduct.getQuantity());
+        productInventoryDetails.setRate(purchaseOrderProduct.getRate());
+        productInventoryDetails.setCost(purchaseOrderProduct.getAmount()/purchaseOrderProduct.getQuantity());
         productInventoryDetails.setQuantity(purchaseOrderProduct.getQuantity());
         productInventoryDetailsService.saveProductInventoryDetails(productInventoryDetails);
+    }
+
+    public List<ProductInventoryDetailsEntity> inquiryProduct(long productId){
+        return productInventoryDetailsService.getAvailableProducts(this.productService.getProductById(productId));
     }
     
 }
