@@ -127,7 +127,7 @@ public class InvoiceService {
         invoiceIncomeEntity.setInvoice(invoice);
         invoiceIncomeEntity.setProduct(productInventoryDetailsEntity.getProduct());
         invoiceIncomeEntity.setQuantity(rowQuantity);
-        invoiceIncomeEntity.setCost(productInventoryDetailsEntity.getRate());
+        invoiceIncomeEntity.setCost(productInventoryDetailsEntity.getCost());
         invoiceIncomeEntity.setSalePrice(invoiceProductEntity.getAmount()/invoiceProductEntity.getQuantity());
         this.invoiceIncomeService.saveInvoiceIncome(invoiceIncomeEntity);
     }
