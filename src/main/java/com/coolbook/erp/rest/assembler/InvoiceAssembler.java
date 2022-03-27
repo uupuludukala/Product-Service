@@ -1,10 +1,14 @@
 package com.coolbook.erp.rest.assembler;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.coolbook.erp.entity.*;
+import com.coolbook.erp.model.InvoiceGet;
 import com.coolbook.erp.model.InvoicePost;
 import com.coolbook.erp.model.InvoiceProduct;
+import com.coolbook.erp.model.InvoiceProductGet;
 import com.coolbook.erp.rest.service.BranchService;
 import com.coolbook.erp.rest.service.CustomerService;
 import com.coolbook.erp.rest.service.ProductService;
@@ -15,7 +19,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class InvoiceAssembler {
-
+    
+    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+    
     @Autowired
     private SecurityFacade securityFacade;
 
@@ -27,6 +33,35 @@ public class InvoiceAssembler {
 
     @Autowired
     private CustomerService customerService;
+    
+    public InvoiceGet assembleInvoiceGet(InvoiceEntity invoice){
+        InvoiceGet invoiceGet=new InvoiceGet();
+        invoiceGet.setInvoiceNumber(invoice.getInvoiceNumber());
+        invoiceGet.setDate(dateFormat2.format(invoice.getDate()));
+        invoiceGet.setCustomer(invoice.getCustomer().getCustomerName());
+        invoiceGet.setBranch(invoice.getBranch().getCompany().getCompanyName());
+        invoiceGet.setProducts(assembleInvoiceProducts(invoice.getProducts()));
+        invoiceGet.setTotal(invoice.getTotal());
+        invoiceGet.setInvoice_Id(invoice.getId());
+        return invoiceGet;
+    }
+    
+    private Set<InvoiceProductGet> assembleInvoiceProducts(Set<InvoiceProductEntity> invoiceProducts){
+        Set<InvoiceProductGet> invoiceProductGets=new HashSet();
+        for(InvoiceProductEntity invoiceProductEntity:invoiceProducts){
+            InvoiceProductGet invoiceProductGet=new InvoiceProductGet();
+            invoiceProductGet.setUnitPrice(invoiceProductEntity.getUnitPrice());
+            invoiceProductGet.setQuantity(invoiceProductEntity.getQuantity());
+            invoiceProductGet.setDiscount(invoiceProductEntity.getDiscount());
+            invoiceProductGet.setDescription(invoiceProductEntity.getDescription());
+            invoiceProductGet.setCost(invoiceProductEntity.getCost());
+            invoiceProductGet.setAmount(invoiceProductEntity.getAmount());
+            invoiceProductGet.setItemCode(invoiceProductEntity.getProduct().getProductCode());
+            invoiceProductGets.add(invoiceProductGet);
+            
+        }
+        return invoiceProductGets;
+    }
 	
 	public InvoiceEntity assembleInvoiceEntity(InvoicePost invoicePost) {
 		InvoiceEntity invoiceEntity=new InvoiceEntity();

@@ -21,7 +21,7 @@ public class PurchaseOrderEntity {
     @SequenceGenerator(name = "purchase_order_seq", sequenceName = "purchase_order_seq", allocationSize = 1)
     private long id;
 
-    @Column
+    @Column(unique = true)
     private String purchaseOrderNumber;
     
     @Column

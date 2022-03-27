@@ -10,6 +10,8 @@ import javax.persistence.Column;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InvoiceProductGet  extends ResourceSupport {
 
+    private String itemCode;
+    
     private String description;
 
     private double amount;

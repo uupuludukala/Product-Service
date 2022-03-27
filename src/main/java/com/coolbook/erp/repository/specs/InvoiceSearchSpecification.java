@@ -7,19 +7,18 @@ import javax.persistence.criteria.*;
 
 public class InvoiceSearchSpecification implements Specification<InvoiceEntity> {
     
-    private String searchvalue;
+    private String searchValue;
 
-    public InvoiceSearchSpecification(String searchvalue) {
-        this.searchvalue = searchvalue;
+    public InvoiceSearchSpecification(String searchValue) {
+        this.searchValue = searchValue;
     }
 
     @Override
     public Predicate toPredicate(Root<InvoiceEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         Predicate predicate = cb.or();
-        if (searchvalue != null) {
+        if (searchValue != null) {
             Expression<String> invoiceNumber = root.get("invoiceNumber");
-            predicate = cb.or(predicate, cb.like(cb.upper(invoiceNumber), "%" + searchvalue.toUpperCase() + "%"));
-            
+            predicate = cb.or(predicate, cb.like(cb.upper(invoiceNumber), "%" + searchValue.toUpperCase() + "%"));
         }
         return predicate;
     }

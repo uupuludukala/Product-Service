@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import com.coolbook.erp.entity.InvoiceEntity;
 import com.coolbook.erp.model.InvoiceGet;
 import com.coolbook.erp.model.InvoicePost;
+import com.coolbook.erp.model.PurchaseOrderGet;
 import com.coolbook.erp.rest.assembler.InvoiceGetResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -55,6 +56,10 @@ public class InvoiceController {
 		return new ResponseEntity<>(invoiceId,header, HttpStatus.CREATED);
 	}
 
+    @RequestMapping(value = "getInvoiceById/{id}", method = RequestMethod.GET)
+    public ResponseEntity<InvoiceGet> getInvoiceById(@PathVariable("id") long id) {
+        return ResponseEntity.ok().body(invoiceAssembler.assembleInvoiceGet(this.invoiceService.getInvoiceById(id)));
+    }
 
 	
 	@RequestMapping(value = "invoiceReport/{id}", method = RequestMethod.GET)
@@ -78,5 +83,11 @@ public class InvoiceController {
                 : proxyRequestUri;
         return ok(pagedResourcesAssembler.toResource(this.invoiceService.searchInvoice(pageable, searchValue), assembler,
                 new Link(basePath)));
+    }
+
+    @RequestMapping(value = "cancelInvoice/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Void> cancelInvoice(@PathVariable long  id) throws Exception {
+	    invoiceService.cancelInvoice(id);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

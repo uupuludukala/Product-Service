@@ -28,9 +28,10 @@ public abstract class AbstractInvoiceResourceAssembler  extends ResourceAssemble
         InvoiceGet invoiceGet = new InvoiceGet();
         invoiceGet.setInvoiceNumber(invoiceEntity.getInvoiceNumber());
         invoiceGet.setDate(dateFormat2.format(invoiceEntity.getDate()));
-        invoiceGet.setBranch(createBranchJson(invoiceEntity.getBranch()));
-        invoiceGet.setCustomer(createCustomerJson(invoiceEntity.getCustomer()));
+        invoiceGet.setBranch(invoiceEntity.getBranch().getCompany().getCompanyName());
+        invoiceGet.setCustomer(invoiceEntity.getCustomer().getCustomerName());
         invoiceGet.setProducts(createProductsJson(invoiceEntity.getProducts()));
+        invoiceGet.setInvoice_Id(invoiceEntity.getId());
         return invoiceGet;
     }
 

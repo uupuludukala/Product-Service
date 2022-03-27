@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.coolbook.erp.entity.*;
+import com.coolbook.erp.repository.InvoiceInventoryDetailsRepository;
 import com.coolbook.erp.repository.InvoiceProductRepository;
 import com.coolbook.erp.repository.specs.InvoiceSearchSpecification;
-import com.coolbook.erp.repository.specs.ProductSearchSpecification;
 import com.coolbook.erp.security.SecurityFacade;
 import com.coolbook.erp.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,9 @@ public class InvoiceService {
 
     @Autowired
     private InvoiceProductRepository invoiceProductRepository;
+    
+    @Autowired
+    private InvoiceInventoryDetailsRepository invoiceInventoryDetailsRepository;
 
 	@Autowired
     private InvoiceReport invoiceReport;
@@ -61,6 +64,10 @@ public class InvoiceService {
         }
 	    
 	}
+
+    public InvoiceEntity getInvoiceById(long id) {
+        return this.invoiceRepository.getOne(id);
+    }
 	
 	public void setInvoiceNumber(InvoiceEntity invoice, long id){
 	    invoice.setInvoiceNumber(generateInvoiceNumber(id));
@@ -94,6 +101,8 @@ public class InvoiceService {
             double soldQuantity = 0;
             double toBeSold = invoiceProductEntity.getQuantity();
             for(ProductInventoryDetailsEntity productInventoryDetailsEntity:productInventoryDetailsEntities){
+                InvoiceInventoryDetailsEntity invoiceInventoryDetails=new InvoiceInventoryDetailsEntity();
+                invoiceInventoryDetails.setProductInventoryDetails(productInventoryDetailsEntity);
                 double rowQuantity=0;
                 if(soldQuantity != toBeSold) {                    
                     if (productInventoryDetailsEntity.getQuantity() <= toBeSold - soldQuantity) {
@@ -101,10 +110,14 @@ public class InvoiceService {
                     } else {
                         soldQuantity =rowQuantity= toBeSold - soldQuantity;
                     }
+                    invoiceInventoryDetails.setInvoiceId(invoice.getId());
+                    invoiceInventoryDetails.setQuantity(rowQuantity);
+                    invoiceInventoryDetailsRepository.save(invoiceInventoryDetails);
                     saveInvoiceIncome(invoice, invoiceProductEntity, soldQuantity, productInventoryDetailsEntity,rowQuantity);
                     productInventoryDetailsEntity.setQuantity(productInventoryDetailsEntity.getQuantity() - rowQuantity);
                     productInventoryDetailsService.saveProductInventoryDetails(productInventoryDetailsEntity);
-                }
+                }else
+                    break;
             }
         }
     }
@@ -132,5 +145,21 @@ public class InvoiceService {
     public Page<InvoiceEntity> searchInvoice(Pageable page, String searchValue) {
         InvoiceSearchSpecification specification = new InvoiceSearchSpecification(searchValue);
         return this.invoiceRepository.findAll(specification, page);
+    }
+    
+    public void cancelInvoice(long id){
+        InvoiceEntity invoice=this.invoiceRepository.getOne(id);
+        for(InvoiceProductEntity invoiceProductEntity:invoice.getProducts()){
+            ProductEntity productEntity=invoiceProductEntity.getProduct();
+            productEntity.setQuantity(productEntity.getQuantity() + invoiceProductEntity.getQuantity());
+            productService.updateProduct(productEntity);
+            List<InvoiceInventoryDetailsEntity> invoiceInventoryDetails=invoiceInventoryDetailsRepository.getInvoiceInventoryDetails(invoice.getId());
+            for(InvoiceInventoryDetailsEntity invoiceInventoryDetailsEntity:invoiceInventoryDetails){
+                ProductInventoryDetailsEntity productInventoryDetailsEntity = invoiceInventoryDetailsEntity.getProductInventoryDetails();
+                productInventoryDetailsEntity.setQuantity(productInventoryDetailsEntity.getQuantity()+invoiceInventoryDetailsEntity.getQuantity());
+                productInventoryDetailsService.saveProductInventoryDetails(productInventoryDetailsEntity);
+            }
+        }
+        this.invoiceIncomeService.deleteInvoiceIncome(invoice);
     }
 }
