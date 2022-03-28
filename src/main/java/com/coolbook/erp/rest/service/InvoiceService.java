@@ -161,5 +161,6 @@ public class InvoiceService {
             }
         }
         this.invoiceIncomeService.deleteInvoiceIncome(invoice);
+        this.invoiceRepository.delete(id);
     }
 }
