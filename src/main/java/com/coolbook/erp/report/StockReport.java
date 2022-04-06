@@ -54,9 +54,9 @@ public class StockReport {
 
         try {
             CompanyEntity company=companyService.getCompanyById(securityFacade.getCurrentUser().getCompanyId());
-            Path path = Paths.get(ClassLoader.getSystemResource("Logo.png").toURI());
-            Image img = Image.getInstance(path.toAbsolutePath().toString());
-            document.add(img);
+//            Path path = Paths.get(ClassLoader.getSystemResource("Logo.png").toURI());
+//            Image img = Image.getInstance(path.toAbsolutePath().toString());
+//            document.add(img);
             document.add( Chunk.NEWLINE );
             document.add(new Paragraph(company.getCompanyName()+", "+company.getAddressLine1()+", " +
                     company.getAddressLine2()+", " +company.getAddressLine3()+", "+company.getContactNumber(), font));
@@ -98,11 +98,9 @@ public class StockReport {
                 }
             }
             document.add( table);
-        } catch (DocumentException | MalformedURLException | URISyntaxException | FileNotFoundException e) {
+        } catch (DocumentException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } 
         document.close();
         return new ByteArrayInputStream(out.toByteArray());
     }

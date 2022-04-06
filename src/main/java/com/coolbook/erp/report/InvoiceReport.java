@@ -46,22 +46,20 @@ public class InvoiceReport {
 		}
 		document.open();
         try {
-            Path path = Paths.get(ClassLoader.getSystemResource("Logo.png").toURI());
-            Image img = Image.getInstance(path.toAbsolutePath().toString());
-            img.setAlignment(Element.ALIGN_RIGHT);
-            img.setIndentationRight(10.00F);
-            document.add(img);
+//            Path path = Paths.get(ClassLoader.getSystemResource("Logo.png").toURI());
+//            Image img = Image.getInstance(path.toAbsolutePath().toString());
+//            img.setAlignment(Element.ALIGN_RIGHT);
+//            img.setIndentationRight(10.00F);
+//            document.add(img);
             document.add( Chunk.NEWLINE );
             populateCompanyDetails(document);
             populateHeader(document,invoiceEntity.getCustomer(),invoiceEntity);
             document.add( Chunk.NEWLINE );
             populateInvoiceItems(document,invoiceEntity.getProducts());
 //            populateHeader(document,invoiceEntity.getProducts());
-		} catch (DocumentException | MalformedURLException | URISyntaxException | FileNotFoundException e) {
+		} catch (DocumentException  e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-            e.printStackTrace();
-        }
+		} 
         document.close();
 		return new ByteArrayInputStream(out.toByteArray());
 	}
