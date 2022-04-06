@@ -2,8 +2,10 @@ package com.coolbook.erp.report;
 
 import com.coolbook.erp.entity.CompanyEntity;
 import com.coolbook.erp.entity.ProductEntity;
+import com.coolbook.erp.entity.ProductInventoryDetailsEntity;
 import com.coolbook.erp.repository.ProductRepository;
 import com.coolbook.erp.rest.service.CompanyService;
+import com.coolbook.erp.rest.service.ProductInventoryDetailsService;
 import com.coolbook.erp.security.SecurityFacade;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -32,12 +34,15 @@ public class StockReport {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    private ProductInventoryDetailsService productInventoryDetailsService;
     
     @Autowired
     private SecurityFacade securityFacade;
 
     public ByteArrayInputStream generateStockReport(long productCategory) {
-        Document document = new Document();
+        Document document = new Document(PageSize.A4,2F, 2F,2F, 2F);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
             PdfWriter.getInstance(document, out);
@@ -58,26 +63,41 @@ public class StockReport {
             document.add( Chunk.NEWLINE );
             document.add( Chunk.NEWLINE );
             List<ProductEntity> products=productRepository.getProductsByCategory(productCategory);
-            float [] pointColumnWidths = {150F, 150F,150F, 150F, 150F};
+            float [] pointColumnWidths = {75F, 150F,100F, 100F, 75F, 75F, 75F,75F};
             PdfPTable table = new PdfPTable(pointColumnWidths);
-            table.addCell("Product Category Code");
-            table.addCell("Product Category Name");
-            table.addCell("Product Code");            
+            table.addCell("Product Code");
             table.addCell("Product Name");
+            table.addCell("Purchase Order Number");            
+            table.addCell("Date");
+            table.addCell("Rate");
+            table.addCell("Cost");
+            table.addCell("Sale Price");
             table.addCell("Quantity");
             if(products.isEmpty()){
                 table.addCell("No Records Found");
             }
-            for(ProductEntity product:products){
-                table.addCell(product.getProductCategory().getProductCategoryCode());
-                table.addCell(product.getProductCategory().getProductCategoryName());
-                table.addCell(product.getProductCode());
-                table.addCell(product.getProductName());
-                table.addCell(String.valueOf(product.getQuantity()));
+//            for(ProductEntity product:products){
+//                table.addCell(product.getProductCategory().getProductCategoryCode());
+//                table.addCell(product.getProductCategory().getProductCategoryName());
+//                table.addCell(product.getProductCode());
+//                table.addCell(product.getProductName());
+//                table.addCell(String.valueOf(product.getQuantity()));
+//            }
+            
+            for(ProductEntity product:products) {
+                List<ProductInventoryDetailsEntity> productInventoryDetails = productInventoryDetailsService.getAvailableProducts(product);
+                for(ProductInventoryDetailsEntity productInventoryDetailsEntity:productInventoryDetails){
+                    table.addCell( productInventoryDetailsEntity.getProduct().getProductCode());
+                    table.addCell( productInventoryDetailsEntity.getProduct().getProductName());
+                    table.addCell( productInventoryDetailsEntity.getPurchaseOrder().getPurchaseOrderNumber());
+                    table.addCell(productInventoryDetailsEntity.getPurchaseOrder().getDate().toString());
+                    table.addCell( String.valueOf(productInventoryDetailsEntity.getRate()));
+                    table.addCell( String.valueOf(productInventoryDetailsEntity.getCost()));
+                    table.addCell( String.valueOf(product.getSalePrice()));
+                    table.addCell(String.valueOf(productInventoryDetailsEntity.getQuantity()));
+                }
             }
             document.add( table);
-            
-
         } catch (DocumentException | MalformedURLException | URISyntaxException | FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
