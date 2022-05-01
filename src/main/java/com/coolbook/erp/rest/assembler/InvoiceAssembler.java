@@ -87,7 +87,7 @@ public class InvoiceAssembler {
             invoiceProductentity.setCost(product.getCost());
 			invoiceProductentity.setDiscount(invoiceProduct.getDiscount());
             invoiceProductentity.setAmount(invoiceProduct.getAmount());
-            invoiceProductentity.setDescription(product.getProductName());
+            invoiceProductentity.setDescription(invoiceProduct.getDescription());
 			invoiceProductentity.setQuantity(invoiceProduct.getQuantity());
             invoiceProductentity.setItemNo(product.getProductCode());
             invoiceProductEntityList.add(invoiceProductentity);

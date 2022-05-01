@@ -42,6 +42,8 @@ public class ProductGet extends ResourceSupport {
 	private long responsible;	
 	private List<CompanyGet> companies;
     private StatusEnum status;
+    private int warrantyMonths;
+    private int warrantyYears;
 
     public ProductGet(long product_Id,String productCode,String productName){
         this.product_Id=product_Id;

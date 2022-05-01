@@ -47,6 +47,8 @@ public abstract class AbstractProductResourceAssembler extends ResourceAssembler
 		productGet.setVolume(productEntity.getVolume());
 		productGet.setResponsible(productEntity.getResponsible());
 		productGet.setStatus(StatusEnum.getByCode(productEntity.getStatus()));
+        productGet.setWarrantyMonths(productEntity.getWarrantyMonths());
+        productGet.setWarrantyYears(productEntity.getWarrantyYears());
 		List<CompanyGet> companies =new ArrayList<CompanyGet>();
 		for(CompanyEntity company:productEntity.getCompanies()) {
 			CompanyGet companyGet=new CompanyGet();

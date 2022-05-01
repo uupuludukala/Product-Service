@@ -56,6 +56,8 @@ public class ProductAssembler {
         productGet.setVolume(productEntity.getVolume());
         productGet.setResponsible(productEntity.getResponsible());
         productGet.setStatus(StatusEnum.getByCode(productEntity.getStatus()));
+        productGet.setWarrantyMonths(productEntity.getWarrantyMonths());
+        productGet.setWarrantyYears(productEntity.getWarrantyYears());
         List<CompanyGet> companies = new ArrayList<CompanyGet>();
         for (CompanyEntity company : productEntity.getCompanies()) {
             CompanyGet companyGet = new CompanyGet();
@@ -90,6 +92,8 @@ public class ProductAssembler {
         productEntity.setWeight(productPost.getWeight());
         productEntity.setVolume(productPost.getVolume());
         productEntity.setResponsible(productPost.getResponsible());
+        productEntity.setWarrantyMonths(productPost.getWarrantyMonths());
+        productEntity.setWarrantyYears(productPost.getWarrantyYears());
         if (productPost.getStatus() != null)
             productEntity.setStatus(productPost.getStatus().getCode());
         Set<CompanyEntity> companies = new HashSet<CompanyEntity>();

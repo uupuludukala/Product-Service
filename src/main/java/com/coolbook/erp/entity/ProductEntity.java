@@ -113,5 +113,11 @@ public class ProductEntity {
             inverseJoinColumns = {@JoinColumn(name = "company_id")}
     )
 	private Set<CompanyEntity> companies;
+	
+	@Column
+	private int warrantyMonths;
+
+	@Column
+    private int warrantyYears;
 
 }

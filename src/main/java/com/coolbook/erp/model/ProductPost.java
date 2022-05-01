@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
+import javax.persistence.Column;
+
 @Data
 public class ProductPost {
 
@@ -75,6 +77,12 @@ public class ProductPost {
 	
     @JsonProperty("status")
     private StatusEnum status;
+
+    @JsonProperty("warrantyMonths")
+    private int warrantyMonths;
+
+    @JsonProperty("warrantyYears")
+    private int warrantyYears;
 	
 	
 }

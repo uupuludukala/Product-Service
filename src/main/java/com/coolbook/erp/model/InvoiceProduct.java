@@ -11,5 +11,6 @@ public class InvoiceProduct {
 	private double unitPrice;
 	private double discount;
 	private double amount;
+	private String description;
 	
 }

@@ -2,6 +2,7 @@ package com.coolbook.erp.rest.service;
 
 import java.io.ByteArrayInputStream;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.coolbook.erp.entity.*;
@@ -10,6 +11,7 @@ import com.coolbook.erp.repository.InvoiceProductRepository;
 import com.coolbook.erp.repository.specs.InvoiceSearchSpecification;
 import com.coolbook.erp.security.SecurityFacade;
 import com.coolbook.erp.security.User;
+import com.coolbook.erp.validation.InvoiceValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,8 +53,9 @@ public class InvoiceService {
     @Autowired
     private SecurityFacade securityFacade;
 	
-	public long saveInvoice(InvoiceEntity invoice) throws Exception {
-	    if(validateInvoice(invoice)) {
+	public  long saveInvoice(InvoiceEntity invoice) throws Exception {
+	    List<String> validationErrorList=validateInvoice(invoice);
+	    if(validationErrorList.isEmpty()) {
             invoice.setUser(userService.getUserById(securityFacade.getCurrentUser().getUserId()));
             long id = this.invoiceRepository.save(invoice).getId();
             invoice.setId(id);
@@ -60,7 +63,7 @@ public class InvoiceService {
             adjustInventory(invoice);
             return id;
         }else{
-	        throw new Exception();
+	        throw new InvoiceValidationException(validationErrorList);
         }
 	    
 	}
@@ -132,14 +135,17 @@ public class InvoiceService {
         this.invoiceIncomeService.saveInvoiceIncome(invoiceIncomeEntity);
     }
     
-    public boolean validateInvoice(InvoiceEntity invoice){
-	    boolean isValid = true;
+    public List<String> validateInvoice(InvoiceEntity invoice){
+	    List<String> validationErrorList=new ArrayList<>();
 	    for(InvoiceProductEntity invoiceProductEntity:invoice.getProducts()){
-            isValid=invoiceProductEntity.getProduct().getCost() <= invoiceProductEntity.getUnitPrice() && invoiceProductEntity.getProduct().getQuantity() >= invoiceProductEntity.getQuantity();
-            if(!isValid)
-                break;
+	        if(invoiceProductEntity.getProduct().getCost() >= invoiceProductEntity.getAmount()){
+                validationErrorList.add("Invalid unit Price for "+invoiceProductEntity.getProduct().getProductCode() +": "+invoiceProductEntity.getProduct().getProductName());
+            }
+	        if(invoiceProductEntity.getProduct().getQuantity() <= invoiceProductEntity.getQuantity() || productInventoryDetailsService.getAvailableProducts(invoiceProductEntity.getProduct()).isEmpty()){
+                validationErrorList.add("Invalid product quantity for "+invoiceProductEntity.getProduct().getProductCode() +": "+invoiceProductEntity.getProduct().getProductName());
+            }
         }
-	    return isValid;
+	    return validationErrorList;
     }
 
     public Page<InvoiceEntity> searchInvoice(Pageable page, String searchValue) {

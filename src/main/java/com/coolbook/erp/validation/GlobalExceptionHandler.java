@@ -65,6 +65,15 @@ public class GlobalExceptionHandler extends  ResponseEntityExceptionHandler {
 		return apiError;
 	}
 
+    @ExceptionHandler({ InvoiceValidationException.class })
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public List<String> handleInvoiceValidationException(InvoiceValidationException e) {       
+        return e.getValidationErrorList();
+    }
+
+    
+
     @ExceptionHandler({ DataIntegrityViolationException.class })
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
