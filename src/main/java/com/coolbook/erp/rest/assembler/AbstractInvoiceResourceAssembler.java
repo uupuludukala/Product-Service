@@ -63,7 +63,8 @@ public abstract class AbstractInvoiceResourceAssembler  extends ResourceAssemble
             invoiceProductGet.setDescription(invoiceProductEntity.getDescription());
             invoiceProductGet.setDiscount(invoiceProductEntity.getDiscount());
             invoiceProductGet.setQuantity(invoiceProductEntity.getQuantity());
-            invoiceProductGet.setUnitPrice(invoiceProductEntity.getUnitPrice());
+            invoiceProductGet.setRate(invoiceProductEntity.getRate());
+            invoiceProductGet.setTotal(invoiceProductEntity.getTotal());
             products.add(invoiceProductGet);
         }
         return products;

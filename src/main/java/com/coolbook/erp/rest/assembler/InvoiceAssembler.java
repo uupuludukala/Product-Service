@@ -50,7 +50,7 @@ public class InvoiceAssembler {
         Set<InvoiceProductGet> invoiceProductGets=new HashSet();
         for(InvoiceProductEntity invoiceProductEntity:invoiceProducts){
             InvoiceProductGet invoiceProductGet=new InvoiceProductGet();
-            invoiceProductGet.setUnitPrice(invoiceProductEntity.getUnitPrice());
+            invoiceProductGet.setRate(invoiceProductEntity.getRate());
             invoiceProductGet.setQuantity(invoiceProductEntity.getQuantity());
             invoiceProductGet.setDiscount(invoiceProductEntity.getDiscount());
             invoiceProductGet.setDescription(invoiceProductEntity.getDescription());
@@ -83,7 +83,8 @@ public class InvoiceAssembler {
 			InvoiceProductEntity invoiceProductentity=new InvoiceProductEntity();
             product=productService.getProductById(invoiceProduct.getProductId());
 			invoiceProductentity.setProduct(product);
-			invoiceProductentity.setUnitPrice(invoiceProduct.getUnitPrice());
+			invoiceProductentity.setRate(invoiceProduct.getRate());
+            invoiceProductentity.setTotal(invoiceProduct.getTotal());
             invoiceProductentity.setCost(product.getCost());
 			invoiceProductentity.setDiscount(invoiceProduct.getDiscount());
             invoiceProductentity.setAmount(invoiceProduct.getAmount());

@@ -29,19 +29,22 @@ public class InvoiceProductEntity {
 	private String description;
 
     @Column
+    private double quantity;
+
+    @Column
+    private double rate;
+
+    @Column
 	private double amount;
 
     @Column
-    private double cost;
+    private double total;
 
-	@Column
-	private double unitPrice;
+    @Column
+    private double cost;
 	
 	@Column
 	private double discount;
-	
-	@Column
-	private double quantity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "invoice_id", nullable = false)

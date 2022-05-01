@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.springframework.hateoas.ResourceSupport;
 
-import javax.persistence.Column;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,7 +17,9 @@ public class InvoiceProductGet  extends ResourceSupport {
 
     private double cost;
 
-    private double unitPrice;
+    private double rate;
+
+    private double total;
 
     private double discount;
 

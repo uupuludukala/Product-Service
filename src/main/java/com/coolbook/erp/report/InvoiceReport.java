@@ -163,7 +163,7 @@ public class InvoiceReport {
             PdfPCell quantityCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getQuantity()),normalFont)));
             quantityCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(quantityCell);
-            PdfPCell unitPriceCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getUnitPrice()),normalFont)));
+            PdfPCell unitPriceCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getRate()),normalFont)));
             unitPriceCell.setBorder(Rectangle.NO_BORDER);            
             table.addCell(unitPriceCell);
             PdfPCell discountCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getDiscount()),normalFont)));
