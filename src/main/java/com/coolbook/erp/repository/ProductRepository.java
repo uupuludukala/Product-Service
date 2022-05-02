@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long>, JpaSpecificationExecutor<ProductEntity> {
     
-    @Query(value="from ProductEntity p where p.productCategory.id =?1")
+    @Query(value="from ProductEntity p where p.productCategory.id =?1 order by productCode")
     List<ProductEntity> getProductsByCategory(long productCategory);
 
 }
