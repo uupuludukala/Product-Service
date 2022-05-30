@@ -29,6 +29,9 @@ public abstract class AbstractEmployeeResourceAssembler extends ResourceAssemble
         employeeGet.setHomePhone(employeeEntity.getHomePhone());
         employeeGet.setImageUrl(employeeEntity.getImageUrl());
         employeeGet.setStatus(StatusEnum.getByCode(employeeEntity.getStatus()));
+        employeeGet.setBankName(employeeEntity.getBankName());
+        employeeGet.setBankBranch(employeeEntity.getBankBranch());
+        employeeGet.setAccountNumber(employeeEntity.getAccountNumber());
 
         return employeeGet;
     }

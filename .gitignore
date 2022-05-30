@@ -1,4 +1,4 @@
-target/
+target
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
@@ -22,3 +22,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/target/*
+/target/classes/
+/target/classes/com/coolbook/erp/entity/*

@@ -141,7 +141,7 @@ public class InvoiceService {
 	        if(invoiceProductEntity.getProduct().getCost() >= invoiceProductEntity.getAmount()){
                 validationErrorList.add("Invalid unit Price for "+invoiceProductEntity.getProduct().getProductCode() +": "+invoiceProductEntity.getProduct().getProductName());
             }
-	        if(invoiceProductEntity.getProduct().getQuantity() <= invoiceProductEntity.getQuantity() || productInventoryDetailsService.getAvailableProducts(invoiceProductEntity.getProduct()).isEmpty()){
+	        if(invoiceProductEntity.getProduct().getQuantity() < invoiceProductEntity.getQuantity() || productInventoryDetailsService.getAvailableProducts(invoiceProductEntity.getProduct()).isEmpty()){
                 validationErrorList.add("Invalid product quantity for "+invoiceProductEntity.getProduct().getProductCode() +": "+invoiceProductEntity.getProduct().getProductName());
             }
         }

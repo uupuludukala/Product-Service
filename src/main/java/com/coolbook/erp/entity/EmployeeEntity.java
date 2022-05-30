@@ -49,4 +49,14 @@ public class EmployeeEntity {
     
     @Column
     private String status;
+
+    @Column
+    private String bankName;
+
+    @Column
+    private String bankBranch;
+
+    @Column
+    private String accountNumber;
+    
 }

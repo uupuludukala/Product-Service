@@ -31,7 +31,8 @@ public abstract class AbstractCustomerResourceAssembler  extends ResourceAssembl
 		customerGet.setCreditLimit(customerEntity.getCreditLimit());
 		customerGet.setImageUrl(customerEntity.getImageUrl());
 		customerGet.setStatus(StatusEnum.getByCode(customerEntity.getStatus()));
-                
+        customerGet.setCompany(customerEntity.getCompany());
+        customerGet.setOccupation(customerEntity.getOccupation());
 		return customerGet;
 	}
 

@@ -5,6 +5,8 @@ import org.springframework.hateoas.ResourceSupport;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import javax.persistence.Column;
+
 @Data
 public class CustomerGet extends ResourceSupport {
 	@JsonProperty("id")
@@ -19,4 +21,6 @@ public class CustomerGet extends ResourceSupport {
 	private double creditLimit;
 	private String imageUrl;
 	private StatusEnum status;
+    private String occupation;
+    private String company;
 }

@@ -22,6 +22,9 @@ public class CustomerAssembler {
 		customerGet.setCreditLimit(customerEntity.getCreditLimit());
 		customerGet.setImageUrl(customerEntity.getImageUrl());
 		customerGet.setStatus(StatusEnum.getByCode(customerEntity.getStatus()));
+        customerGet.setOccupation(customerEntity.getOccupation());
+        customerGet.setCompany(customerEntity.getCompany());
+        
 		return customerGet;
 	}
 	
@@ -38,6 +41,8 @@ public class CustomerAssembler {
 		customerEntity.setImageUrl(customerPost.getImageUrl());
 		if(customerPost.getStatus()!=null)
 		    customerEntity.setStatus(customerPost.getStatus().getCode());
+        customerEntity.setOccupation(customerPost.getOccupation());
+        customerEntity.setCompany(customerPost.getCompany());
 		return customerEntity;
 	}
 }

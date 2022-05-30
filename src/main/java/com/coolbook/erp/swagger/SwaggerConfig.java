@@ -18,7 +18,8 @@ import static com.google.common.base.Predicates.not;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class 
+SwaggerConfig {
 
 	public static final String AUTHORIZATION = "Authorization";
 

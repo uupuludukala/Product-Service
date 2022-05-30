@@ -31,7 +31,7 @@ public class VendorAssembler {
         return vendorGet;
     }
 
-    private Set<VendorAccountGet> assembleVendorAccountGet(Set<VendorAccountEntity> vendorAccounts){
+    public Set<VendorAccountGet> assembleVendorAccountGet(Set<VendorAccountEntity> vendorAccounts){
         Set<VendorAccountGet> vendorAccountsGet= new HashSet<>();
         for(VendorAccountEntity vendorAccountEntity:vendorAccounts){
             vendorAccountsGet.add(new VendorAccountGet(vendorAccountEntity.getId(),

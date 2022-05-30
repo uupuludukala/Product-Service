@@ -12,7 +12,7 @@ public class CustomerGetResourceAssembler extends AbstractCustomerResourceAssemb
 	protected String getSelfLink(String id) {
 		if (!StringUtils.isEmpty(id)) {
 			UriComponentsBuilder builder = ServletUriComponentsBuilder.fromHttpUrl(requestURI).query(null);
-			if (!builder.build().toString().endsWith("/customerss")) {
+			if (!builder.build().toString().endsWith("/customers")) {
 				String branchCurrentURI = builder.build().toString();
 				String branchURI = branchCurrentURI.substring(0, branchCurrentURI.indexOf("/customers") + 9);
 				builder = ServletUriComponentsBuilder.fromHttpUrl(branchURI);

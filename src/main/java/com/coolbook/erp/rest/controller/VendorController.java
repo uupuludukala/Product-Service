@@ -1,11 +1,12 @@
 package com.coolbook.erp.rest.controller;
 
 import com.coolbook.erp.entity.VendorEntity;
-import com.coolbook.erp.model.VendorGet;
-import com.coolbook.erp.model.VendorPost;
+import com.coolbook.erp.model.*;
 import com.coolbook.erp.rest.assembler.VendorAssembler;
 import com.coolbook.erp.rest.assembler.VendorGetResourceAssembler;
+import com.coolbook.erp.rest.assembler.VendorPaymentAssembler;
 import com.coolbook.erp.rest.searchCriteria.VendorCriteria;
+import com.coolbook.erp.rest.service.VendorPaymentService;
 import com.coolbook.erp.rest.service.VendorService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.util.List;
+import java.util.Set;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 public class VendorController {
     private static final String REFERRER_HEADER_KEY = "referrer";
+    
     VendorService vendorService;
 
     @Autowired
@@ -40,6 +45,8 @@ public class VendorController {
 
     @Autowired
     VendorAssembler vendorAssembler;
+    
+    
 
     @Autowired
     VendorController(VendorService vendorService) {
@@ -53,6 +60,8 @@ public class VendorController {
         header.setLocation(linkTo(ControllerLinkBuilder.methodOn(VendorController.class).getVendorById(vendorId)).toUri());
         return new ResponseEntity<>(header, HttpStatus.CREATED);
     }
+
+    
 
     @RequestMapping(value ="saveVendor/{id}",method=RequestMethod.PUT)
     public ResponseEntity<Void> updateVendor(@RequestBody VendorPost vendor,@ApiParam(value = "Vendor Id", required = true) @PathVariable("id") long id){
@@ -72,6 +81,13 @@ public class VendorController {
 
         return ResponseEntity.ok().body(vendorAssembler.assembleVendorGet(this.vendorService.getVendorById(id)));
     }
+
+    @RequestMapping(value = "getVendorAccountByVendorId/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Set<VendorAccountGet>> getVendorAccountByVendorId(@PathVariable("id") long id) {
+        return ResponseEntity.ok().body(vendorAssembler.assembleVendorAccountGet(this.vendorService.getVendorById(id).getVendorAccounts()));
+    }
+
+   
 
     @RequestMapping(value = "getAllVendor", method = RequestMethod.GET)
     public ResponseEntity<PagedResources<VendorGet>> getAllVendor(Pageable pageable, HttpServletRequest request,

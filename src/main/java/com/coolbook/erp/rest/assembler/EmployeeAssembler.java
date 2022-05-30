@@ -20,6 +20,10 @@ public class EmployeeAssembler {
         employeeGet.setHomePhone(employeeEntity.getHomePhone());
         employeeGet.setImageUrl(employeeEntity.getImageUrl());
         employeeGet.setStatus(StatusEnum.getByCode(employeeEntity.getStatus()));
+        employeeGet.setBankName(employeeEntity.getBankName());
+        employeeGet.setBankBranch(employeeEntity.getBankBranch());
+        employeeGet.setAccountNumber(employeeEntity.getAccountNumber());
+        
         return employeeGet;
     }
 
@@ -35,6 +39,9 @@ public class EmployeeAssembler {
         employeeEntity.setImageUrl(employeePost.getImageUrl());
         if(employeePost.getStatus()!=null)
             employeeEntity.setStatus(employeePost.getStatus().getCode());
+        employeeEntity.setBankName(employeePost.getBankName());
+        employeeEntity.setBankBranch(employeePost.getBankBranch());
+        employeeEntity.setAccountNumber(employeePost.getAccountNumber());
         return employeeEntity;
     }
 }

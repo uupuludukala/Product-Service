@@ -56,4 +56,10 @@ public class CustomerEntity {
     @Column
     private String status;
 
+    @Column
+    private String occupation;
+
+    @Column
+    private String company;
+
 }

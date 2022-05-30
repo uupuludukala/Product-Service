@@ -3,6 +3,8 @@ package com.coolbook.erp.model;
 import com.coolbook.erp.common.enums.StatusEnum;
 import lombok.Data;
 
+import javax.persistence.Column;
+
 @Data
 public class EmployeePost {
 
@@ -15,4 +17,7 @@ public class EmployeePost {
     private String homePhone;
     private String imageUrl;
     private StatusEnum status;
+    private String bankName;
+    private String bankBranch;
+    private String accountNumber;
 }

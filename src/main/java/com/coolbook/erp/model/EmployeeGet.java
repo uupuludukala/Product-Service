@@ -18,4 +18,7 @@ public class EmployeeGet extends ResourceSupport {
     private String homePhone;
     private String imageUrl;
     private StatusEnum status;
+    private String bankName;
+    private String bankBranch;
+    private String accountNumber;
 }
