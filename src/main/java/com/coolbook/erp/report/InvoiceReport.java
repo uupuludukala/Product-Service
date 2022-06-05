@@ -182,7 +182,7 @@ public class InvoiceReport {
         totalPhrase.add(new Chunk("Total : " + DECIMAL_FORMAT.format(total),nameFont));
         footerDescriptionPhrase.add(new Chunk(" \n\n" +
                 "Amount in Words   : " + NumberToWordConverterUtil.numberToWord((int)total) + " and " 
-                +NumberToWordConverterUtil.numberToWord(Integer.parseInt( String.valueOf(total).substring(String.valueOf(total).indexOf(".")+1))) + " cents \n" ,normalFont));
+                +Integer.parseInt( String.valueOf(DECIMAL_FORMAT.format(total)).substring(String.valueOf(DECIMAL_FORMAT.format(total)).indexOf(".")+1)) + "/100 Only \n" ,normalFont));
         footerDescriptionPhrase.add(new Chunk("Number of items   : " + totalItems +"\n\n\n\n",normalFont));
         footerDescriptionPhrase.add(new Chunk(" ---------------------------\n",normalFont));
         footerDescriptionPhrase.add(new Chunk(" Authorized Signature \n",normalFont));
