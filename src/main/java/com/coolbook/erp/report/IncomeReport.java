@@ -13,11 +13,18 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 @Component
 public class IncomeReport {
+
+    DecimalFormat df = new DecimalFormat("###.###");
+
+    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
     
     @Autowired
     private InvoiceIncomeRepository invoiceIncomeRepository;
@@ -80,7 +87,7 @@ public class IncomeReport {
             PdfPCell invoiceNumberCell=new PdfPCell(new Phrase(new Chunk(invoice.getInvoiceNumber(),normalFont)));
             invoiceNumberCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(invoiceNumberCell);
-            PdfPCell dateCell=new PdfPCell(new Phrase(new Chunk(invoice.getDate().toString(),normalFont)));
+            PdfPCell dateCell=new PdfPCell(new Phrase(new Chunk(dateFormat2.format(invoice.getDate()),normalFont)));
             dateCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(dateCell);
             PdfPCell totalCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(invoice.getTotal()),normalFont)));
@@ -97,19 +104,19 @@ public class IncomeReport {
             PdfPCell costCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(cost),normalFont)));
             costCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(costCell);
-            PdfPCell profitCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(invoice.getTotal()-cost),normalFont)));
+            PdfPCell profitCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(df.format(invoice.getTotal()-cost)),normalFont)));
             profitCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(profitCell);
         }
         Phrase companyPhrase=new Phrase();
         companyPhrase.add(new Chunk("Total Cost : ",totalFont));
-        companyPhrase.add(new Chunk(String.valueOf(totalCost),totalFont));
+        companyPhrase.add(new Chunk(String.valueOf(df.format(totalCost)),totalFont));
         companyPhrase.add(Chunk.NEWLINE);
         companyPhrase.add(new Chunk("Total Sale Price : ",totalFont));
-        companyPhrase.add(new Chunk(String.valueOf(totalSalePrice),totalFont));
+        companyPhrase.add(new Chunk(String.valueOf(df.format(totalSalePrice)),totalFont));
         companyPhrase.add(Chunk.NEWLINE);
         companyPhrase.add(new Chunk("Total Profit : ",totalFont));
-        companyPhrase.add(new Chunk(String.valueOf(totalProfit),totalFont));
+        companyPhrase.add(new Chunk(String.valueOf(df.format(totalProfit)),totalFont));
         companyPhrase.add(Chunk.NEWLINE);
         document.add(table);
         document.add(companyPhrase);

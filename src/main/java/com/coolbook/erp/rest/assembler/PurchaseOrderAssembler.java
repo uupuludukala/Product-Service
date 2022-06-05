@@ -13,9 +13,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class PurchaseOrderAssembler {
@@ -23,7 +21,6 @@ public class PurchaseOrderAssembler {
     @Autowired
     private ProductService productService;
 
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 

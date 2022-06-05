@@ -18,6 +18,8 @@ public class VendorPaymentAssembler {
 
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+
     public VendorPaymentEntity assembleVendorPaymentEntity(VendorPaymentPost vendorPaymentPost) {
         VendorPaymentEntity vendorPaymentEntity=new VendorPaymentEntity();
         vendorPaymentEntity.setAccountNumber(vendorPaymentPost.getAccountNumber());
@@ -39,7 +41,7 @@ public class VendorPaymentAssembler {
         vendorPaymentGet.setAccountNumber(vendorPaymentEntity.getAccountNumber());
         vendorPaymentGet.setBankBranch(vendorPaymentEntity.getBankBranch());
         vendorPaymentGet.setBankName(vendorPaymentEntity.getBankName());
-        vendorPaymentGet.setDate(dateFormat.format(vendorPaymentEntity.getDate()));
+        vendorPaymentGet.setDate(dateFormat2.format(vendorPaymentEntity.getDate()));
         vendorPaymentGet.setVendorId(vendorPaymentEntity.getVendor().getId());
         vendorPaymentGet.setVendorName(vendorPaymentEntity.getVendor().getVendorName());
         return vendorPaymentGet;

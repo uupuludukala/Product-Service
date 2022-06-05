@@ -22,12 +22,12 @@ public class CustomerSearchSpecification implements Specification<CustomerEntity
 	public Predicate toPredicate(Root<CustomerEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		Predicate predicate = cb.conjunction();
 		if (searchvalue != null) {
-            Expression<String> companyCode = root.get("nicNumber");
-            predicate = cb.like(cb.upper(companyCode), "%" + searchvalue.toUpperCase() + "%");
-            Expression<String> companyName = root.get("customerName");
-            predicate = cb.or(predicate, cb.like(cb.upper(companyName), "%" + searchvalue.toUpperCase() + "%"));
-            Expression<String> contactNumber = root.get("mobileNumber");
-            predicate = cb.or(predicate, cb.like(contactNumber, "%" + searchvalue + "%"));
+            Expression<String> nicNumber = root.get("nicNumber");
+            predicate = cb.like(cb.upper(nicNumber), "%" + searchvalue.toUpperCase() + "%");
+            Expression<String> customerName = root.get("customerName");
+            predicate = cb.or(predicate, cb.like(cb.upper(customerName), "%" + searchvalue.toUpperCase() + "%"));
+            Expression<String> mobileNumber = root.get("mobileNumber");
+            predicate = cb.or(predicate, cb.like(mobileNumber, "%" + searchvalue + "%"));
 		}
 		return predicate;
 	}

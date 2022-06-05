@@ -18,6 +18,8 @@ public class PurchaseOrderSpecification implements Specification<PurchaseOrderEn
         if (searchCriteria.getPurchaseOrderNumber() != null) {
             Expression<String> vendorName = root.get("purchaseOrderNumber");
             predicate = cb.and(predicate, cb.like(cb.upper(vendorName), "%" + searchCriteria.getPurchaseOrderNumber().toUpperCase() + "%"));
+            
+            
         }
         return predicate;
     }

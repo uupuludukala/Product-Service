@@ -13,7 +13,7 @@ public abstract class AbstractInvoiceResourceAssembler  extends ResourceAssemble
     
     protected String requestURI;
 
-    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
 
     public AbstractInvoiceResourceAssembler() {
         super(ProductEntity.class, InvoiceGet.class);
