@@ -115,6 +115,7 @@ public class InvoiceReport {
         customerPhrase.add(new Chunk(customer.getAddressLine2(),normalFont));
         customerPhrase.add(Chunk.NEWLINE);
         customerPhrase.add(new Chunk(customer.getAddressLine3(),normalFont));
+        customerPhrase.add(Chunk.NEWLINE);
         customerPhrase.add(new Chunk(customer.getHomePhone(),normalFont));
         customerPhrase.add(Chunk.NEWLINE);
         customerPhrase.add(new Chunk(customer.getMobileNumber(),normalFont));
@@ -126,7 +127,7 @@ public class InvoiceReport {
     }
     
     private void populateInvoiceItems(Document document, Set<InvoiceProductEntity> products) throws DocumentException {
-        float [] pointColumnWidths = {100F, 300F,150F, 150F, 150F,150F};
+        float [] pointColumnWidths = {100F, 500F,100F, 100F, 100F,100F};
         PdfPTable table = new PdfPTable(pointColumnWidths);
         table.setWidthPercentage(100);
         PdfPCell itemNoHeaderCell=new PdfPCell(new Phrase(new Chunk("Item",normalFont)));
@@ -167,7 +168,7 @@ public class InvoiceReport {
             PdfPCell amountCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(DECIMAL_FORMAT.format(product.getAmount())),normalFont)));
             amountCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(amountCell);
-            totalItems+=totalItems+product.getQuantity();
+            totalItems+=product.getQuantity();
         }        
         document.add(table);
     }
