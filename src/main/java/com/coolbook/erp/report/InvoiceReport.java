@@ -1,16 +1,14 @@
 package com.coolbook.erp.report;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.Set;
 
 import com.coolbook.erp.entity.*;
 import com.coolbook.erp.repository.InvoiceRepository;
 import com.coolbook.erp.rest.service.CompanyService;
 import com.coolbook.erp.security.SecurityFacade;
+import com.coolbook.erp.util.NumberToWordConverterUtil;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -34,32 +32,28 @@ public class InvoiceReport {
     Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 8, BaseColor.BLACK);
 
     Font nameFont = FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD);
+
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
+    
+    
+    int totalItems;
     
 	public ByteArrayInputStream generateInvoice(long id) {
         InvoiceEntity invoiceEntity = invoiceRepository.findOne(id);
 		Document document = new Document(PageSize.A4,15,15,15,15);
+        
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
-			PdfWriter.getInstance(document, out);
-		} catch (DocumentException e1) {
-			e1.printStackTrace();
-		}
-		document.open();
-        try {
-//            Path path = Paths.get(ClassLoader.getSystemResource("Logo.png").toURI());
-//            Image img = Image.getInstance(path.toAbsolutePath().toString());
-//            img.setAlignment(Element.ALIGN_RIGHT);
-//            img.setIndentationRight(10.00F);
-//            document.add(img);
-            populateHeader(document,invoiceEntity.getCustomer(),invoiceEntity);
-           
+            PdfWriter writer=PdfWriter.getInstance(document, out);
+            document.open();
+            populateHeader(document,invoiceEntity.getCustomer(),invoiceEntity);           
             populateInvoiceItems(document,invoiceEntity.getProducts());
-
-            populateInvoiceFooter(document,invoiceEntity);
+            populateInvoiceFooter(document,invoiceEntity,writer);
+            document.close();
 		} catch (DocumentException  e) {
 			e.printStackTrace();
 		} 
-        document.close();
+       
 		return new ByteArrayInputStream(out.toByteArray());
 	}
 	
@@ -135,7 +129,7 @@ public class InvoiceReport {
         float [] pointColumnWidths = {100F, 300F,150F, 150F, 150F,150F};
         PdfPTable table = new PdfPTable(pointColumnWidths);
         table.setWidthPercentage(100);
-        PdfPCell itemNoHeaderCell=new PdfPCell(new Phrase(new Chunk("Item No",normalFont)));
+        PdfPCell itemNoHeaderCell=new PdfPCell(new Phrase(new Chunk("Item",normalFont)));
         itemNoHeaderCell.setBorder(Rectangle.BOX);
         table.addCell(itemNoHeaderCell);
         PdfPCell descriptionHeaderCell=new PdfPCell(new Phrase(new Chunk("Description",normalFont)));
@@ -153,6 +147,7 @@ public class InvoiceReport {
         PdfPCell amountHeaderCell=new PdfPCell(new Phrase(new Chunk("Amount(Rs)",normalFont)));
         amountHeaderCell.setBorder(Rectangle.BOX);
         table.addCell(amountHeaderCell);
+        totalItems=0;
         for(InvoiceProductEntity product:products){
             PdfPCell productCodeCell=new PdfPCell(new Phrase(new Chunk(product.getProduct().getProductCode(),normalFont)));
             productCodeCell.setBorder(Rectangle.NO_BORDER);
@@ -163,31 +158,53 @@ public class InvoiceReport {
             PdfPCell quantityCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getQuantity()),normalFont)));
             quantityCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(quantityCell);
-            PdfPCell unitPriceCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getRate()),normalFont)));
+            PdfPCell unitPriceCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(DECIMAL_FORMAT.format(product.getRate())),normalFont)));
             unitPriceCell.setBorder(Rectangle.NO_BORDER);            
             table.addCell(unitPriceCell);
-            PdfPCell discountCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getDiscount()),normalFont)));
+            PdfPCell discountCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(DECIMAL_FORMAT.format(product.getDiscount())),normalFont)));
             discountCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(discountCell);
-            PdfPCell amountCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(product.getAmount()),normalFont)));
+            PdfPCell amountCell=new PdfPCell(new Phrase(new Chunk(String.valueOf(DECIMAL_FORMAT.format(product.getAmount())),normalFont)));
             amountCell.setBorder(Rectangle.NO_BORDER);
             table.addCell(amountCell);
+            totalItems+=totalItems+product.getQuantity();
         }        
         document.add(table);
     }
 
-    private void populateInvoiceFooter(Document document,InvoiceEntity invoice) throws DocumentException {
+    private void populateInvoiceFooter(Document document,InvoiceEntity invoice, PdfWriter writer) throws DocumentException {
         PdfPTable table = new PdfPTable(1);
-        table.setHorizontalAlignment(Element.ALIGN_RIGHT);        
+        table.setHorizontalAlignment(Element.ALIGN_RIGHT);
         Phrase totalPhrase=new Phrase();
-        totalPhrase.add(new Chunk("Total : " +String.valueOf(invoice.getTotal()),nameFont));
+        Phrase footerDescriptionPhrase=new Phrase();
+        double total=invoice.getTotal();
+        totalPhrase.add(new Chunk("Total : " + DECIMAL_FORMAT.format(total),nameFont));
+        footerDescriptionPhrase.add(new Chunk(" \n\n" +
+                "Amount in Words   : " + NumberToWordConverterUtil.numberToWord((int)total) + " and " 
+                +NumberToWordConverterUtil.numberToWord(Integer.parseInt( String.valueOf(total).substring(String.valueOf(total).indexOf(".")+1))) + " cents \n" ,normalFont));
+        footerDescriptionPhrase.add(new Chunk("Number of items   : " + totalItems +"\n\n\n\n",normalFont));
+        footerDescriptionPhrase.add(new Chunk(" ---------------------------\n",normalFont));
+        footerDescriptionPhrase.add(new Chunk(" Authorized Signature \n",normalFont));
+        
         Paragraph totalParagraph=new Paragraph(totalPhrase);
+        Paragraph footerDescriptionParagraph=new Paragraph(footerDescriptionPhrase);
         table.setWidthPercentage(100);
         PdfPCell totalCell=new PdfPCell(totalParagraph);
         totalCell.setBorder(Rectangle.NO_BORDER);
         totalCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        table.addCell(totalCell);        
-        document.add(table);        
+
+        PdfPCell footerDescriptionCell=new PdfPCell(footerDescriptionParagraph);
+        footerDescriptionCell.setBorder(Rectangle.NO_BORDER);
+        footerDescriptionCell.setBorderColorBottom(BaseColor.BLACK);
+        footerDescriptionCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        table.addCell(totalCell);
+        table.addCell(footerDescriptionCell);
+        if(table.getTotalWidth()==0)
+            table.setTotalWidth((document.right()-document.left())*table.getWidthPercentage()/100f);
+        table.writeSelectedRows(0, -1,
+                document.left(document.leftMargin()),
+                table.getTotalHeight() + document.bottom(document.bottomMargin()),
+                writer.getDirectContent() );    
     }
 }
 
