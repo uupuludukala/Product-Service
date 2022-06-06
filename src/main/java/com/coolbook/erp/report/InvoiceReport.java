@@ -40,7 +40,7 @@ public class InvoiceReport {
     
 	public ByteArrayInputStream generateInvoice(long id) {
         InvoiceEntity invoiceEntity = invoiceRepository.findOne(id);
-		Document document = new Document(PageSize.A4,15,15,15,15);
+		Document document = new Document(PageSize.A5,15,15,15,15);
         
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
