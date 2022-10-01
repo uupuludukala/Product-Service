@@ -67,7 +67,7 @@ public class InvoiceAssembler {
 		InvoiceEntity invoiceEntity=new InvoiceEntity();
 		invoiceEntity.setCashAmount(invoicePost.getCashAmount());
 		invoiceEntity.setCustomer(customerService.getCustomerById(invoicePost.getCustomerId()));
-		invoiceEntity.setDate(new Date());
+		invoiceEntity.setDate(invoicePost.getDate());
 		invoiceEntity.setPaymentMethod(invoicePost.getPaymentMethod());
 		invoiceEntity.setTotal(invoicePost.getTotal());
 		invoiceEntity.setTotalDiscount(invoicePost.getTotalDiscount());

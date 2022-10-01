@@ -1,5 +1,6 @@
 package com.coolbook.erp.model;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -19,4 +20,5 @@ public class InvoicePost {
 	private String paymentMethod;
 	private double totalDiscount;
 	private long customerId;
+	private Date date;
 }

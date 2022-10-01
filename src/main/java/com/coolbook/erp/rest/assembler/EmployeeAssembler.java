@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EmployeeAssembler {
-    public EmployeeGet essembleEmployeeGet(EmployeeEntity employeeEntity) {
+    public EmployeeGet assembleEmployeeGet(EmployeeEntity employeeEntity) {
         EmployeeGet employeeGet = new EmployeeGet();
         employeeGet.setEmployee_Id(employeeEntity.getId());
         employeeGet.setNicNumber(employeeEntity.getNicNumber());
@@ -27,7 +27,7 @@ public class EmployeeAssembler {
         return employeeGet;
     }
 
-    public EmployeeEntity essembleEmployeeEntity(EmployeePost employeePost) {
+    public EmployeeEntity assembleEmployeeEntity(EmployeePost employeePost) {
         EmployeeEntity employeeEntity=new EmployeeEntity();
         employeeEntity.setNicNumber(employeePost.getNicNumber());
         employeeEntity.setEmployeeName(employeePost.getEmployeeName());

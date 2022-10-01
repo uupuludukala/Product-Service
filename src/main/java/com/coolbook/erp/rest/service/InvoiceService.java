@@ -73,7 +73,7 @@ public class InvoiceService {
     }
 	
 	public void setInvoiceNumber(InvoiceEntity invoice, long id){
-	    invoice.setInvoiceNumber(generateInvoiceNumber(id));
+	    invoice.setInvoiceNumber(generateInvoiceNumber(id, invoice));
         this.invoiceRepository.save(invoice);
     }
 
@@ -83,14 +83,14 @@ public class InvoiceService {
 	
 	
 	
-	public  String generateInvoiceNumber(long id){
+	public  String generateInvoiceNumber(long id,InvoiceEntity invoice){
 	    StringBuilder invoiceNumber=new StringBuilder("");
         User user= securityFacade.getCurrentUser();
         LocalDateTime date = LocalDateTime.now();
         CompanyEntity company=companyService.getCompanyById(user.getCompanyId());
         invoiceNumber.append(company.getCompanyCode()).append("-");
         invoiceNumber.append(user.getBranchCode());
-        invoiceNumber.append( date.getYear()).append(date.getMonthValue()).append(date.getDayOfMonth());
+        invoiceNumber.append( invoice.getDate());
         invoiceNumber.append(id);
         return invoiceNumber.toString();
     }

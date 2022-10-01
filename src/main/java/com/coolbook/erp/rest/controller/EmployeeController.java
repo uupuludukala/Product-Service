@@ -48,7 +48,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "saveEmployee", method = RequestMethod.POST)
     public ResponseEntity<Void> saveEmployee(@Valid @RequestBody EmployeePost employee) {
-        long employeeId = employeeService.saveEmployee(employeeAssembler.essembleEmployeeEntity(employee));
+        long employeeId = employeeService.saveEmployee(employeeAssembler.assembleEmployeeEntity(employee));
         HttpHeaders header = new HttpHeaders();
         header.setLocation(linkTo(ControllerLinkBuilder.methodOn(EmployeeController.class).getEmployeeById(employeeId)).toUri());
         return new ResponseEntity<>(header, HttpStatus.CREATED);
@@ -56,7 +56,7 @@ public class EmployeeController {
 
     @RequestMapping(value ="saveEmployee/{id}",method=RequestMethod.PUT)
     public ResponseEntity<Void> updateEmployee(@RequestBody EmployeePost employee,@ApiParam(value = "Employee Id", required = true) @PathVariable("id") long id){
-        employeeService.updateEmployee(employeeAssembler.essembleEmployeeEntity(employee), id);
+        employeeService.updateEmployee(employeeAssembler.assembleEmployeeEntity(employee), id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -70,7 +70,7 @@ public class EmployeeController {
     @RequestMapping(value = "getEmployeeById/{id}", method = RequestMethod.GET)
     public ResponseEntity<EmployeeGet> getEmployeeById(@PathVariable("id") long id) {
 
-        return ResponseEntity.ok().body(employeeAssembler.essembleEmployeeGet(this.employeeService.getEmployeeById(id)));
+        return ResponseEntity.ok().body(employeeAssembler.assembleEmployeeGet(this.employeeService.getEmployeeById(id)));
     }
 
     @RequestMapping(value = "getAllEmployee", method = RequestMethod.GET)
