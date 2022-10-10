@@ -2,6 +2,7 @@ package com.coolbook.erp.rest.service;
 
 import java.io.ByteArrayInputStream;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,11 +87,13 @@ public class InvoiceService {
 	public  String generateInvoiceNumber(long id,InvoiceEntity invoice){
 	    StringBuilder invoiceNumber=new StringBuilder("");
         User user= securityFacade.getCurrentUser();
-        LocalDateTime date = LocalDateTime.now();
+        LocalDateTime date = invoice.getDate().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();;
         CompanyEntity company=companyService.getCompanyById(user.getCompanyId());
         invoiceNumber.append(company.getCompanyCode()).append("-");
         invoiceNumber.append(user.getBranchCode());
-        invoiceNumber.append( invoice.getDate());
+        invoiceNumber.append( date.getYear()).append(date.getMonthValue()).append(date.getDayOfMonth());
         invoiceNumber.append(id);
         return invoiceNumber.toString();
     }
