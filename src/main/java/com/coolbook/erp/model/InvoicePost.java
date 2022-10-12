@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -20,5 +22,7 @@ public class InvoicePost {
 	private String paymentMethod;
 	private double totalDiscount;
 	private long customerId;
+	@Valid
+	@NotNull
 	private Date date;
 }
