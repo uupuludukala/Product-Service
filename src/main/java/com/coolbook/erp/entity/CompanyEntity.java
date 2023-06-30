@@ -41,10 +41,7 @@ public class CompanyEntity {
 
     @Column
     private String status;
-	
-	@ManyToMany(mappedBy = "companies", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<ProductEntity> products;
-	
+
 	@Override
 	public String toString(){
 	    return super.toString();

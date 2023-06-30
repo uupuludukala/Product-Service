@@ -29,7 +29,7 @@ public class InvoiceAssembler {
     ProductService productService;
     
     @Autowired
-    BranchService branchService;
+   private BranchService branchService;
 
     @Autowired
     private CustomerService customerService;
@@ -39,7 +39,7 @@ public class InvoiceAssembler {
         invoiceGet.setInvoiceNumber(invoice.getInvoiceNumber());
         invoiceGet.setDate(dateFormat2.format(invoice.getDate()));
         invoiceGet.setCustomer(invoice.getCustomer().getCustomerName());
-        invoiceGet.setBranch(invoice.getBranch().getCompany().getCompanyName());
+        invoiceGet.setBranch( branchService.getBranchById(invoice.getBranchId()).getCompany().getCompanyName());
         invoiceGet.setProducts(assembleInvoiceProducts(invoice.getProducts()));
         invoiceGet.setTotal(invoice.getTotal());
         invoiceGet.setInvoice_Id(invoice.getId());
@@ -71,7 +71,7 @@ public class InvoiceAssembler {
 		invoiceEntity.setPaymentMethod(invoicePost.getPaymentMethod());
 		invoiceEntity.setTotal(invoicePost.getTotal());
 		invoiceEntity.setTotalDiscount(invoicePost.getTotalDiscount());
-		invoiceEntity.setBranch(branchService.getBranchById(securityFacade.getCurrentUser().getBranchId()));
+		invoiceEntity.setBranchId(securityFacade.getCurrentUser().getBranchId());
         invoiceEntity.setProducts(assembleInvoiceProductList( invoicePost.getProductList(),invoiceEntity));
 		return invoiceEntity;
 	}

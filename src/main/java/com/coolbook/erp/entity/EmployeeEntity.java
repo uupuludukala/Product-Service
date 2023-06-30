@@ -1,8 +1,11 @@
 package com.coolbook.erp.entity;
 
+import com.coolbook.erp.common.enums.GenderEnum;
+import com.coolbook.erp.common.enums.MaritalStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -46,7 +49,7 @@ public class EmployeeEntity {
 
     @Column
     private String imageUrl;
-    
+
     @Column
     private String status;
 
@@ -58,5 +61,15 @@ public class EmployeeEntity {
 
     @Column
     private String accountNumber;
-    
+
+    @Column
+    private MaritalStatusEnum maritalStatus;
+
+    @Column
+    private GenderEnum gender;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_job_id", referencedColumnName = "id")
+    private EmployeeJobEntity employeeJob;
+
 }

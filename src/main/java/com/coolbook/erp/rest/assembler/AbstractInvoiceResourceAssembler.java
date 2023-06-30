@@ -2,6 +2,8 @@ package com.coolbook.erp.rest.assembler;
 
 import com.coolbook.erp.entity.*;
 import com.coolbook.erp.model.*;
+import com.coolbook.erp.rest.service.BranchService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import java.text.DateFormat;
@@ -19,6 +21,9 @@ public abstract class AbstractInvoiceResourceAssembler  extends ResourceAssemble
         super(ProductEntity.class, InvoiceGet.class);
     }
 
+    @Autowired
+    private BranchService branchService;
+
     @Override
     public InvoiceGet toResource(InvoiceEntity  productEntity) {
         return createInvoiceJson(productEntity);
@@ -28,7 +33,7 @@ public abstract class AbstractInvoiceResourceAssembler  extends ResourceAssemble
         InvoiceGet invoiceGet = new InvoiceGet();
         invoiceGet.setInvoiceNumber(invoiceEntity.getInvoiceNumber());
         invoiceGet.setDate(invoiceEntity.getDate()!=null ?dateFormat2.format(invoiceEntity.getDate()):null);
-        invoiceGet.setBranch(invoiceEntity.getBranch().getCompany().getCompanyName());
+        invoiceGet.setBranch(branchService.getBranchById(invoiceEntity.getBranchId()).getCompany().getCompanyName());
         invoiceGet.setCustomer(invoiceEntity.getCustomer().getCustomerName());
         invoiceGet.setProducts(createProductsJson(invoiceEntity.getProducts()));
         invoiceGet.setInvoice_Id(invoiceEntity.getId());

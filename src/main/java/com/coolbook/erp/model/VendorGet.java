@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.hateoas.ResourceSupport;
 
-import java.util.List;
 import java.util.Set;
 
 @Data

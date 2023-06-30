@@ -5,8 +5,6 @@ import org.springframework.hateoas.ResourceSupport;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 public class CustomerGet extends ResourceSupport {
 	@JsonProperty("id")

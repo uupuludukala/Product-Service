@@ -1,5 +1,6 @@
 package com.coolbook.erp.rest.service;
 
+import com.coolbook.erp.dataSourceRouting.DataSourceContextHolder;
 import com.coolbook.erp.repository.specs.UserSearchSpecification;
 import com.coolbook.erp.rest.searchCriteria.UserCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,19 @@ import com.coolbook.erp.repository.specs.UserSpecification;
 @Service
 public class UserService {
 UserRepository userRepository;
-	
+
+
+	private DataSourceContextHolder dataSourceContextHolder;
 	@Autowired
-	UserService(UserRepository userRepository){
+	UserService(UserRepository userRepository,DataSourceContextHolder dataSourceContextHolder){
 		this.userRepository=userRepository;
+		this.dataSourceContextHolder=dataSourceContextHolder;
 	}
 	public long saveUser(UserEntity user) {
 		return this.userRepository.save(user).getId();
 	}
 	public UserEntity getUserById(long id) {
+		dataSourceContextHolder.setDataSourceContext("coop");
 		return this.userRepository.getOne(id);
 	}
 	public Page<UserEntity> getAllUser(Pageable page, UserCriteria criteria){

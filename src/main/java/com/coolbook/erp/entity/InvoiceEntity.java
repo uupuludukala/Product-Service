@@ -1,12 +1,10 @@
 package com.coolbook.erp.entity;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +22,8 @@ public class InvoiceEntity {
     @Column
 	private String invoiceNumber;
     
-	@OneToOne
-	private UserEntity user;
+	@Column
+	private long userId;
 	
 	@Column
 	private Date date;
@@ -50,8 +48,8 @@ public class InvoiceEntity {
 	@OneToOne
 	private CustomerEntity customer;
 
-    @OneToOne
-    private BranchEntity branch;
+    @Column
+    private long branchId;
 
 
 }

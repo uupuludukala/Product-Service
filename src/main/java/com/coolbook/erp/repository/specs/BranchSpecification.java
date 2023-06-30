@@ -15,8 +15,12 @@ public class BranchSpecification implements Specification<BranchEntity> {
 
 	private BranchCriteria searchCriteria;
 
-	public BranchSpecification(BranchCriteria searchCriteria) {
+	private String companyCode;
+
+
+	public BranchSpecification(BranchCriteria searchCriteria,String companyCode) {
 		this.searchCriteria = searchCriteria;
+		this.companyCode =companyCode;
 	}
 
 	@Override
@@ -26,14 +30,17 @@ public class BranchSpecification implements Specification<BranchEntity> {
 			Expression<String> exp = root.get("id");
 			predicate = cb.equal(exp, searchCriteria.getId());
 		}
-
+		if(!"COOP".equals(companyCode)) {
+			Expression<String> exp = root.get("company.companyCode");
+			predicate = cb.and(predicate, cb.equal(cb.upper(exp), companyCode));
+		}
 		if (searchCriteria.getBranchCode() != null) {
 			Expression<String> exp = root.get("branchCode");
 			predicate = cb.and(predicate, cb.like(cb.upper(exp), "%" + searchCriteria.getBranchCode().toUpperCase() + "%"));
 		}
 		
 		if (searchCriteria.getBranchCode() != null) {
-			Expression<String> exp = root.get("branchNamer");
+			Expression<String> exp = root.get("branchName");
 			predicate = cb.and(predicate, cb.like(cb.upper(exp), "%" + searchCriteria.getBranchName().toUpperCase() + "%"));
 		}
 

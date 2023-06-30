@@ -7,6 +7,7 @@ import java.util.Set;
 import com.coolbook.erp.entity.*;
 import com.coolbook.erp.repository.InvoiceRepository;
 import com.coolbook.erp.rest.service.CompanyService;
+import com.coolbook.erp.rest.service.UserService;
 import com.coolbook.erp.security.SecurityFacade;
 import com.coolbook.erp.util.NumberToWordConverterUtil;
 import com.itextpdf.text.*;
@@ -22,7 +23,8 @@ public class InvoiceReport {
     
     @Autowired
     CompanyService companyService;
-    
+    @Autowired
+    private UserService userService;
     @Autowired
     private InvoiceRepository invoiceRepository;
 
@@ -86,7 +88,7 @@ public class InvoiceReport {
         invoicePhrase.add(Chunk.NEWLINE);
         invoicePhrase.add(new Chunk("Date : "+invoice.getDate(),normalFont));
         invoicePhrase.add(Chunk.NEWLINE);
-        invoicePhrase.add(new Chunk("Operator : "+invoice.getUser().getUserName(),normalFont));
+        invoicePhrase.add(new Chunk("Operator : "+userService.getUserById(invoice.getUserId()).getUserName(),normalFont));
         invoicePhrase.add(Chunk.NEWLINE);
         Paragraph invoiceParagraph=new Paragraph(invoicePhrase);
         invoiceParagraph.setAlignment(Element.ALIGN_RIGHT);

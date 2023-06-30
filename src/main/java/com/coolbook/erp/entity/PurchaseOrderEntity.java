@@ -2,11 +2,9 @@ package com.coolbook.erp.entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

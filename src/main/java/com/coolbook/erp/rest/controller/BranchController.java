@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiParam;
 
 
 @RestController
-//@RequestMapping(value="branchService")
+@RequestMapping("co-opData")
 public class BranchController {
 	private static final String REFERRER_HEADER_KEY = "referrer";
 	

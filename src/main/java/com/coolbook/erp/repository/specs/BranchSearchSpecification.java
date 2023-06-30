@@ -16,10 +16,12 @@ public class BranchSearchSpecification implements Specification<BranchEntity> {
 
 	private String searchValue;
 	private long companyId;
+	private String companyCode;
 
-	public BranchSearchSpecification(String searchValue, long companyId) {
+	public BranchSearchSpecification(String searchValue, long companyId,String companyCode) {
 		this.searchValue = searchValue;
 		this.companyId = companyId;
+		this.companyCode=companyCode;
 	}
 
 	@Override
@@ -60,10 +62,12 @@ public class BranchSearchSpecification implements Specification<BranchEntity> {
         Subquery<CompanyEntity> subQuery = query.subquery(CompanyEntity.class);
         Root<CompanyEntity> rootChild = subQuery.from(CompanyEntity.class);
         subQuery.select(rootChild);
-        subQuery.where(cb.or(cb.or(cb.like(cb.upper(rootChild.get("companyCode")),"%" + searchValue.toUpperCase() + "%"),
-                cb.like(cb.upper(rootChild.get("companyName")),"%" + searchValue.toUpperCase() + "%")),
-                cb.like(cb.upper(rootChild.get("contactNumber")),"%" + searchValue.toUpperCase() + "%"))
+        subQuery.where(cb.and(cb.or(
+                cb.like(cb.upper(rootChild.get("companyName")),"%" + searchValue.toUpperCase() + "%"),
+                cb.like(cb.upper(rootChild.get("contactNumber")),"%" + searchValue.toUpperCase() + "%")),
+				!"COOP".equals(companyCode) ?cb.equal(cb.upper(rootChild.get("companyCode")),companyCode)
+						:cb.like(cb.upper(rootChild.get("companyCode")),"%" + searchValue.toUpperCase() + "%"))
                 );
-        return cb.or(predicate, company.in(subQuery));
+        return cb.and(predicate, company.in(subQuery));
     }
 }

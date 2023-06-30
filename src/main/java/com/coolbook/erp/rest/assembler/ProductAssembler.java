@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import com.coolbook.erp.model.CompanyGet;
 import com.coolbook.erp.model.ProductGet;
 import com.coolbook.erp.model.ProductPost;
-import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.stereotype.Component;
 
 import com.coolbook.erp.entity.CompanyEntity;
@@ -58,14 +58,6 @@ public class ProductAssembler {
         productGet.setStatus(StatusEnum.getByCode(productEntity.getStatus()));
         productGet.setWarrantyMonths(productEntity.getWarrantyMonths());
         productGet.setWarrantyYears(productEntity.getWarrantyYears());
-        List<CompanyGet> companies = new ArrayList<CompanyGet>();
-        for (CompanyEntity company : productEntity.getCompanies()) {
-            CompanyGet companyGet = new CompanyGet();
-            companyGet.setCompany_id(company.getId());
-            companyGet.setCompanyName(company.getCompanyName());
-            companies.add(companyGet);
-        }
-        productGet.setCompanies(companies);
         return productGet;
     }
 
@@ -97,16 +89,6 @@ public class ProductAssembler {
         if (productPost.getStatus() != null)
             productEntity.setStatus(productPost.getStatus().getCode());
         Set<CompanyEntity> companies = new HashSet<CompanyEntity>();
-        companies.add(companyService.getCompanyById(securityFacade.getCurrentUser().getCompanyId()));
-        if (productPost.getCompanies() != null) {
-            for (Long companyId : productPost.getCompanies()) {
-                if(companyId!=null)
-                companies.add(companyService.getCompanyById(companyId));
-            }
-        } else {
-            companies.add(companyService.getCompanyById(securityFacade.getCurrentUser().getCompanyId()));
-        }
-        productEntity.setCompanies(companies);
         return productEntity;
     }
 }

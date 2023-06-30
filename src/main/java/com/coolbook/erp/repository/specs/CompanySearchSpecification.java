@@ -12,22 +12,31 @@ import com.coolbook.erp.entity.CompanyEntity;
 
 public class CompanySearchSpecification  implements Specification<CompanyEntity> {
 
-	private String searchvalue;
+	private String searchValue;
 
-	public CompanySearchSpecification(String searchvalue) {
-		this.searchvalue = searchvalue;
+	private String companyCode;
+
+	public CompanySearchSpecification(String searchValue,String companyCode) {
+		this.searchValue = searchValue;
+		this.companyCode=companyCode;
 	}
 
 	@Override
 	public Predicate toPredicate(Root<CompanyEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		Predicate predicate =null;
-		if (searchvalue != null) {
-			Expression<String> companyCode = root.get("companyCode");
-			predicate = cb.like(cb.upper(companyCode), "%" + searchvalue.toUpperCase() + "%");
+
+		if (searchValue != null) {
+			Expression<String> companyCodeExpression = root.get("companyCode");
+
 			Expression<String> companyName = root.get("companyName");
-			predicate = cb.or(predicate, cb.like(cb.upper(companyName), "%" + searchvalue.toUpperCase() + "%"));
+			predicate =  cb.like(cb.upper(companyName), "%" + searchValue.toUpperCase() + "%");
 			Expression<String> contactNumber = root.get("contactNumber");
-			predicate = cb.or(predicate, cb.like(contactNumber, "%" + searchvalue + "%"));
+			predicate = cb.or(predicate, cb.like(contactNumber, "%" + searchValue + "%"));
+			if ("COOP".equals(companyCode)){
+				predicate = cb.and(predicate,cb.like(cb.upper(companyCodeExpression), "%" + searchValue.toUpperCase() + "%"));
+			}else{
+				predicate = cb.and(predicate,cb.equal(cb.upper(companyCodeExpression), companyCode));
+			}
 		}
 		return predicate;
 	}

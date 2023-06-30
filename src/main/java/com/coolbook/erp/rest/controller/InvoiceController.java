@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import com.coolbook.erp.entity.InvoiceEntity;
 import com.coolbook.erp.model.InvoiceGet;
 import com.coolbook.erp.model.InvoicePost;
-import com.coolbook.erp.model.PurchaseOrderGet;
 import com.coolbook.erp.rest.assembler.InvoiceGetResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;

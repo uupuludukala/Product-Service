@@ -1,8 +1,8 @@
 package com.coolbook.erp.rest.assembler;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import com.coolbook.erp.model.UserGet;
 import com.coolbook.erp.model.UserPost;
-import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,9 @@
 package com.coolbook.erp.rest.controller;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import com.coolbook.erp.rest.service.BranchService;
 import com.coolbook.erp.rest.service.CompanyService;
 import com.coolbook.erp.rest.service.UserService;
-import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

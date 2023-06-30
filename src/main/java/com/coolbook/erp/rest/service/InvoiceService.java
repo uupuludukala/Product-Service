@@ -57,7 +57,7 @@ public class InvoiceService {
 	public  long saveInvoice(InvoiceEntity invoice) throws Exception {
 	    List<String> validationErrorList=validateInvoice(invoice);
 	    if(validationErrorList.isEmpty()) {
-            invoice.setUser(userService.getUserById(securityFacade.getCurrentUser().getUserId()));
+            invoice.setUserId(securityFacade.getCurrentUser().getUserId());
             long id = this.invoiceRepository.save(invoice).getId();
             invoice.setId(id);
             setInvoiceNumber(invoice, id);
@@ -89,9 +89,8 @@ public class InvoiceService {
         User user= securityFacade.getCurrentUser();
         LocalDateTime date = invoice.getDate().toInstant()
                 .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();;
-        CompanyEntity company=companyService.getCompanyById(user.getCompanyId());
-        invoiceNumber.append(company.getCompanyCode()).append("-");
+                .toLocalDateTime();
+        invoiceNumber.append(user.getCompanyCode()).append("-");
         invoiceNumber.append(user.getBranchCode());
         invoiceNumber.append( date.getYear()).append(date.getMonthValue()).append(date.getDayOfMonth());
         invoiceNumber.append(id);

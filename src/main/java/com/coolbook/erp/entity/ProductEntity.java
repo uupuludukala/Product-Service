@@ -106,14 +106,6 @@ public class ProductEntity {
     @Column
     private String status;
 	
-	@ManyToMany
-    @JoinTable(
-            name = "product_company",
-            joinColumns = {@JoinColumn(name = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "company_id")}
-    )
-	private Set<CompanyEntity> companies;
-	
 	@Column
 	private int warrantyMonths;
 

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;

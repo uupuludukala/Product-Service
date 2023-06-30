@@ -5,9 +5,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.Tuple;
 import javax.persistence.criteria.*;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PurchaseOrderSearchSpecification extends SearchSpecification implements Specification<PurchaseOrderEntity>  {

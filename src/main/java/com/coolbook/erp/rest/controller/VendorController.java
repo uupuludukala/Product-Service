@@ -4,9 +4,7 @@ import com.coolbook.erp.entity.VendorEntity;
 import com.coolbook.erp.model.*;
 import com.coolbook.erp.rest.assembler.VendorAssembler;
 import com.coolbook.erp.rest.assembler.VendorGetResourceAssembler;
-import com.coolbook.erp.rest.assembler.VendorPaymentAssembler;
 import com.coolbook.erp.rest.searchCriteria.VendorCriteria;
-import com.coolbook.erp.rest.service.VendorPaymentService;
 import com.coolbook.erp.rest.service.VendorService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import java.util.List;
 import java.util.Set;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;

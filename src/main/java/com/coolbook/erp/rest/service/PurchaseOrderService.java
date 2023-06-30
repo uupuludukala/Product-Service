@@ -4,7 +4,6 @@ import com.coolbook.erp.entity.ProductEntity;
 import com.coolbook.erp.entity.ProductInventoryDetailsEntity;
 import com.coolbook.erp.entity.PurchaseOrderEntity;
 import com.coolbook.erp.entity.PurchaseOrderProductEntity;
-import com.coolbook.erp.repository.PurchaseOrderProductRepository;
 import com.coolbook.erp.repository.PurchaseOrderRepository;
 import com.coolbook.erp.repository.specs.PurchaseOrderSearchSpecification;
 import com.coolbook.erp.repository.specs.PurchaseOrderSpecification;

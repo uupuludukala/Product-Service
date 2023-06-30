@@ -1,6 +1,5 @@
 package com.coolbook.erp.rest.service;
 
-import com.coolbook.erp.entity.VendorAccountEntity;
 import com.coolbook.erp.entity.VendorEntity;
 import com.coolbook.erp.repository.VendorAccountRepository;
 import com.coolbook.erp.repository.VendorRepository;

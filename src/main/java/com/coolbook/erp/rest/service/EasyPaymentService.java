@@ -1,7 +1,6 @@
 package com.coolbook.erp.rest.service;
 
 import com.coolbook.erp.entity.EasyPaymentEntity;
-import com.coolbook.erp.entity.InvoiceEntity;
 import com.coolbook.erp.repository.EasyPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

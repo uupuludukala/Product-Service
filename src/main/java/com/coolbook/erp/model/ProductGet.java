@@ -39,8 +39,7 @@ public class ProductGet extends ResourceSupport {
 	private String descReceipt;
 	private double weight;
 	private double volume;
-	private long responsible;	
-	private List<CompanyGet> companies;
+	private long responsible;
     private StatusEnum status;
     private int warrantyMonths;
     private int warrantyYears;

@@ -3,8 +3,6 @@ package com.coolbook.erp.model;
 import com.coolbook.erp.common.enums.VendorTypeEnum;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Data

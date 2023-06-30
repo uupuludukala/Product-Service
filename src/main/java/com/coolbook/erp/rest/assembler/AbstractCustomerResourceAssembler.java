@@ -1,7 +1,7 @@
 package com.coolbook.erp.rest.assembler;
 
-import com.coolbook.erp.model.CustomerGet;
 import com.coolbook.erp.common.enums.StatusEnum;
+import com.coolbook.erp.model.CustomerGet;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CustomerEntity;

@@ -60,7 +60,7 @@ public class GlobalExceptionHandler extends  ResponseEntityExceptionHandler {
 	public ApiError handleConstraintViolationexception(ConstraintViolationexception e) {
 		ApiError apiError=new ApiError();
         for(org.springframework.validation.FieldError fieldError: e.getFielderrors()){
-            apiError.addFieldError(fieldError.getCode(),fieldError.getField(),fieldError.getDefaultMessage(),fieldError.getRejectedValue().toString());
+            apiError.addFieldError(fieldError.getCode(),fieldError.getField(),fieldError.getDefaultMessage(),fieldError.getRejectedValue()!=null ?fieldError.getRejectedValue().toString():"");
         }
 		return apiError;
 	}

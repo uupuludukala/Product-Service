@@ -1,6 +1,5 @@
 package com.coolbook.erp.model;
 
-import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -22,7 +21,7 @@ public class CustomerPost {
 	@NotNull
 	private double creditLimit;
 	private String imageUrl;
-	private StatusEnum status;    
+	private StatusEnum status;
     private String occupation;
     private String company;
 }

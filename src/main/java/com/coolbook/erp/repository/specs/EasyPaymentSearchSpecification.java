@@ -1,7 +1,6 @@
 package com.coolbook.erp.repository.specs;
 
 import com.coolbook.erp.entity.EasyPaymentEntity;
-import com.coolbook.erp.entity.EmployeeEntity;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;

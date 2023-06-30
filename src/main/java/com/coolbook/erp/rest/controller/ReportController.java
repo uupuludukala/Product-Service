@@ -1,6 +1,5 @@
 package com.coolbook.erp.rest.controller;
 
-import com.coolbook.erp.model.ProductPost;
 import com.coolbook.erp.rest.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -13,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @RestController
 public class ReportController {

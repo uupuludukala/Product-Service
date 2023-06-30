@@ -2,7 +2,6 @@ package com.coolbook.erp.repository;
 
 import com.coolbook.erp.entity.InvoiceEntity;
 import com.coolbook.erp.entity.InvoiceIncomeEntity;
-import com.coolbook.erp.entity.InvoiceInventoryDetailsEntity;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

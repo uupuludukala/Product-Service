@@ -1,15 +1,10 @@
 package com.coolbook.erp.rest.service;
 
-import com.coolbook.erp.entity.VendorEntity;
 import com.coolbook.erp.entity.VendorPaymentEntity;
 import com.coolbook.erp.repository.VendorAccountRepository;
 import com.coolbook.erp.repository.VendorPaymentRepository;
-import com.coolbook.erp.repository.VendorRepository;
 import com.coolbook.erp.repository.specs.VendorPaymentSearchSpecification;
 import com.coolbook.erp.repository.specs.VendorPaymentSpecification;
-import com.coolbook.erp.repository.specs.VendorSearchSpecification;
-import com.coolbook.erp.repository.specs.VendorSpecification;
-import com.coolbook.erp.rest.searchCriteria.VendorCriteria;
 import com.coolbook.erp.rest.searchCriteria.VendorPaymentCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

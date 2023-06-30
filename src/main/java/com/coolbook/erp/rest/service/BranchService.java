@@ -1,5 +1,7 @@
 package com.coolbook.erp.rest.service;
 
+import com.coolbook.erp.dataSourceRouting.DataSourceContextHolder;
+import com.coolbook.erp.security.SecurityFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,16 +15,20 @@ import com.coolbook.erp.rest.searchCriteria.BranchCriteria;
 
 @Service
 public class BranchService {
-BranchRepository branchRepository;
-	
+	BranchRepository branchRepository;
+
+
+	private DataSourceContextHolder dataSourceContextHolder;
 	@Autowired
-	BranchService(BranchRepository branchRepository){
+	BranchService(BranchRepository branchRepository,DataSourceContextHolder dataSourceContextHolder){
 		this.branchRepository=branchRepository;
+		this.dataSourceContextHolder=dataSourceContextHolder;
 	}
 	public long saveBranch(BranchEntity branch) {
 		return this.branchRepository.save(branch).getId();
 	}
-	
+	@Autowired
+	private SecurityFacade securityFacade;
 	public void updateBranch(BranchEntity branch, long id) {
 		branch.setId(id);
 		this.branchRepository.save(branch);
@@ -34,22 +40,23 @@ BranchRepository branchRepository;
 
 	}
 	public BranchEntity getBranchById(long id) {
+		dataSourceContextHolder.setDataSourceContext("coop");
 		return this.branchRepository.getOne(id);
 		
 	}
 	public Page<BranchEntity> getAllBranch(Pageable page,BranchCriteria searchCriteria){
-		BranchSpecification specification=new BranchSpecification(searchCriteria);
+		BranchSpecification specification=new BranchSpecification(searchCriteria,securityFacade.getCurrentUser().getCompanyCode());
 		return this.branchRepository.findAll(specification,page);
 	}
 	
 	
 	public Page<BranchEntity> searchBranchByCompany(Pageable page, String searchValue,long companyId) {
-		BranchSearchSpecification specification = new BranchSearchSpecification(searchValue,companyId);
+		BranchSearchSpecification specification = new BranchSearchSpecification(searchValue,companyId,securityFacade.getCurrentUser().getCompanyCode());
 		return this.branchRepository.findAll(specification, page);
 	}
 	
 	public Page<BranchEntity> searchBranch(Pageable page, String searchValue) {
-		BranchSearchSpecification specification = new BranchSearchSpecification(searchValue,0);
+		BranchSearchSpecification specification = new BranchSearchSpecification(searchValue,0,securityFacade.getCurrentUser().getCompanyCode());
 		return this.branchRepository.findAll(specification, page);
 	}
 	

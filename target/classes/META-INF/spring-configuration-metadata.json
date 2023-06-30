@@ -6,6 +6,11 @@
       "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
     },
     {
+      "name": "datasource.customerDataSources",
+      "type": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig",
+      "sourceType": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig"
+    },
+    {
       "name": "file",
       "type": "com.coolbook.erp.config.FileStorageProperties",
       "sourceType": "com.coolbook.erp.config.FileStorageProperties"
@@ -90,6 +95,36 @@
       "name": "cors.path",
       "type": "java.lang.String",
       "sourceType": "com.coolbook.erp.config.security.CORSConfiguration"
+    },
+    {
+      "name": "datasource.customerDataSources.password",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig"
+    },
+    {
+      "name": "datasource.customerDataSources.password",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig"
+    },
+    {
+      "name": "datasource.customerDataSources.url",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig"
+    },
+    {
+      "name": "datasource.customerDataSources.url",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig"
+    },
+    {
+      "name": "datasource.customerDataSources.username",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig"
+    },
+    {
+      "name": "datasource.customerDataSources.username",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.coolbook.erp.dataSourceRouting.CustomerDataSourceConfig"
     },
     {
       "name": "file.upload-dir",

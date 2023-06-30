@@ -3,9 +3,9 @@ package com.coolbook.erp.rest.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coolbook.erp.common.enums.StatusEnum;
 import com.coolbook.erp.model.CompanyGet;
 import com.coolbook.erp.model.ProductGet;
-import com.coolbook.erp.common.enums.StatusEnum;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.coolbook.erp.entity.CompanyEntity;
@@ -49,14 +49,6 @@ public abstract class AbstractProductResourceAssembler extends ResourceAssembler
 		productGet.setStatus(StatusEnum.getByCode(productEntity.getStatus()));
         productGet.setWarrantyMonths(productEntity.getWarrantyMonths());
         productGet.setWarrantyYears(productEntity.getWarrantyYears());
-		List<CompanyGet> companies =new ArrayList<CompanyGet>();
-		for(CompanyEntity company:productEntity.getCompanies()) {
-			CompanyGet companyGet=new CompanyGet();
-			companyGet.setCompany_id(company.getId());
-			companyGet.setCompanyName(company.getCompanyName());
-			companies.add(companyGet);
-		}
-		productGet.setCompanies(companies);
 		return productGet;
 	}
 

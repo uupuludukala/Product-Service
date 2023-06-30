@@ -1,8 +1,6 @@
 package com.coolbook.erp.rest.controller;
 
-import com.coolbook.erp.entity.ProductInventoryDetailsEntity;
 import com.coolbook.erp.entity.PurchaseOrderEntity;
-import com.coolbook.erp.model.ProductGet;
 import com.coolbook.erp.model.ProductInventoryDetailsGet;
 import com.coolbook.erp.model.PurchaseOrderGet;
 import com.coolbook.erp.model.PurchaseOrderPost;
@@ -10,7 +8,6 @@ import com.coolbook.erp.rest.assembler.ProductInventoryDetailsAssembler;
 import com.coolbook.erp.rest.assembler.PurchaseOrderAssembler;
 import com.coolbook.erp.rest.assembler.PurchaseOrderGetResourceAssembler;
 import com.coolbook.erp.rest.searchCriteria.PurchaseOrderCriteria;
-import com.coolbook.erp.rest.service.ProductInventoryDetailsService;
 import com.coolbook.erp.rest.service.PurchaseOrderService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;

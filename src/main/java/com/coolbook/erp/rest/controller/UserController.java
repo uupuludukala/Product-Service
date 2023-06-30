@@ -33,6 +33,7 @@ import com.coolbook.erp.rest.service.UserService;
 import io.swagger.annotations.ApiParam;
 
 @RestController
+@RequestMapping("co-opData")
 public class UserController {
 	private static final String REFERRER_HEADER_KEY = "referrer";
 	UserService userService;
