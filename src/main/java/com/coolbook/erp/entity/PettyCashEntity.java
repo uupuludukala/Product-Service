@@ -9,7 +9,6 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "petty_cash")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PettyCashEntity {
 
     @Id

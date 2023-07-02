@@ -22,7 +22,7 @@ public class PettyCashSearchSpecification extends SearchSpecification implements
     public Predicate toPredicate(Root<PettyCashEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
 
-        Predicate predicate =null;
+        Predicate predicate = cb.conjunction();
         if (searchValue != null) {
             Expression<String> description = root.get("description");
             predicate = cb.or(predicate,cb.like(cb.upper(description), "%" + searchValue.toUpperCase() + "%"));
