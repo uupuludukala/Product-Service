@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmployeeAttendanceService {
+public class EmployeeAttendanceService extends BaseService{
     EmployeeAttendanceRepository employeeAttendanceRepository;
 
     @Autowired
@@ -20,11 +20,13 @@ public class EmployeeAttendanceService {
     }
 
     public long saveEmployeeAttendance(EmployeeAttendanceEntity employeeAttendance) {
+        setMetaData(employeeAttendance,null);
         return this.employeeAttendanceRepository.save(employeeAttendance).getId();
     }
 
     public void updateEmployeeAttendance(EmployeeAttendanceEntity employeeAttendance, long id) {
         employeeAttendance.setId(id);
+        setMetaData(employeeAttendance,this.employeeAttendanceRepository.getOne(id));
         this.employeeAttendanceRepository.save(employeeAttendance);
     }
 

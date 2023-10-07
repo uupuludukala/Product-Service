@@ -2,8 +2,6 @@ package com.coolbook.erp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "workOrder")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class WorkOrderEntity {
+public class WorkOrderEntity extends BaseEntity{
 
     @Id
     @Column

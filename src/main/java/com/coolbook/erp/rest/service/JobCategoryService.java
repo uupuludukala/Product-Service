@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JobCategoryService {
+public class JobCategoryService extends BaseService{
     JobCategoryRepository jobCategoryRepository;
 
     @Autowired
@@ -19,11 +19,13 @@ public class JobCategoryService {
         this.jobCategoryRepository=jobCategoryRepository;
     }
     public long saveJobCategory(JobCategoryEntity jobCategory) {
+        setMetaData(jobCategory,null);
         return this.jobCategoryRepository.save(jobCategory).getId();
     }
 
     public void updateJobCategory(JobCategoryEntity jobCategory, long id) {
         jobCategory.setId(id);
+        setMetaData(jobCategory,this.jobCategoryRepository.getOne(id));
         this.jobCategoryRepository.save(jobCategory);
     }
 

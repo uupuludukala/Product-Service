@@ -31,6 +31,7 @@ public class BranchAssembler {
 		 branchEntity.setAddressLine3(branchPost.getAddressLine3());
 		 branchEntity.setCompany(companyRepository.getOne(branchPost.getCompanyId()));
 		 branchEntity.setContactNumber(branchPost.getContactNumber());
+
 		 if(branchPost.getStatus()!=null)
 		    branchEntity.setStatus(branchPost.getStatus().getCode());
 		 return branchEntity;

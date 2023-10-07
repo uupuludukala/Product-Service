@@ -1,30 +1,15 @@
 package com.coolbook.erp.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "product")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class ProductEntity {
+public class ProductEntity extends BaseEntity{
 	public ProductEntity(long id) {
 		this.id = id;
 	}

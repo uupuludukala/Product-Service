@@ -12,7 +12,7 @@ import com.coolbook.erp.repository.ProductCategoryRepository;
 import com.coolbook.erp.repository.specs.ProductCategorySpecification;
 
 @Service
-public class ProductCategoryService {
+public class ProductCategoryService extends BaseService{
 	ProductCategoryRepository productCategoryRepository;
 
 	@Autowired
@@ -21,11 +21,13 @@ public class ProductCategoryService {
 	}
 
 	public long saveProductCategory(ProductCategoryEntity productCategory) {
+		setMetaData(productCategory,null);
 		return this.productCategoryRepository.save(productCategory).getId();
 	}
 
 	public void updateProductCategory(ProductCategoryEntity productcategory,long id) {
 		productcategory.setId(id);
+		setMetaData(productcategory,this.productCategoryRepository.getOne(id));
 		this.productCategoryRepository.save(productcategory);
 	}
 	

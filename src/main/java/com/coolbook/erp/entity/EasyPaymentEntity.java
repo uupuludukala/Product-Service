@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "easy_payment")
-public class EasyPaymentEntity {
+public class EasyPaymentEntity extends BaseEntity{
 
     @Id
     @Column

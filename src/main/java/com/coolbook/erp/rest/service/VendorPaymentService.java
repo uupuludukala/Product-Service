@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VendorPaymentService {
+public class VendorPaymentService extends BaseService{
     
     @Autowired
     private VendorPaymentRepository vendorPaymentRepository;
@@ -24,12 +24,14 @@ public class VendorPaymentService {
 
 
     public long saveVendorPayment(VendorPaymentEntity vendorPayment){
+        setMetaData(vendorPayment,null);
         long id=this.vendorPaymentRepository.save(vendorPayment).getId();
         return id;
     }
 
     public void updateVendor(VendorPaymentEntity vendorPayment, long id) {
         vendorPayment.setId(id);
+        setMetaData(vendorPayment,this.vendorPaymentRepository.getOne(id));
         this.vendorPaymentRepository.save(vendorPayment);
     }
 

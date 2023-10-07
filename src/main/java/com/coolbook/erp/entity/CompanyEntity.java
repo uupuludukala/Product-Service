@@ -1,18 +1,15 @@
 package com.coolbook.erp.entity;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "company")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class CompanyEntity {
+public class CompanyEntity extends BaseEntity{
 	
 	
 	@Id

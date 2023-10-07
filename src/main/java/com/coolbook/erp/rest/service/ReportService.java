@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.util.Date;
 
 @Service
-public class ReportService {
+public class ReportService extends BaseService{
 
     @Autowired
     private StockReport stockReport;

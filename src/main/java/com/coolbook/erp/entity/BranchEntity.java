@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "branch", uniqueConstraints = @UniqueConstraint(columnNames = {"company_id", "branchName", "branchCode"}))
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class BranchEntity {
+public class BranchEntity  extends BaseEntity{
 
     @Id
     @Column

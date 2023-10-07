@@ -1,8 +1,10 @@
 package com.coolbook.erp.rest.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.coolbook.erp.entity.CustomerEntity;
+import com.coolbook.erp.exception.ConstraintViolationexception;
+import com.coolbook.erp.repository.CustomerRepository;
+import com.coolbook.erp.repository.specs.CustomerSearchSpecification;
+import com.coolbook.erp.repository.specs.CustomerSpecification;
 import com.coolbook.erp.rest.searchCriteria.CustomerCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,14 +12,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 
-import com.coolbook.erp.entity.CustomerEntity;
-import com.coolbook.erp.exception.ConstraintViolationexception;
-import com.coolbook.erp.repository.CustomerRepository;
-import com.coolbook.erp.repository.specs.CustomerSearchSpecification;
-import com.coolbook.erp.repository.specs.CustomerSpecification;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-public class CustomerService {
+public class CustomerService extends BaseService{
 
 	CustomerRepository customerRepository;
 
@@ -32,12 +31,14 @@ public class CustomerService {
 				fieldErrors.add(new FieldError("","nicNumber","NIC Number already Exists"));
 				throw new ConstraintViolationexception(fieldErrors);
 			}
+		setMetaData(customer,null);
 			return this.customerRepository.save(customer).getId();
 
 	}
 
 	public void updateCustomer(CustomerEntity customer, long id) {
 		customer.setId(id);
+		setMetaData(customer,this.customerRepository.getOne(id));
 		this.customerRepository.save(customer);
 	}
 

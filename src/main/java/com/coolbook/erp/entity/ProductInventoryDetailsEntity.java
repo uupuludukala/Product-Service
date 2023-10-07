@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "product_inventory_details")
-public class ProductInventoryDetailsEntity {
+public class ProductInventoryDetailsEntity extends BaseEntity{
     @Id
     @Column
     @GeneratedValue(generator = "product_inventory_details_seq")

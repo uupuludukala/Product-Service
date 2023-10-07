@@ -1,14 +1,10 @@
 package com.coolbook.erp.rest.service;
 
-import java.io.ByteArrayInputStream;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.coolbook.erp.entity.*;
+import com.coolbook.erp.report.InvoiceReport;
 import com.coolbook.erp.repository.InvoiceInventoryDetailsRepository;
 import com.coolbook.erp.repository.InvoiceProductRepository;
+import com.coolbook.erp.repository.InvoiceRepository;
 import com.coolbook.erp.repository.specs.InvoiceSearchSpecification;
 import com.coolbook.erp.security.SecurityFacade;
 import com.coolbook.erp.security.User;
@@ -18,11 +14,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.coolbook.erp.report.InvoiceReport;
-import com.coolbook.erp.repository.InvoiceRepository;
+import java.io.ByteArrayInputStream;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-public class InvoiceService {
+public class InvoiceService extends BaseService{
 
 	@Autowired
 	private InvoiceRepository invoiceRepository;
@@ -56,6 +55,7 @@ public class InvoiceService {
 	
 	public  long saveInvoice(InvoiceEntity invoice) throws Exception {
 	    List<String> validationErrorList=validateInvoice(invoice);
+        setMetaData(invoice,null);
 	    if(validationErrorList.isEmpty()) {
             invoice.setUserId(securityFacade.getCurrentUser().getUserId());
             long id = this.invoiceRepository.save(invoice).getId();

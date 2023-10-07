@@ -29,12 +29,14 @@ public class RequestInterceptor implements HandlerInterceptor {
     public boolean preHandle(
             HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
-            dataSourceContextHolder.setDataSourceContext(securityFacade.getCurrentUser().getCompanyCode().toLowerCase());
+
             String path = (String) request.
                     getAttribute(HandlerMapping.
                             BEST_MATCHING_PATTERN_ATTRIBUTE);
         if(path.contains("co-opData")){
             dataSourceContextHolder.setDataSourceContext("coop");
+        }else{
+            dataSourceContextHolder.setDataSourceContext(securityFacade.getCurrentUser().getCompanyCode().toLowerCase());
         }
         }catch(NoUserAuthenticatedException e){
             dataSourceContextHolder.setDataSourceContext("coop");

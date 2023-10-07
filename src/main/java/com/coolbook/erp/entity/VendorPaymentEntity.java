@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "vendorPayment")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class VendorPaymentEntity {
+public class VendorPaymentEntity extends BaseEntity{
     @Id
     @Column
     @GeneratedValue(generator="vendor_payment_seq")

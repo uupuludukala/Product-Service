@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "invoice_inventory_details")
-public class InvoiceInventoryDetailsEntity {
+public class InvoiceInventoryDetailsEntity extends BaseEntity{
 
     @Id
     @Column

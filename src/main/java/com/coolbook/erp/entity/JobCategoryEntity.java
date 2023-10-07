@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "job_category")
-public class JobCategoryEntity {
+public class JobCategoryEntity extends BaseEntity{
 
     @Id
     @Column

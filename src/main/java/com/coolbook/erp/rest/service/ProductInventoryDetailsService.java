@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductInventoryDetailsService {
+public class ProductInventoryDetailsService extends BaseService{
     
     @Autowired
     private ProductInventoryDetailsRepository productInventoryDetailsRepository;
     
     public void saveProductInventoryDetails(ProductInventoryDetailsEntity productInventoryDetailsEntity){
+        setMetaData(productInventoryDetailsEntity,null);
        this.productInventoryDetailsRepository.save(productInventoryDetailsEntity);
     }
     

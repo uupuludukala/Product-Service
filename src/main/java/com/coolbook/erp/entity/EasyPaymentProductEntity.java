@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "easyPayment_product")
-public class EasyPaymentProductEntity {
+public class EasyPaymentProductEntity extends BaseEntity{
     @Id
     @Column
     @GeneratedValue(generator = "easyPayment_product_seq")

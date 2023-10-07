@@ -13,7 +13,7 @@ import com.coolbook.erp.repository.UserRepository;
 import com.coolbook.erp.repository.specs.UserSpecification;
 
 @Service
-public class UserService {
+public class UserService extends BaseService{
 UserRepository userRepository;
 
 
@@ -24,6 +24,7 @@ UserRepository userRepository;
 		this.dataSourceContextHolder=dataSourceContextHolder;
 	}
 	public long saveUser(UserEntity user) {
+		setMetaData(user,null);
 		return this.userRepository.save(user).getId();
 	}
 	public UserEntity getUserById(long id) {
@@ -37,6 +38,7 @@ UserRepository userRepository;
 	
 	public void updateUser(UserEntity user,long id) {
 		user.setId(id);
+		setMetaData(user,this.userRepository.getOne(id));
 		this.userRepository.save(user);
 	}
 	
@@ -45,7 +47,7 @@ UserRepository userRepository;
 		this.userRepository.delete(id);
 	}
 
-    public Page<UserEntity> searchBranch(Pageable page, String searchValue) {
+    public Page<UserEntity> searchUser(Pageable page, String searchValue) {
         UserSearchSpecification specification = new UserSearchSpecification(searchValue,0);
         return this.userRepository.findAll(specification, page);
     }

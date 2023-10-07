@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WorkShiftService {
+public class WorkShiftService extends BaseService{
     WorkShiftRepository workShiftRepository;
 
     @Autowired
@@ -19,11 +19,13 @@ public class WorkShiftService {
         this.workShiftRepository=workShiftRepository;
     }
     public long saveWorkShift(WorkShiftEntity workShift) {
+        setMetaData(workShift,null);
         return this.workShiftRepository.save(workShift).getId();
     }
 
     public void updateWorkShift(WorkShiftEntity workShift, long id) {
         workShift.setId(id);
+        setMetaData(workShift,this.workShiftRepository.getOne(id));
         this.workShiftRepository.save(workShift);
     }
 

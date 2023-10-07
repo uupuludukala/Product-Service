@@ -1,8 +1,0 @@
-{
-  "bookingResponses": [
-    {
-      "externalService": "salesforce",
-      "status": 200
-    }
-  ]
-}

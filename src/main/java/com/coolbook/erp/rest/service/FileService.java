@@ -1,6 +1,16 @@
 package com.coolbook.erp.rest.service;
 
 
+import com.coolbook.erp.config.FileStorageProperties;
+import com.coolbook.erp.exception.FileStorageException;
+import com.coolbook.erp.exception.MyFileNotFoundException;
+import org.apache.commons.lang.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -9,19 +19,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 
-import com.coolbook.erp.config.FileStorageProperties;
-import org.apache.commons.lang.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.coolbook.erp.exception.FileStorageException;
-import com.coolbook.erp.exception.MyFileNotFoundException;
-
 @Service
-public class FileService {
+public class FileService extends BaseService{
 
     private final Path fileStorageLocation;
 

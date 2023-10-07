@@ -19,7 +19,7 @@ import java.util.List;
 
 
 @Service
-public class PurchaseOrderService {
+public class PurchaseOrderService extends BaseService{
 
     @Autowired
     private PurchaseOrderRepository purchaseOrderRepository;
@@ -36,11 +36,13 @@ public class PurchaseOrderService {
     
 
     public long savePurchaseOrder(PurchaseOrderEntity purchaseOrder){
+        setMetaData(purchaseOrder,null);
         long id=this.purchaseOrderRepository.save(purchaseOrder).getId();
         return id;
     }
 
-    public void updatePurchaseOrder(PurchaseOrderEntity purchaseOrder) {        
+    public void updatePurchaseOrder(PurchaseOrderEntity purchaseOrder) {
+        setMetaData(purchaseOrder,this.purchaseOrderRepository.getOne(purchaseOrder.getId()));
         this.purchaseOrderRepository.save(purchaseOrder);
     }
 

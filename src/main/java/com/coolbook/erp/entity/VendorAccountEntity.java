@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "vendor_account")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class VendorAccountEntity {
+public class VendorAccountEntity extends BaseEntity{
 
     @Id
     @Column

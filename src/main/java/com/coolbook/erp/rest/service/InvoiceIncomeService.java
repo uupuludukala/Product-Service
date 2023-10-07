@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class InvoiceIncomeService {
+public class InvoiceIncomeService extends BaseService{
     
     @Autowired
     private InvoiceIncomeRepository invoiceIncomeRepository;
     
     public void saveInvoiceIncome(InvoiceIncomeEntity invoiceIncomeEntity){
+        setMetaData(invoiceIncomeEntity,null);
         this.invoiceIncomeRepository.save(invoiceIncomeEntity);
     }
     

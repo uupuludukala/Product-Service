@@ -97,7 +97,7 @@ public class UserController {
         String basePath = StringUtils.isEmpty(proxyRequestUri)
                 ? ServletUriComponentsBuilder.fromCurrentRequest().toUriString()
                 : proxyRequestUri;
-        return ok(pagedResourcesAssembler.toResource(this.userService.searchBranch(pageable, searchValue), assembler,
+        return ok(pagedResourcesAssembler.toResource(this.userService.searchUser(pageable, searchValue), assembler,
                 new Link(basePath)));
     }
 }

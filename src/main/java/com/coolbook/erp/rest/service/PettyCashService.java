@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PettyCashService {
+public class PettyCashService extends BaseService{
     PettyCashRepository pettyCashRepository;
 
     @Autowired
@@ -19,11 +19,13 @@ public class PettyCashService {
         this.pettyCashRepository=pettyCashRepository;
     }
     public long savePettyCash(PettyCashEntity pettyCash) {
+        setMetaData(pettyCash,null);
         return this.pettyCashRepository.save(pettyCash).getId();
     }
 
     public void updatePettyCash(PettyCashEntity pettyCash, long id) {
         pettyCash.setId(id);
+        setMetaData(pettyCash,this.pettyCashRepository.getOne(id));
         this.pettyCashRepository.save(pettyCash);
     }
 

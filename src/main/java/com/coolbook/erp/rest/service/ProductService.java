@@ -14,7 +14,7 @@ import com.coolbook.erp.repository.specs.ProductSpecificationPOS;
 import com.coolbook.erp.security.SecurityFacade;
 
 @Service
-public class ProductService {
+public class ProductService extends BaseService{
 
 	ProductRepository productRepository;
 
@@ -27,10 +27,12 @@ public class ProductService {
 	}
 
 	public long saveProduct(ProductEntity product) {
+		setMetaData(product,null);
 		return this.productRepository.save(product).getId();
 	}
 
 	public void updateProduct(ProductEntity product) {
+		setMetaData(product,this.productRepository.getOne(product.getId()));
 		this.productRepository.save(product);
 	}
 

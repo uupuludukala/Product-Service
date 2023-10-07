@@ -13,7 +13,7 @@ import com.coolbook.erp.repository.PaymentMethodRepository;
 import com.coolbook.erp.repository.specs.PaymentMethodSpecification;
 
 @Service
-public class PaymentMethodService {
+public class PaymentMethodService extends BaseService{
 
 	PaymentMethodRepository paymentMethodRepository;
 
@@ -23,11 +23,13 @@ public class PaymentMethodService {
 	}
 
 	public long savePaymentMethod(PaymentMethodEntity paymentMethod) {
+		setMetaData(paymentMethod,null);
 		return this.paymentMethodRepository.save(paymentMethod).getId();
 	}
 	
 	public void updatePaymentMethod(PaymentMethodEntity paymentMethod,long id) {
 		paymentMethod.setId(id);
+		setMetaData(paymentMethod,this.paymentMethodRepository.getOne(id));
 		this.paymentMethodRepository.save(paymentMethod);
 	}
 	

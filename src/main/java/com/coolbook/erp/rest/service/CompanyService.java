@@ -14,7 +14,7 @@ import com.coolbook.erp.repository.specs.CompanySearchSpecification;
 import com.coolbook.erp.repository.specs.CompanySpecification;
 
 @Service
-public class CompanyService {
+public class CompanyService extends BaseService{
 	CompanyRepository companyRepository;
 
 	private DataSourceContextHolder dataSourceContextHolder;
@@ -27,11 +27,13 @@ public class CompanyService {
 		this.dataSourceContextHolder=dataSourceContextHolder;
 	}
 	public long saveCompany(CompanyEntity company) {
+		setMetaData(company,null);
 		return this.companyRepository.save(company).getId();
 	}
 	
 	public void updateCompany(CompanyEntity company, long id) {
 		company.setId(id);
+		setMetaData(company,this.companyRepository.getOne(id));
 		this.companyRepository.save(company);
 	}
 

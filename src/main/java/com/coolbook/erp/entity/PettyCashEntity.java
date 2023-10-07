@@ -1,6 +1,5 @@
 package com.coolbook.erp.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "petty_cash")
-public class PettyCashEntity {
+public class PettyCashEntity extends BaseEntity{
 
     @Id
     @Column

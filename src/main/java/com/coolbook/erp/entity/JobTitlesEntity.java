@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "job_title")
-public class JobTitlesEntity {
+public class JobTitlesEntity extends BaseEntity{
 
     @Id
     @Column

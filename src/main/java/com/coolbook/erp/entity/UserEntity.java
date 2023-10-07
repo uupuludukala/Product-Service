@@ -1,23 +1,16 @@
 package com.coolbook.erp.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name="oauth_user") 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class UserEntity {
+public class UserEntity extends BaseEntity{
 
     public UserEntity(long id) {
         this.id = id;

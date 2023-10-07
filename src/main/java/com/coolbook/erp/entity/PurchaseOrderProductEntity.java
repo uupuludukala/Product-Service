@@ -1,15 +1,15 @@
 package com.coolbook.erp.entity;
 
-import javax.persistence.*;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "purchase_order_product")
-public class PurchaseOrderProductEntity {
+public class PurchaseOrderProductEntity extends BaseEntity{
     @Id
     @Column
     @GeneratedValue(generator = "purchase_order_product_seq")

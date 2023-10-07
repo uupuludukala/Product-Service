@@ -5,12 +5,11 @@ import com.coolbook.erp.common.enums.MaritalStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "employee")
-public class EmployeeEntity {
+public class EmployeeEntity extends BaseEntity{
 
     public EmployeeEntity(long id) {
         this.id = id;

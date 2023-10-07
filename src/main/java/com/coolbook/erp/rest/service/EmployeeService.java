@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EmployeeService {
+public class EmployeeService extends BaseService{
 
     EmployeeRepository employeeRepository;
 
@@ -31,12 +31,14 @@ public class EmployeeService {
             fieldErrors.add(new FieldError("","nicNumber","NIC Number already Exists"));
             throw new ConstraintViolationexception(fieldErrors);
         }
+        setMetaData(employee,null);
         return this.employeeRepository.save(employee).getId();
 
     }
 
     public void updateEmployee(EmployeeEntity employee, long id) {
         employee.setId(id);
+        setMetaData(employee,this.employeeRepository.getOne(id));
         this.employeeRepository.save(employee);
     }
 

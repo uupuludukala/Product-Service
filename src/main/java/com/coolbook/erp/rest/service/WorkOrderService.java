@@ -11,18 +11,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WorkOrderService {
+public class WorkOrderService extends BaseService{
 
     @Autowired
     private WorkOrderRepository workOrderRepository;
 
     public long saveWorkOrder(WorkOrderEntity workOrder){
+        setMetaData(workOrder,null);
         long id=this.workOrderRepository.save(workOrder).getId();
         return id;
     }
 
     public void updateWorkOrder(WorkOrderEntity workOrder, long id) {
         workOrder.setId(id);
+        setMetaData(workOrder,this.workOrderRepository.getOne(id));
         this.workOrderRepository.save(workOrder);
     }
 

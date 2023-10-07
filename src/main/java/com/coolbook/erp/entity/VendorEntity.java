@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "vendor")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class VendorEntity {
+public class VendorEntity extends BaseEntity{
 
     @Id
     @Column

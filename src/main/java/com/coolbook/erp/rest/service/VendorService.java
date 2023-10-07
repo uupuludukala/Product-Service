@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class VendorService {
+public class VendorService extends BaseService{
 
     @Autowired
     private VendorRepository vendorRepository;
@@ -24,12 +24,14 @@ public class VendorService {
    
 
     public long saveVendor(VendorEntity vendor){
+        setMetaData(vendor,null);
         long id=this.vendorRepository.save(vendor).getId();
         return id;
     }
 
     public void updateVendor(VendorEntity vendor, long id) {
         vendor.setId(id);
+        setMetaData(vendor,this.vendorRepository.getOne(id));
         this.vendorRepository.save(vendor);
     }
 

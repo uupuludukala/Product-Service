@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "workOrderComponent")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class WorkOrderComponentEntity {
+public class WorkOrderComponentEntity extends BaseEntity{
 
     @Id
     @Column

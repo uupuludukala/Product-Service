@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EasyPaymentService {
+public class EasyPaymentService extends BaseService{
 
     @Autowired
     private EasyPaymentRepository easyPaymentRepository;
 
     public long saveEasyPayment(EasyPaymentEntity easyPaymentEntity){
+        setMetaData(easyPaymentEntity,null);
       return  easyPaymentRepository.save(easyPaymentEntity).getId();
     }
 

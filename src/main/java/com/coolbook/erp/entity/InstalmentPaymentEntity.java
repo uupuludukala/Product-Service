@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "instalment_payment")
-public class InstalmentPaymentEntity {
+public class InstalmentPaymentEntity extends BaseEntity{
 
     @Id
     @Column
